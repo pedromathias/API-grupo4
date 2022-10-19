@@ -30,8 +30,8 @@ public class Produto {
 	@Column(name = "valor_unitario", nullable = false)
 	private Double valorUnitario;
 	
-	@Column
-	private Image imagemProduto;
+//	@Column
+//	private Image imagemProduto;
 	
 	@Column(name = "id_categoria")
 	private Integer idCategoria;
@@ -72,12 +72,12 @@ public class Produto {
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-	public Image getImagemProduto() {
-		return imagemProduto;
-	}
-	public void setImagemProduto(Image imagemProduto) {
-		this.imagemProduto = imagemProduto;
-	}
+//	public Image getImagemProduto() {
+//		return imagemProduto;
+//	}
+//	public void setImagemProduto(Image imagemProduto) {
+//		this.imagemProduto = imagemProduto;
+//	}
 	public Integer getIdCategoria() {
 		return idCategoria;
 	}

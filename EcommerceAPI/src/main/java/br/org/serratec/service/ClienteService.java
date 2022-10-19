@@ -19,8 +19,8 @@ public class ClienteService {
 		return clienteRepositorio.findAll();
 	}
 	
-	public Optional<Cliente> obterPorId(Long id){
-		Optional<Cliente> optCliente = clienteRepositorio.findById(id);
+	public Optional<Cliente> obterPorId(Long idCliente){
+		Optional<Cliente> optCliente = clienteRepositorio.findById(idCliente);
 		
 		return optCliente;
 	}
