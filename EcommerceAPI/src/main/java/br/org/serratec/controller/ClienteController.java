@@ -32,9 +32,9 @@ public class ClienteController {
 		return ResponseEntity.ok(lista);
 	}
 	@GetMapping("/{idCliente}")
-	public ResponseEntity<Cliente> obterPorId(@PathVariable Long id){
+	public ResponseEntity<Cliente> obterPorId(@PathVariable Long idCliente){
 		
-		Optional<Cliente> optCliente = clienteServico.obterPorId(id);
+		Optional<Cliente> optCliente = clienteServico.obterPorId(idCliente);
 		return ResponseEntity.ok(optCliente.get());
 	}
 	
@@ -44,12 +44,12 @@ public class ClienteController {
 		return new ResponseEntity<>(cliente, HttpStatus.CREATED);
 	}
 	@PutMapping("/{idCliente}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
-		return ResponseEntity.ok(clienteServico.atualizar(id, cliente));
+	public ResponseEntity<Cliente> atualizar(@PathVariable Long idCliente, @RequestBody Cliente cliente) {
+		return ResponseEntity.ok(clienteServico.atualizar(idCliente, cliente));
 	}
 	@DeleteMapping("/{idCliente}")
-	public ResponseEntity<?> deletar(@PathVariable Long id) {
-		clienteServico.deletar(id);
+	public ResponseEntity<?> deletar(@PathVariable Long idCliente) {
+		clienteServico.deletar(idCliente);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
