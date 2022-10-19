@@ -3,6 +3,7 @@ package br.org.serratec.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,7 +47,11 @@ public class Cliente {
 	@Column(nullable = true)
 	private Date dataNasc;
 	
-	//Fazer idEndereco
+	@Embedded
+	public Endereco id_endereco;
+	
+	@Embedded
+	public Endereco end;
 
 	public Long getIdCliente() {
 		return idCliente;
