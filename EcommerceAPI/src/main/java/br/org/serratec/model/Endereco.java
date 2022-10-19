@@ -8,13 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Embeddable
+//@Embeddable
 public class Endereco {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_endereco")
-	private Long id_endereco;
+	private Long idEndereco;
 	
 	@Column (name="cep", nullable=false, length=9)
 	private int cep;
@@ -37,12 +36,12 @@ public class Endereco {
 	@Column (name="estado", nullable=true)
 	private String estado;
 
-	public Long getId_endereco() {
-		return id_endereco;
+	public Long getEndereco() {
+		return idEndereco;
 	}
 
-	public void setId_endereco(Long id_endereco) {
-		this.id_endereco = id_endereco;
+	public void setIdEndereco(Long idEndereco) {
+		this.idEndereco = idEndereco;
 	}
 
 	public int getCep() {
