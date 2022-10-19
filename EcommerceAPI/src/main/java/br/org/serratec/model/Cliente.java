@@ -47,11 +47,11 @@ public class Cliente {
 	@Column(nullable = true)
 	private Date dataNasc;
 	
-	@Embedded
-	public Endereco id_endereco;
-	
-	@Embedded
-	public Endereco end;
+//	@Embedded
+//	public Endereco idEndereco;
+//	
+//	@Embedded
+//	public Endereco end;
 
 	public Long getIdCliente() {
 		return idCliente;
