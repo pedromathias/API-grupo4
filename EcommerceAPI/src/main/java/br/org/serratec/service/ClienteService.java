@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Cliente;
 import br.org.serratec.repository.ClienteRepository;
 
@@ -13,31 +14,35 @@ import br.org.serratec.repository.ClienteRepository;
 public class ClienteService {
 
 	@Autowired
-	private ClienteRepository clienteRepositorio;
+	private ClienteRepository repositorio;
 	
 	public List<Cliente> obterTodos(){
-		return clienteRepositorio.findAll();
+		return repositorio.findAll();
 	}
 	
 	public Optional<Cliente> obterPorId(Long id){
-		Optional<Cliente> optCliente = clienteRepositorio.findById(id);
+		Optional<Cliente> optCliente = repositorio.findById(id);
 		
+		if(optCliente.isEmpty()) {
+			throw new ResourceNotFoundException("Não foi possivel encontrar o cliente com id " + id);
+		}
 		return optCliente;
 	}
 	
 	public Cliente cadastrar(Cliente cliente) {
 		
-		return clienteRepositorio.save(cliente);
+		return repositorio.save(cliente);
 	}
 	
 	public Cliente atualizar(Long id, Cliente cliente) {
 		
+		obterPorId(id);
 		cliente.setId(id);
-		return clienteRepositorio.save(cliente);
+		return repositorio.save(cliente);
 		
 	}
 	
 	public void deletar(Long id) {
-		clienteRepositorio.deleteById(id);
+		repositorio.deleteById(id);
 	}
 }
