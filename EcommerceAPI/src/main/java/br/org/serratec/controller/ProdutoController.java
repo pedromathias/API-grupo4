@@ -15,41 +15,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.model.Categoria;
-import br.org.serratec.service.CategoriaService;
+import br.org.serratec.model.Produto;
+import br.org.serratec.service.ProdutoService;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaController {
-	
+@RequestMapping("/produtos")
+public class ProdutoController {
+
 	@Autowired
-	private CategoriaService servico;
-	
+	private ProdutoService servico;
+
 	@GetMapping
-	public ResponseEntity<List<Categoria>> obterTodos(){
-		
-		List<Categoria> lista = servico.obterTodos();
+	public ResponseEntity<List<Produto>> obterTodos() {
+
+		List<Produto> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
-	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> obterPorId(@PathVariable Long id){
-		Optional<Categoria> optCategoria = servico.obterPorId(id);
-		return ResponseEntity.ok(optCategoria.get());
+
+	@GetMapping("/{id_produto}")
+	public ResponseEntity<Produto> obterPorId(@PathVariable Long id) {
+
+		Optional<Produto> optProduto = servico.obterPorId(id);
+		return ResponseEntity.ok(optProduto.get());
 	}
-	
-	@PostMapping 
-	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria) {
-		categoria = servico.cadastrar(categoria);
-		return new ResponseEntity<>(categoria, HttpStatus.CREATED);
+
+	@PostMapping
+	public ResponseEntity<Produto> cadastrar(@RequestBody Produto produto) {
+		produto = servico.cadastrar(produto);
+		return new ResponseEntity<>(produto, HttpStatus.CREATED);
 	}
-	@PutMapping("/{id}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
-		return ResponseEntity.ok(servico.atualizar(id, categoria));
+
+	@PutMapping("/{id_produto}")
+	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+		return ResponseEntity.ok(servico.atualizar(id, produto));
 	}
-	@DeleteMapping("/{id}")
+
+	@DeleteMapping("/{id_produto}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-
 }

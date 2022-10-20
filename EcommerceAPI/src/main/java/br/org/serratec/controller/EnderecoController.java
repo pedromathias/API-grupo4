@@ -1,6 +1,7 @@
 package br.org.serratec.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,37 +16,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.model.Categoria;
-import br.org.serratec.service.CategoriaService;
+import br.org.serratec.model.Endereco;
+import br.org.serratec.service.EnderecoService;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaController {
+@RequestMapping("/enderecos")
+public class EnderecoController {
 	
 	@Autowired
-	private CategoriaService servico;
+	private EnderecoService servico;
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> obterTodos(){
-		
-		List<Categoria> lista = servico.obterTodos();
+	public ResponseEntity<List<Endereco>> obterTodos(){
+		List<Endereco> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> obterPorId(@PathVariable Long id){
-		Optional<Categoria> optCategoria = servico.obterPorId(id);
-		return ResponseEntity.ok(optCategoria.get());
+	public ResponseEntity<Endereco> obterPorId(@PathVariable Long id){
+		Optional<Endereco> optEndereco = servico.obterPorId(id);
+		return ResponseEntity.ok(optEndereco.get());
 	}
 	
 	@PostMapping 
-	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria) {
-		categoria = servico.cadastrar(categoria);
-		return new ResponseEntity<>(categoria, HttpStatus.CREATED);
+	public ResponseEntity<Endereco> cadastrar(@RequestBody Endereco endereco) {
+		endereco = servico.cadastrar(endereco);
+		return new ResponseEntity<>(endereco, HttpStatus.CREATED);
 	}
+	
 	@PutMapping("/{id}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
-		return ResponseEntity.ok(servico.atualizar(id, categoria));
+	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco endereco) {
+		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		servico.deletar(id);

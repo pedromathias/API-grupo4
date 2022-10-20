@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,8 +14,9 @@ import javax.persistence.Table;
 public class Produto {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
-	private Long idProduto;
+	private Long id;
 	
 	@Column(name = "nome", nullable = false, length = 30)
 	private String nome;
@@ -30,17 +33,17 @@ public class Produto {
 	@Column(name = "valor_unitario", nullable = false)
 	private Double valorUnitario;
 	
-	@Column
-	private Image imagemProduto;
+//	@Column
+//	private Image imagemProduto;
 	
 	@Column(name = "id_categoria")
 	private Integer idCategoria;
 
-	public Long getIdProduto() {
-		return idProduto;
+	public Long getId() {
+		return id;
 	}
-	public void setIdProduto(Long idProduto) {
-		this.idProduto = idProduto;
+	public void setIdProduto(Long id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -72,12 +75,12 @@ public class Produto {
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-	public Image getImagemProduto() {
-		return imagemProduto;
-	}
-	public void setImagemProduto(Image imagemProduto) {
-		this.imagemProduto = imagemProduto;
-	}
+//	public Image getImagemProduto() {
+//		return imagemProduto;
+//	}
+//	public void setImagemProduto(Image imagemProduto) {
+//		this.imagemProduto = imagemProduto;
+//	}
 	public Integer getIdCategoria() {
 		return idCategoria;
 	}

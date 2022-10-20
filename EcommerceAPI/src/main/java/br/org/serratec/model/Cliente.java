@@ -24,7 +24,8 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idCliente;
+	@Column(name="id_cliente")
+	private Long id;
 	
 	@Column(nullable = false, length = 30)
 	private String email;
@@ -47,18 +48,18 @@ public class Cliente {
 	@Column(nullable = true)
 	private Date dataNasc;
 	
-	@Embedded
-	public Endereco id_endereco;
+//	@Embedded
+//	public Endereco idEndereco;
 	
-	@Embedded
-	public Endereco end;
+//	@Embedded
+//	public Endereco end;
 
-	public Long getIdCliente() {
-		return idCliente;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

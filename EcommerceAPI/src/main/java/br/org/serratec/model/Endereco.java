@@ -14,7 +14,7 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_endereco")
-	private Long id_endereco;
+	private Long id;
 	
 	@Column (name="cep", nullable=false, length=9)
 	private int cep;
@@ -37,12 +37,12 @@ public class Endereco {
 	@Column (name="estado", nullable=true)
 	private String estado;
 
-	public Long getId_endereco() {
-		return id_endereco;
+	public Long getEndereco() {
+		return id;
 	}
 
-	public void setId_endereco(Long id_endereco) {
-		this.id_endereco = id_endereco;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public int getCep() {
