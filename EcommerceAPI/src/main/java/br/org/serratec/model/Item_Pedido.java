@@ -1,5 +1,5 @@
 package br.org.serratec.model;
 
-public class EcommerceAPI {
+public class Item_Pedido {
 
 }
