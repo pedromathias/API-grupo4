@@ -19,37 +19,36 @@ import br.org.serratec.model.Categoria;
 import br.org.serratec.service.CategoriaService;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/categorias")
 public class CategoriaController {
 	
 	@Autowired
-	private CategoriaService categoriaServico;
+	private CategoriaService servico;
 	
 	@GetMapping
 	public ResponseEntity<List<Categoria>> obterTodos(){
 		
-		List<Categoria> lista = categoriaServico.obterTodos();
+		List<Categoria> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
-	@GetMapping("/{idCategoria}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> obterPorId(@PathVariable Long id){
-		
-		Optional<Categoria> optCategoria = categoriaServico.obterPorId(id);
+		Optional<Categoria> optCategoria = servico.obterPorId(id);
 		return ResponseEntity.ok(optCategoria.get());
 	}
 	
 	@PostMapping 
 	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria) {
-		categoria = categoriaServico.cadastrar(categoria);
+		categoria = servico.cadastrar(categoria);
 		return new ResponseEntity<>(categoria, HttpStatus.CREATED);
 	}
-	@PutMapping("/{idCategoria}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
-		return ResponseEntity.ok(categoriaServico.atualizar(id, categoria));
+		return ResponseEntity.ok(servico.atualizar(id, categoria));
 	}
-	@DeleteMapping("/{idCategoria}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
-		categoriaServico.deletar(id);
+		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

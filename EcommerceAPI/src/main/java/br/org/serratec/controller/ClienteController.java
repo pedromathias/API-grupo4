@@ -23,33 +23,32 @@ import br.org.serratec.service.ClienteService;
 public class ClienteController {
 	
 	@Autowired
-	private ClienteService clienteServico;
+	private ClienteService servico;
 	
 	@GetMapping
 	public ResponseEntity<List<Cliente>> obterTodos(){
 		
-		List<Cliente> lista = clienteServico.obterTodos();
+		List<Cliente> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
-	@GetMapping("/{idCliente}")
-	public ResponseEntity<Cliente> obterPorId(@PathVariable Long idCliente){
-		
-		Optional<Cliente> optCliente = clienteServico.obterPorId(idCliente);
+	@GetMapping("/{id}")
+	public ResponseEntity<Cliente> obterPorId(@PathVariable Long id){
+		Optional<Cliente> optCliente = servico.obterPorId(id);
 		return ResponseEntity.ok(optCliente.get());
 	}
 	
 	@PostMapping 
 	public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente cliente) {
-		cliente = clienteServico.cadastrar(cliente);
+		cliente = servico.cadastrar(cliente);
 		return new ResponseEntity<>(cliente, HttpStatus.CREATED);
 	}
-	@PutMapping("/{idCliente}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long idCliente, @RequestBody Cliente cliente) {
-		return ResponseEntity.ok(clienteServico.atualizar(idCliente, cliente));
+	@PutMapping("/{id}")
+	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
+		return ResponseEntity.ok(servico.atualizar(id, cliente));
 	}
-	@DeleteMapping("/{idCliente}")
-	public ResponseEntity<?> deletar(@PathVariable Long idCliente) {
-		clienteServico.deletar(idCliente);
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
+		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

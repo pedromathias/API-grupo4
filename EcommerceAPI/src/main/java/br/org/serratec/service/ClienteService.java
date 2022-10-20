@@ -19,8 +19,8 @@ public class ClienteService {
 		return clienteRepositorio.findAll();
 	}
 	
-	public Optional<Cliente> obterPorId(Long idCliente){
-		Optional<Cliente> optCliente = clienteRepositorio.findById(idCliente);
+	public Optional<Cliente> obterPorId(Long id){
+		Optional<Cliente> optCliente = clienteRepositorio.findById(id);
 		
 		return optCliente;
 	}
@@ -32,7 +32,7 @@ public class ClienteService {
 	
 	public Cliente atualizar(Long id, Cliente cliente) {
 		
-		cliente.setIdCliente(id);
+		cliente.setId(id);
 		return clienteRepositorio.save(cliente);
 		
 	}

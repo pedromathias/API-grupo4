@@ -32,9 +32,9 @@ public class EnderecoController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/{idEndereco}")
-	public ResponseEntity<Endereco> obterPorId(@PathVariable Long idEndereco){
-		Optional<Endereco> optEndereco = servico.obterPorId(idEndereco);
+	@GetMapping("/{id}")
+	public ResponseEntity<Endereco> obterPorId(@PathVariable Long id){
+		Optional<Endereco> optEndereco = servico.obterPorId(id);
 		return ResponseEntity.ok(optEndereco.get());
 	}
 	
@@ -44,15 +44,15 @@ public class EnderecoController {
 		return new ResponseEntity<>(endereco, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{idEndereco}")
-	public ResponseEntity<Endereco> atualizar(@PathVariable Long idEndereco, @RequestBody Endereco endereco) {
-		return ResponseEntity.ok(servico.atualizar(idEndereco, endereco));
+	@PutMapping("/{id}")
+	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco endereco) {
+		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
 	
-	@DeleteMapping("/{idEndereco}")
-	public ResponseEntity<?> deletar(@PathVariable Long idEndereco) {
-		servico.deletar(idEndereco);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
+		servico.deletar(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

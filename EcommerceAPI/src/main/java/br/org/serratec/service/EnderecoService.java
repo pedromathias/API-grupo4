@@ -19,24 +19,24 @@ public class EnderecoService {
 		return repositorio.findAll();
 	}
 	
-	public Optional<Endereco> obterPorId(Long id_endereco){
-		return repositorio.findById(id_endereco);
+	public Optional<Endereco> obterPorId(Long id){
+		return repositorio.findById(id);
 	}
 	
 	public Endereco cadastrar(Endereco endereco) {
-		endereco.setIdEndereco(null);
+		endereco.setId(null);
 		return repositorio.save(endereco);
 	}
 	
-	public Endereco atualizar(Long idEndereco, Endereco endereco) {
-		obterPorId(idEndereco);
-		endereco.setIdEndereco(idEndereco);
+	public Endereco atualizar(Long id, Endereco endereco) {
+		obterPorId(id);
+		endereco.setId(id);
 		return repositorio.save(endereco);
 	}
 	
-	public void deletar (Long idEndereco) {
-		obterPorId(idEndereco);
-		repositorio.deleteById(idEndereco);
+	public void deletar (Long id) {
+		obterPorId(id);
+		repositorio.deleteById(id);
 		
 	}
 }
