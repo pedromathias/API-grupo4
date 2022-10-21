@@ -57,4 +57,5 @@ public class PedidoController {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
 }

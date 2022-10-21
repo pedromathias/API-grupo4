@@ -1,30 +1,20 @@
 package br.org.serratec.model;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-//CREATE TABLE cliente (id_cliente SERIAL PRIMARY KEY,
-//email varchar(30) NOT NULL,
-//nome_usuario varchar(20) NOT NULL,
-//nome_completo varchar(60) NOT NULL,
-//senha varchar(255),
-//cpf varchar(14) NOT NULL,
-//telefone varchar(11),
-//data_nasc DATE, 
-//id_endereco INTEGER, FOREIGN KEY(id_endereco) REFERENCES endereco(id_endereco));
+
+
 
 @Entity
 public class Cliente {
@@ -36,7 +26,7 @@ public class Cliente {
 	
 	@NotBlank(message = "Preencha o nome")
 	@Size(max=30, message = "Tamanho máximo 30 caracteres")
-	@Column(nullable = false, length = 30)
+	@Column(unique = true)
 	private String email;
 	
 	@NotBlank(message = "Preencha o nome de usuário")
@@ -55,7 +45,7 @@ public class Cliente {
 	
 	@NotBlank(message = "Preencha o cpf")
 	@Size(max=14, message = "Tamanho máximo 14 caracteres")
-	@Column(nullable = false, length = 14)
+	@Column(unique = true)
 	private String cpf;
 	
 	@Size(max=14, message = "Tamanho máximo 11 caracteres")
@@ -144,8 +134,7 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
+
 	public Date getDataNasc() {
 		return dataNasc;
 	}

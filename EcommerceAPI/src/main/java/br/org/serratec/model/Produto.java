@@ -1,6 +1,5 @@
 package br.org.serratec.model;
 
-import java.awt.Image;
 import java.util.Date;
 import java.util.List;
 
@@ -94,5 +93,6 @@ public class Produto {
 //	public void setImagemProduto(Image imagemProduto) {
 //		this.imagemProduto = imagemProduto;
 //	}
+
 	
 }

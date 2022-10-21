@@ -22,6 +22,7 @@ import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.model.Cliente;
 import br.org.serratec.service.ClienteService;
 
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -47,7 +48,12 @@ public class ClienteController {
 		return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
 	}
 	@PutMapping("/{id}")
+
+	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente cliente) {
+
+
 	public ResponseEntity<ClienteResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteRequestDTO cliente) {
+
 		return ResponseEntity.ok(servico.atualizar(id, cliente));
 	}
 	@DeleteMapping("/{id}")
