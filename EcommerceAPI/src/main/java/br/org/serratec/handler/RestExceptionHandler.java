@@ -1,41 +1,31 @@
 package br.org.serratec.handler;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.org.serratec.exception.ResourceBadRequestException;
-import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.error.MensagemError;
-import br.org.serratec.utils.ConversorDeData;
 
 @ControllerAdvice
-public class RestExceptionHandler {
-
-	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<MensagemError> handlerResourceNotFoundException(ResourceNotFoundException ex){
-		String dataHora = ConversorDeData.converterDateParaDataEHora(new Date());
-		MensagemError erro =  new MensagemError(dataHora, 404, "Not Found", ex.getMessage());
-		
-		return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler(ResourceBadRequestException.class)
-	public ResponseEntity<MensagemError> handlerBadRequestException(ResourceBadRequestException ex){
-		String dataHora  = ConversorDeData.converterDateParaDataEHora(new Date());
-		MensagemError erro =  new MensagemError(dataHora, 400, "Bad Request", ex.getMessage());
-				
-		return new ResponseEntity<>(erro, HttpStatus.BAD_REQUEST);
-	}
-	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<MensagemError> handlerInternalServerException(Exception ex){
-		String dataHora  = ConversorDeData.converterDateParaDataEHora(new Date());
-		MensagemError erro =  new MensagemError(dataHora, 500, "Internal Server Error", ex.getMessage());
-				
-		return new ResponseEntity<>(erro, HttpStatus.INTERNAL_SERVER_ERROR);
+public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		List<String> erros = new ArrayList<>();
+		for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+			erros.add(error.getField() + ": " + error.getDefaultMessage());
+		}
+		MensagemError erroResposta = new MensagemError(status.value(), "Existem Campos Inválidos, Confira o preechimento",
+				LocalDateTime.now(), erros);
+		return super.handleExceptionInternal(ex, erroResposta, headers, status, request);
 	}
 }
