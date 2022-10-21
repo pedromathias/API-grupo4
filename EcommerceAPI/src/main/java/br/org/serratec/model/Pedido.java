@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "pedido")
 public class Pedido {
 	
 	@Id
@@ -28,10 +30,19 @@ public class Pedido {
 	@Column(length=20)
 	private String status;
 	
-	//@Column
+	//@Embedded
 	//private Cliente idCliente;
 		
 	
+	
+	/*public Cliente getIdCliente() {
+	*	return idCliente;
+	*}
+	*
+	*public void setIdCliente(Cliente idCliente) {
+	*	this.idCliente = idCliente;
+	*}
+	*/
 	public Long getId() {
 		return id;
 	}
