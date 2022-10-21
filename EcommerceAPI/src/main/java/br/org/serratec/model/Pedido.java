@@ -17,45 +17,35 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Pedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_pedido")
+	@Column(name = "id_pedido")
 	private Long id;
-	
+
 	@FutureOrPresent
-	@NotNull(message="Preencha a data do pedido")
-	@Column(name = "data_pedido",nullable=false)
+	@NotNull(message = "Preencha a data do pedido")
+	@Column(name = "data_pedido", nullable = false)
 	private Date dataPedido;
-	
-	@Column(name="data_entrega",nullable=true)
+
+	@Column(name = "data_entrega", nullable = true)
 	private Date dataEntrega;
-	
-	@Column(name="data_envio",nullable=true)
+
+	@Column(name = "data_envio", nullable = true)
 	private Date dataEnvio;
-	
-	@Size(max=20,message="Tamanho máximo de 20 caracteres")
-	@Column(name="status",length=20)
+
+	@Size(max = 20, message = "Tamanho máximo de 20 caracteres")
+	@Column(name = "status", length = 20)
 	private String status;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	@JsonBackReference
 	private Cliente cliente;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_item_pedido")
-//	@JsonBackReference
 	private ItemPedido itemPedido;
-		
-	
-	public ItemPedido getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(ItemPedido itemPedido) {
-		this.itemPedido = itemPedido;
-	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -63,6 +53,14 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	public Long getId() {
@@ -104,7 +102,5 @@ public class Pedido {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
+
 }

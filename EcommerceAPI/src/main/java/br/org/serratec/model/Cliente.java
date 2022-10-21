@@ -60,30 +60,12 @@ public class Cliente {
 
 	@Column(name="data_nascimento",nullable = true)
 	private Date dataNasc;
-	
-	
+		
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> endereco;
 	
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedido;
-
-
-	public List<Pedido> getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(List<Pedido> pedido) {
-		this.pedido = pedido;
-	}
-
-	public List<Endereco> getEnderecos() {
-		return endereco;
-	}
-
-	public void setEnderecos(List<Endereco> endereco) {
-		this.endereco = endereco;
-	}
 
 	public Long getId() {
 		return id;
@@ -149,4 +131,22 @@ public class Cliente {
 		this.dataNasc = dataNasc;
 	}
 
+	public List<Endereco> getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(List<Endereco> endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
+
+
+	
 }

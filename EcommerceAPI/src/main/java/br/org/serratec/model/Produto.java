@@ -1,6 +1,7 @@
 package br.org.serratec.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -48,13 +50,14 @@ public class Produto {
 	@JsonBackReference
 	private ItemPedido itemPedido;
 	
+	@OneToMany(mappedBy="produto")
+    private List<Categoria> categoria;
+	
 //	@JoinColumn(name = "idCategoria", referencedColumnName = "id_categoria")
 //	private Categoria categoria;
 //	@Column
 //	private Image imagemProduto;
 	
-	
-
 	public ItemPedido getItemPedido() {
 		return itemPedido;
 	}
@@ -97,17 +100,18 @@ public class Produto {
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
+	public List<Categoria> getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(List<Categoria> categoria) {
+		this.categoria = categoria;
+	}
+	
 //	public Image getImagemProduto() {
 //		return imagemProduto;
 //	}
 //	public void setImagemProduto(Image imagemProduto) {
 //		this.imagemProduto = imagemProduto;
 //	}
-//	public Integer getIdCategoria() {
-//		return idCategoria;
-//	}
-//	public void setIdCategoria(Integer idCategoria) {
-//		this.idCategoria = idCategoria;
-//	}
-	
+
 }

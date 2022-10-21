@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class ItemPedido {
 
@@ -27,6 +29,7 @@ public class ItemPedido {
 	private int precoVenda;
 	
 	@OneToMany(mappedBy="itemPedido")
+	@JsonBackReference
 	private List<Pedido> pedido;
 	
 	@OneToMany(mappedBy="itemPedido")
