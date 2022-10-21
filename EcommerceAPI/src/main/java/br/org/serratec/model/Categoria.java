@@ -5,7 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity	
 @Table(name = "categoria")
@@ -20,6 +26,20 @@ public class Categoria {
 	
 	@Column(name = "descricao", nullable = true, length = 150)
 	private String descricao;
+	
+	@ManyToOne
+	@JoinColumn(name="id_produto")
+	@JsonBackReference
+	private Produto produto;
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
 
 	public Long getId() {
 		return id;

@@ -3,6 +3,8 @@ package br.org.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,35 +21,39 @@ import br.org.serratec.model.Pedido;
 import br.org.serratec.service.PedidoService;
 
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/pedidos")
 public class PedidoController {
-	
+
 	@Autowired
 	private PedidoService servico;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Pedido>> obterTodos(){
-		
+	public ResponseEntity<List<Pedido>> obterTodos() {
+
 		List<Pedido> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
-	@GetMapping("/{id}")
-	public ResponseEntity<Pedido> obterPorId(@PathVariable Long id){
+
+	@GetMapping("/{id_pedido}")
+	public ResponseEntity<Pedido> obterPorId(@Valid @PathVariable Long id) {
+
 		Optional<Pedido> optPedido = servico.obterPorId(id);
 		return ResponseEntity.ok(optPedido.get());
 	}
-	
-	@PostMapping 
-	public ResponseEntity<Pedido> cadastrar(@RequestBody Pedido pedido) {
+
+	@PostMapping
+	public ResponseEntity<Pedido> cadastrar(@Valid @RequestBody Pedido pedido) {
 		pedido = servico.cadastrar(pedido);
 		return new ResponseEntity<>(pedido, HttpStatus.CREATED);
 	}
-	@PutMapping("/{id}")
-	public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido pedido) {
+
+	@PutMapping("/{id_pedido}")
+	public ResponseEntity<Pedido> atualizar(@Valid @PathVariable Long id, @RequestBody Pedido pedido) {
 		return ResponseEntity.ok(servico.atualizar(id, pedido));
 	}
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable Long id) {
+
+	@DeleteMapping("/{id_pedido}")
+	public ResponseEntity<?> deletar(@Valid @PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

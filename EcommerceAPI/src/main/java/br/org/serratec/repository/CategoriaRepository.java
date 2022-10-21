@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import br.org.serratec.model.Categoria;
 
+
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 

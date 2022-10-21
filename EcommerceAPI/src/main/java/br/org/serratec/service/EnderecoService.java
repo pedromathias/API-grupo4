@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.repository.EnderecoRepository;
+
 
 @Service
 public class EnderecoService {
@@ -20,7 +22,11 @@ public class EnderecoService {
 	}
 	
 	public Optional<Endereco> obterPorId(Long id){
-		return repositorio.findById(id);
+		Optional<Endereco> optEndereco = repositorio.findById(id);
+		if(optEndereco.isEmpty()) {
+			throw new ResourceNotFoundException("Não foi possivel encontrar o endereço com id " + id);
+	}
+			return repositorio.findById(id);
 	}
 	
 	public Endereco cadastrar(Endereco endereco) {

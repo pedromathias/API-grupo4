@@ -8,36 +8,47 @@ import org.springframework.stereotype.Service;
 
 import br.org.serratec.model.Pedido;
 import br.org.serratec.repository.PedidoRepository;
+import br.org.serratec.exception.ResourceNotFoundException;
+
 
 @Service
 public class PedidoService {
-
-	@Autowired
-	private PedidoRepository pedidoRepositorio;
 	
-	public List<Pedido> obterTodos(){
-		return pedidoRepositorio.findAll();
+	@Autowired
+	private PedidoRepository repositorio;
+	
+	public List<Pedido> obterTodos() {
+		return repositorio.findAll();
 	}
 	
 	public Optional<Pedido> obterPorId(Long id){
-		Optional<Pedido> optPedido = pedidoRepositorio.findById(id);
+		
+		Optional<Pedido> optPedido = repositorio.findById(id);
+		
+		if(optPedido.isEmpty()) {
+			throw new ResourceNotFoundException("Não foi possivel encontrar o pedido com id " + id);
+		}
 		
 		return optPedido;
 	}
 	
 	public Pedido cadastrar(Pedido pedido) {
 		
-		return pedidoRepositorio.save(pedido);
+		pedido.setId(null);
+		return repositorio.save(pedido);
 	}
 	
 	public Pedido atualizar(Long id, Pedido pedido) {
 		
-		pedido.setId(id);
-		return pedidoRepositorio.save(pedido);
+		obterPorId(id);
 		
+		pedido.setId(id);
+		return repositorio.save(pedido);
 	}
 	
 	public void deletar(Long id) {
-		pedidoRepositorio.deleteById(id);
+		obterPorId(id);
+		repositorio.deleteById(id);
 	}
+
 }
