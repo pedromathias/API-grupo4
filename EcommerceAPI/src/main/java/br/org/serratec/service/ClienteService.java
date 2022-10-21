@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Cliente;
 import br.org.serratec.repository.ClienteRepository;
@@ -45,4 +46,5 @@ public class ClienteService {
 	public void deletar(Long id) {
 		repositorio.deleteById(id);
 	}
+	
 }

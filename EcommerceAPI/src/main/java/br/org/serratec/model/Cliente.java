@@ -1,6 +1,8 @@
 package br.org.serratec.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,6 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 //CREATE TABLE cliente (id_cliente SERIAL PRIMARY KEY,
 //email varchar(30) NOT NULL,
@@ -27,32 +34,47 @@ public class Cliente {
 	@Column(name="id_cliente")
 	private Long id;
 	
+	@NotBlank(message = "Preencha o nome")
+	@Size(max=30, message = "Tamanho máximo 30 caracteres")
 	@Column(nullable = false, length = 30)
 	private String email;
 	
+	@NotBlank(message = "Preencha o nome de usuário")
+	@Size(max=20, message = "Tamanho máximo 20 caracteres")
 	@Column(nullable = false, length = 20)
 	private String nomeUsuario;
 	
+	@NotBlank(message = "Preencha o nome do usuário completo")
+	@Size(max=60, message = "Tamanho máximo 60 caracteres")
 	@Column(nullable = false, length = 60)
 	private String nomeCompleto;
 	
+	@Size(max=255, message = "Tamanho máximo 255 caracteres")
 	@Column(nullable = true, length = 255)
 	private String senha;
 	
+	@NotBlank(message = "Preencha o cpf")
+	@Size(max=14, message = "Tamanho máximo 14 caracteres")
 	@Column(nullable = false, length = 14)
 	private String cpf;
 	
+	@Size(max=14, message = "Tamanho máximo 11 caracteres")
 	@Column(nullable = true, length = 11)
 	private String telefone;
 	
 	@Column(nullable = true)
 	private Date dataNasc;
 	
-//	@Embedded
-//	public Endereco idEndereco;
-	
-//	@Embedded
-//	public Endereco end;
+	@OneToMany(mappedBy="cliente")
+	private List<Endereco> endereco;
+
+	public List<Endereco> getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(List<Endereco> endereco) {
+		this.endereco = endereco;
+	}
 
 	public Long getId() {
 		return id;
@@ -109,7 +131,8 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
+	
+	
 	public Date getDataNasc() {
 		return dataNasc;
 	}

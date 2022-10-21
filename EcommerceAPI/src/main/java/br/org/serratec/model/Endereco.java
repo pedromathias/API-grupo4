@@ -1,11 +1,18 @@
 package br.org.serratec.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Embeddable
@@ -36,6 +43,25 @@ public class Endereco {
 	
 	@Column (name="estado", nullable=true)
 	private String estado;
+	
+	@ManyToOne
+	@JoinColumn(name="id_cliente")
+	@JsonBackReference
+	private Cliente cliente;
+
+	
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Long getId() {
+		return id;
+	}
 
 	public Long getEndereco() {
 		return id;
