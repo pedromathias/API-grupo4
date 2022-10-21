@@ -2,11 +2,14 @@ package br.org.serratec.model;
 
 import java.awt.Image;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,9 +39,19 @@ public class Produto {
 //	@Column
 //	private Image imagemProduto;
 	
-	@Column(name = "id_categoria")
-	private Integer idCategoria;
+	@OneToMany(mappedBy="produto")
+	private List<Categoria> categoria;
+	
 
+	public List<Categoria> getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(List<Categoria> categoria) {
+		this.categoria = categoria;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -81,11 +94,5 @@ public class Produto {
 //	public void setImagemProduto(Image imagemProduto) {
 //		this.imagemProduto = imagemProduto;
 //	}
-	public Integer getIdCategoria() {
-		return idCategoria;
-	}
-	public void setIdCategoria(Integer idCategoria) {
-		this.idCategoria = idCategoria;
-	}
 	
 }

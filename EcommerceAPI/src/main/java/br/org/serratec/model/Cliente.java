@@ -67,6 +67,19 @@ public class Cliente {
 	
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> endereco;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedido;
+
+	
+	
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
 
 	public List<Endereco> getEndereco() {
 		return endereco;
