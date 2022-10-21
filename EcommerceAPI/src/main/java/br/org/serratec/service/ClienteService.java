@@ -12,9 +12,13 @@ import br.org.serratec.dto.ClienteRequestDTO;
 import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
+
 import br.org.serratec.model.Cliente;
 import br.org.serratec.model.MensagemEmail;
 import br.org.serratec.repository.ClienteRepository;
+
+import br.org.serratec.exception.ResourceNotFoundException;
+
 
 @Service
 public class ClienteService {
@@ -45,6 +49,21 @@ public class ClienteService {
 		return Optional.of(dto);
 	}
 	
+
+	public Cliente cadastrar(Cliente cliente) {
+		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
+		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
+		if(clientes.size()>0) {
+			throw new RuntimeException("Cpf já cadastrado!");
+		}
+		if(client.size()>0) {
+			throw new RuntimeException("Email já cadastrado");
+		}
+		return repositorio.save(cliente);
+	}
+		
+
+		
 	public ClienteResponseDTO cadastrar(ClienteRequestDTO cliente) {
 		var clienteModel = mapper.map(cliente, Cliente.class);
 		clienteModel.setId(null);
@@ -63,7 +82,7 @@ public class ClienteService {
 		return response;
 		
 	}
-	
+  	
 	public ClienteResponseDTO atualizar(Long id, ClienteRequestDTO cliente) {
 		obterPorId(id);
 		var clienteModel = mapper.map(cliente, Cliente.class);
@@ -78,8 +97,5 @@ public class ClienteService {
 		repositorio.deleteById(id);
 	}
 	
-	private void validarModelo(Cliente cliente) {
-	if(cliente.getNomeUsuario().length() > 20);
-	}
-	
+
 }

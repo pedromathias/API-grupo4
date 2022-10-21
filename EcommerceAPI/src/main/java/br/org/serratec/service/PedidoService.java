@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Pedido;
 import br.org.serratec.repository.PedidoRepository;
+import br.org.serratec.exception.ResourceNotFoundException;
+
 
 @Service
 public class PedidoService {

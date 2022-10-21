@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Produto;
 import br.org.serratec.repository.ProdutoRepository;
+
+import br.org.serratec.exception.ResourceNotFoundException;
 
 @Service
 public class ProdutoService {
@@ -39,7 +39,7 @@ public class ProdutoService {
 	public Produto atualizar(Long id, Produto produto) {
 		
 		obterPorId(id);
-		
+	
 		produto.setIdProduto(id);
 		return repositorio.save(produto);
 	}
