@@ -1,16 +1,17 @@
 package br.org.serratec.model;
 
-import java.awt.Image;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "produto")
 public class Produto {
 	
 	@Id
@@ -18,26 +19,32 @@ public class Produto {
 	@Column(name = "id_produto")
 	private Long id;
 	
-	@Column(name = "nome", nullable = false, length = 30)
+	@NotBlank(message="Preencha o nome")
+	@Size(max=30,message="Tamanho máximo de 30 caracteres")
+	@Column(name = "nome",nullable=false,length=30)
 	private String nome;
 	
-	@Column(name = "descricao", length = 100)
+	@Size(max=100,message="Tamanho máximo de 100 caracteres")
+	@Column(name = "descricao",nullable=true,length=100)
 	private String descricao;
 	
-	@Column(name = "qtd_estoque", nullable = false)
+	@NotNull(message="Preencha a quantidade de estoque")
+	@Column(name = "qtd_estoque",nullable=false)
 	private Integer quantidadeEstoque;
 	
-	@Column(name = "data_cadastro")
+	@Column(name = "data_cadastro",nullable=true)
 	private Date dataCadastro;
 	
-	@Column(name = "valor_unitario", nullable = false)
+	@NotNull(message="Preencha o Valor unitário")
+	@Column(name = "valor_unitario",nullable=false)
 	private Double valorUnitario;
 	
+//	@JoinColumn(name = "idCategoria", referencedColumnName = "id_categoria")
+//	private Categoria categoria;
 //	@Column
 //	private Image imagemProduto;
 	
-	@Column(name = "id_categoria")
-	private Integer idCategoria;
+	
 
 	public Long getId() {
 		return id;
@@ -81,11 +88,11 @@ public class Produto {
 //	public void setImagemProduto(Image imagemProduto) {
 //		this.imagemProduto = imagemProduto;
 //	}
-	public Integer getIdCategoria() {
-		return idCategoria;
-	}
-	public void setIdCategoria(Integer idCategoria) {
-		this.idCategoria = idCategoria;
-	}
+//	public Integer getIdCategoria() {
+//		return idCategoria;
+//	}
+//	public void setIdCategoria(Integer idCategoria) {
+//		this.idCategoria = idCategoria;
+//	}
 	
 }

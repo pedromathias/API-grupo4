@@ -1,14 +1,15 @@
 package br.org.serratec.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Embeddable
 public class Endereco {
 	
 	@Id
@@ -16,21 +17,30 @@ public class Endereco {
 	@Column(name="id_endereco")
 	private Long id;
 	
+	@NotBlank(message="Preencha o cep")
+	@Size(max=9,message="Tamanho máxmimo de 9 caracteres")
 	@Column (name="cep", nullable=false, length=9)
 	private int cep;
 	
+	@NotBlank(message="Preencha a rua")
+	@Size(max=100,message="Tamanho máxmimo de 100 caracteres")
 	@Column (name="rua", nullable=false, length=100)
 	private String rua;
 	
+	@NotBlank(message="Preencha o bairro")
+	@Size(max=50,message="Tamanho máxmimo de 50 caracteres")
 	@Column (name="bairro", nullable=false, length=50)
 	private String bairro;
 	
+	@Size(max=30,message="Tamanho máxmimo de 30 caracteres")
 	@Column (name="cidade", nullable=true, length=30)
 	private String cidade;
 	
+	@NotNull(message="Preencha o numero")
 	@Column (name="numero", nullable=false)
 	private int numero;
 	
+	@Size(max=20,message="Tamanho máxmimo de 20 caracteres")
 	@Column (name="complemento", nullable=true, length=20)
 	private String complemento;
 	

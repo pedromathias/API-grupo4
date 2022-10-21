@@ -3,6 +3,8 @@ package br.org.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,22 +34,22 @@ public class CategoriaController {
 		return ResponseEntity.ok(lista);
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> obterPorId(@PathVariable Long id){
+	public ResponseEntity<Categoria> obterPorId(@Valid @PathVariable Long id){
 		Optional<Categoria> optCategoria = servico.obterPorId(id);
 		return ResponseEntity.ok(optCategoria.get());
 	}
 	
 	@PostMapping 
-	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> cadastrar(@Valid @RequestBody Categoria categoria) {
 		categoria = servico.cadastrar(categoria);
 		return new ResponseEntity<>(categoria, HttpStatus.CREATED);
 	}
 	@PutMapping("/{id}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> atualizar(@Valid @PathVariable Long id, @RequestBody Categoria categoria) {
 		return ResponseEntity.ok(servico.atualizar(id, categoria));
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable Long id) {
+	public ResponseEntity<?> deletar(@Valid @PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

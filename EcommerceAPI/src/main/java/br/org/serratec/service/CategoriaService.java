@@ -3,6 +3,8 @@ package br.org.serratec.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ public class CategoriaService {
 		return categoriaRepositorio.findAll();
 	}
 	
-	public Optional<Categoria> obterPorId(Long id){
+	public Optional<Categoria> obterPorId(@Valid Long id){
 		Optional<Categoria> optCategoria = categoriaRepositorio.findById(id);
 		
 		if(optCategoria.isEmpty()) {
@@ -30,19 +32,19 @@ public class CategoriaService {
 		return optCategoria;
 	}
 	
-	public Categoria cadastrar(Categoria categoria) {
+	public Categoria cadastrar(@Valid Categoria categoria) {
 		
 		return categoriaRepositorio.save(categoria);
 	}
 	
-	public Categoria atualizar(Long id, Categoria categoria) {
+	public Categoria atualizar(@Valid Long id, Categoria categoria) {
 		obterPorId(id);
 		categoria.setId(id);
 		return categoriaRepositorio.save(categoria);
 		
 	}
 	
-	public void deletar(Long id) {
+	public void deletar(@Valid Long id) {
 		categoriaRepositorio.deleteById(id);
 	}
 }

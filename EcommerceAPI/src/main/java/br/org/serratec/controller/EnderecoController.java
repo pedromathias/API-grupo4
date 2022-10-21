@@ -1,8 +1,9 @@
 package br.org.serratec.controller;
 
 import java.util.List;
-
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,24 +34,24 @@ public class EnderecoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Endereco> obterPorId(@PathVariable Long id){
+	public ResponseEntity<Endereco> obterPorId(@Valid @PathVariable Long id){
 		Optional<Endereco> optEndereco = servico.obterPorId(id);
 		return ResponseEntity.ok(optEndereco.get());
 	}
 	
 	@PostMapping 
-	public ResponseEntity<Endereco> cadastrar(@RequestBody Endereco endereco) {
+	public ResponseEntity<Endereco> cadastrar(@Valid @RequestBody Endereco endereco) {
 		endereco = servico.cadastrar(endereco);
 		return new ResponseEntity<>(endereco, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco endereco) {
+	public ResponseEntity<Endereco> atualizar(@Valid @PathVariable Long id, @RequestBody Endereco endereco) {
 		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable Long id) {
+	public ResponseEntity<?> deletar(@Valid @PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

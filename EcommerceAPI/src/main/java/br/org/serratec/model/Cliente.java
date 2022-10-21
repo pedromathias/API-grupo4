@@ -3,11 +3,12 @@ package br.org.serratec.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 //CREATE TABLE cliente (id_cliente SERIAL PRIMARY KEY,
 //email varchar(30) NOT NULL,
@@ -21,38 +22,42 @@ import javax.persistence.Id;
 
 @Entity
 public class Cliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_cliente")
+	@Column(name = "id_cliente")
 	private Long id;
-	
-	@Column(nullable = false, length = 30)
+
+	@NotBlank(message = "Preencha o email")
+	@Size(max = 30, message = "Tamanho máximo de 30 caracteres")
+	@Column(name = "email",nullable=false, length=30)
 	private String email;
-	
-	@Column(nullable = false, length = 20)
+
+	@NotBlank(message = "Preencha o nome do usuário")
+	@Size(max = 20, message = "Tamanho máximo de 20 caracteres")
+	@Column(name = "nome_usuario",nullable=false,length=20)
 	private String nomeUsuario;
-	
-	@Column(nullable = false, length = 60)
+
+	@NotBlank(message = "Preencha o nome completo")
+	@Size(max = 60, message = "Tamanho máximo de 60 caracteres")
+	@Column(name = "nome_completo",nullable=false,length=60)
 	private String nomeCompleto;
-	
-	@Column(nullable = true, length = 255)
+
+	@Size(max = 255, message = "Tamanho máximo de 255 caracteres")
+	@Column(name="senha",nullable=true,length=255)
 	private String senha;
-	
-	@Column(nullable = false, length = 14)
+
+	@NotBlank(message="Preencha o cpf")
+	@Size(max=14,message="Tamanho máximo de 14 caracteres")
+	@Column(name="cpf",nullable=false,length=14)
 	private String cpf;
 	
-	@Column(nullable = true, length = 11)
+	@Size(max=11,message="Tamanho máximo de 11 caracteres")
+	@Column(name="telefone",nullable=true,length=11)
 	private String telefone;
-	
-	@Column(nullable = true)
+
+	@Column(name="data_nascimento",nullable = true)
 	private Date dataNasc;
-	
-//	@Embedded
-//	public Endereco idEndereco;
-	
-//	@Embedded
-//	public Endereco end;
 
 	public Long getId() {
 		return id;
@@ -117,10 +122,5 @@ public class Cliente {
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
-	
-	
-	
-	
-	
-	
+
 }
