@@ -20,33 +20,30 @@ public class Endereco {
 	@Column(name="id_endereco")
 	private Long id;
 	
-	@Column (name="cep", nullable=false, length=9)
-	private int cep;
+	@Column (name = "cep", nullable = false, length = 9)
+	private String cep;
 	
-	@Column (name="rua", nullable=false, length=100)
-	private String rua;
+	@Column (name = "rua", nullable = false, length = 100)
+	private String logradouro;
 	
-	@Column (name="bairro", nullable=false, length=50)
+//	@Column (name = "complemento", nullable = false, length = 20)
+//	private String complemento;
+	
+	@Column (name = "bairro", nullable = false, length = 50)
 	private String bairro;
 	
-	@Column (name="cidade", nullable=true, length=30)
-	private String cidade;
+	@Column (name = "cidade", nullable = true, length = 30)
+	private String localidade;
 	
-	@Column (name="numero", nullable=false)
-	private int numero;
+	@Column (name = "estado", nullable = false, length = 2)
+	private String uf;
 	
-	@Column (name="complemento", nullable=true, length=20)
-	private String complemento;
-	
-	@Column (name="estado", nullable=true)
-	private String estado;
 	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
 	@JsonBackReference
 	private Cliente cliente;
-	
-	
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -65,23 +62,31 @@ public class Endereco {
 
 	public void setId(Long id) {
 		this.id = id;
+		
 	}
-
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
-	public String getRua() {
-		return rua;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
+
+//	public String getComplemento() {
+//		return complemento;
+//	}
+//
+//	public void setComplemento(String complemento) {
+//		this.complemento = complemento;
+//	}
 
 	public String getBairro() {
 		return bairro;
@@ -91,36 +96,20 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getLocalidade() {
+		return localidade;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
 	}
 
-	public int getNumero() {
-		return numero;
+	public String getUf() {
+		return uf;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 	
 	

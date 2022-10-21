@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.org.serratec.dto.ClienteRequestDTO;
+import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.model.Cliente;
 import br.org.serratec.service.ClienteService;
 
@@ -29,24 +31,28 @@ public class ClienteController {
 	private ClienteService servico;
 	
 	@GetMapping
-	public ResponseEntity<List<Cliente>> obterTodos(){
+	public ResponseEntity<List<ClienteResponseDTO>> obterTodos(){
 		
-		List<Cliente> lista = servico.obterTodos();
+		List<ClienteResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> obterPorId(@PathVariable Long id){
-		Optional<Cliente> optCliente = servico.obterPorId(id);
+	public ResponseEntity<ClienteResponseDTO> obterPorId(@PathVariable Long id){
+		Optional<ClienteResponseDTO> optCliente = servico.obterPorId(id);
 		return ResponseEntity.ok(optCliente.get());
 	}
 	
 	@PostMapping 
-	public ResponseEntity<Cliente> cadastrar(@RequestBody @Valid Cliente cliente) {
-		cliente = servico.cadastrar(cliente);
-		return new ResponseEntity<>(cliente, HttpStatus.CREATED);
+	public ResponseEntity<ClienteResponseDTO> cadastrar(@RequestBody @Valid ClienteRequestDTO cliente) {
+		ClienteResponseDTO clienteDTO = servico.cadastrar(cliente);
+		return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
 	}
 	@PutMapping("/{id}")
+
 	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente cliente) {
+
+
+	public ResponseEntity<ClienteResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteRequestDTO cliente) {
 
 		return ResponseEntity.ok(servico.atualizar(id, cliente));
 	}
