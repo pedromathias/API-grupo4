@@ -32,7 +32,7 @@ public class ProdutoService {
 	
 	public Produto cadastrar(Produto produto) {
 		
-		produto.setIdProduto(null);
+		produto.setId(null);
 		return repositorio.save(produto);
 	}
 	
@@ -40,7 +40,7 @@ public class ProdutoService {
 		
 		obterPorId(id);
 		
-		produto.setIdProduto(id);
+		produto.setId(id);
 		return repositorio.save(produto);
 	}
 	

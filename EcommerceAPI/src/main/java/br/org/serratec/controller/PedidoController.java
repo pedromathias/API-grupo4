@@ -17,39 +17,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.model.Produto;
-import br.org.serratec.service.ProdutoService;
+import br.org.serratec.model.Pedido;
+import br.org.serratec.service.PedidoService;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/pedidos")
+public class PedidoController {
 
 	@Autowired
-	private ProdutoService servico;
+	private PedidoService servico;
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> obterTodos() {
+	public ResponseEntity<List<Pedido>> obterTodos() {
 
-		List<Produto> lista = servico.obterTodos();
+		List<Pedido> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> obterPorId(@Valid @PathVariable Long id) {
+	public ResponseEntity<Pedido> obterPorId(@Valid @PathVariable Long id) {
 
-		Optional<Produto> optProduto = servico.obterPorId(id);
-		return ResponseEntity.ok(optProduto.get());
+		Optional<Pedido> optPedido = servico.obterPorId(id);
+		return ResponseEntity.ok(optPedido.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<Produto> cadastrar(@Valid @RequestBody Produto produto) {
-		produto = servico.cadastrar(produto);
-		return new ResponseEntity<>(produto, HttpStatus.CREATED);
+	public ResponseEntity<Pedido> cadastrar(@Valid @RequestBody Pedido pedido) {
+		pedido = servico.cadastrar(pedido);
+		return new ResponseEntity<>(pedido, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizar(@Valid @PathVariable Long id, @RequestBody Produto produto) {
-		return ResponseEntity.ok(servico.atualizar(id, produto));
+	public ResponseEntity<Pedido> atualizar(@Valid @PathVariable Long id, @RequestBody Pedido pedido) {
+		return ResponseEntity.ok(servico.atualizar(id, pedido));
 	}
 
 	@DeleteMapping("/{id}")

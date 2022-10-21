@@ -1,12 +1,14 @@
 package br.org.serratec.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -58,6 +60,30 @@ public class Cliente {
 
 	@Column(name="data_nascimento",nullable = true)
 	private Date dataNasc;
+	
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Endereco> endereco;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedido;
+
+
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return endereco;
+	}
+
+	public void setEnderecos(List<Endereco> endereco) {
+		this.endereco = endereco;
+	}
 
 	public Long getId() {
 		return id;

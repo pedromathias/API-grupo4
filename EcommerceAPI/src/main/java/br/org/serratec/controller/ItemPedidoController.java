@@ -17,39 +17,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.model.Produto;
-import br.org.serratec.service.ProdutoService;
+import br.org.serratec.model.ItemPedido;
+import br.org.serratec.service.ItemPedidoService;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/itempedidos")
+public class ItemPedidoController {
 
 	@Autowired
-	private ProdutoService servico;
+	private ItemPedidoService servico;
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> obterTodos() {
+	public ResponseEntity<List<ItemPedido>> obterTodos() {
 
-		List<Produto> lista = servico.obterTodos();
+		List<ItemPedido> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> obterPorId(@Valid @PathVariable Long id) {
+	public ResponseEntity<ItemPedido> obterPorId(@Valid @PathVariable Long id) {
 
-		Optional<Produto> optProduto = servico.obterPorId(id);
-		return ResponseEntity.ok(optProduto.get());
+		Optional<ItemPedido> optItemPedido = servico.obterPorId(id);
+		return ResponseEntity.ok(optItemPedido.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<Produto> cadastrar(@Valid @RequestBody Produto produto) {
-		produto = servico.cadastrar(produto);
-		return new ResponseEntity<>(produto, HttpStatus.CREATED);
+	public ResponseEntity<ItemPedido> cadastrar(@Valid @RequestBody ItemPedido itemPedido) {
+		itemPedido = servico.cadastrar(itemPedido);
+		return new ResponseEntity<>(itemPedido, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizar(@Valid @PathVariable Long id, @RequestBody Produto produto) {
-		return ResponseEntity.ok(servico.atualizar(id, produto));
+	public ResponseEntity<ItemPedido> atualizar(@Valid @PathVariable Long id, @RequestBody ItemPedido itemPedido) {
+		return ResponseEntity.ok(servico.atualizar(id, itemPedido));
 	}
 
 	@DeleteMapping("/{id}")

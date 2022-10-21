@@ -7,9 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Produto {
@@ -39,6 +43,11 @@ public class Produto {
 	@Column(name = "valor_unitario",nullable=false)
 	private Double valorUnitario;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_item_pedido")
+	@JsonBackReference
+	private ItemPedido itemPedido;
+	
 //	@JoinColumn(name = "idCategoria", referencedColumnName = "id_categoria")
 //	private Categoria categoria;
 //	@Column
@@ -46,10 +55,16 @@ public class Produto {
 	
 	
 
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
+	}
 	public Long getId() {
 		return id;
 	}
-	public void setIdProduto(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {

@@ -7,6 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Pedido {
@@ -16,22 +23,48 @@ public class Pedido {
 	@Column(name="id_pedido")
 	private Long id;
 	
-	@Column(nullable=false)
+	@FutureOrPresent
+	@NotNull(message="Preencha a data do pedido")
+	@Column(name = "data_pedido",nullable=false)
 	private Date dataPedido;
 	
-	@Column
+	@Column(name="data_entrega",nullable=true)
 	private Date dataEntrega;
 	
-	@Column
+	@Column(name="data_envio",nullable=true)
 	private Date dataEnvio;
 	
-	@Column(length=20)
+	@Size(max=20,message="Tamanho máximo de 20 caracteres")
+	@Column(name="status",length=20)
 	private String status;
 	
-	//@Column
-	//private Cliente idCliente;
+	@ManyToOne
+	@JoinColumn(name = "id_cliente")
+	@JsonBackReference
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_item_pedido")
+//	@JsonBackReference
+	private ItemPedido itemPedido;
 		
 	
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public Long getId() {
 		return id;
 	}
