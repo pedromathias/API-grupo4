@@ -78,4 +78,8 @@ public class ClienteService {
 		repositorio.deleteById(id);
 	}
 	
+	private void validarModelo(Cliente cliente) {
+	if(cliente.getNomeUsuario().length() > 20);
+	}
+	
 }

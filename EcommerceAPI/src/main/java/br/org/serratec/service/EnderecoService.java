@@ -1,11 +1,14 @@
 package br.org.serratec.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Cliente;
 import br.org.serratec.model.Endereco;
@@ -17,8 +20,15 @@ public class EnderecoService {
 	@Autowired
 	private EnderecoRepository repositorio;
 	
-	public List<Endereco>obterTodos(){
-		return repositorio.findAll();
+	private ModelMapper mapper = new ModelMapper();
+	
+	public List<EnderecoResponseDTO>obterTodos(){
+		List<Endereco> lista = repositorio.findAll();
+		var novaLista = new ArrayList<EnderecoResponseDTO>();
+		for(Endereco endereco : lista) {
+			novaLista.add(mapper.map(endereco, EnderecoResponseDTO.class));
+		}
+		return novaLista;
 	}
 	
 	public Optional<Endereco> obterPorId(Long id){
