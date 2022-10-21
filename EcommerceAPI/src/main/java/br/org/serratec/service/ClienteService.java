@@ -10,14 +10,10 @@ import org.springframework.stereotype.Service;
 
 import br.org.serratec.dto.ClienteRequestDTO;
 import br.org.serratec.dto.ClienteResponseDTO;
-import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
-
 import br.org.serratec.model.Cliente;
 import br.org.serratec.model.MensagemEmail;
 import br.org.serratec.repository.ClienteRepository;
-
-import br.org.serratec.exception.ResourceNotFoundException;
 
 
 @Service

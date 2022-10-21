@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.dto.ClienteRequestDTO;
 import br.org.serratec.dto.ClienteResponseDTO;
-import br.org.serratec.model.Cliente;
 import br.org.serratec.service.ClienteService;
 
 
