@@ -50,7 +50,21 @@ public class ClienteService {
 	}
 	
 
-	public Cliente cadastrar(Cliente cliente) {
+//	public Cliente cadastrar(Cliente cliente) {
+////		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
+////		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
+////		if(clientes.size()>0) {
+////			throw new RuntimeException("Cpf já cadastrado!");
+////		}
+////		if(client.size()>0) {
+////			throw new RuntimeException("Email já cadastrado");
+////		}
+//		return repositorio.save(cliente);
+//	}
+		
+
+		
+	public ClienteResponseDTO cadastrar(ClienteRequestDTO cliente) {
 		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
 		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
 		if(clientes.size()>0) {
@@ -59,12 +73,6 @@ public class ClienteService {
 		if(client.size()>0) {
 			throw new RuntimeException("Email já cadastrado");
 		}
-		return repositorio.save(cliente);
-	}
-		
-
-		
-	public ClienteResponseDTO cadastrar(ClienteRequestDTO cliente) {
 		var clienteModel = mapper.map(cliente, Cliente.class);
 		clienteModel.setId(null);
 		clienteModel = repositorio.save(clienteModel);
@@ -96,6 +104,8 @@ public class ClienteService {
 		obterPorId(id);
 		repositorio.deleteById(id);
 	}
+	
+	
 	
 
 }
