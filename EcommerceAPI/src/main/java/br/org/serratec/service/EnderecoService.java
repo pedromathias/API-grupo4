@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.dto.EnderecoRequestDTO;
 import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Endereco;
@@ -31,23 +32,29 @@ public class EnderecoService {
 		return novaLista;
 	}
 	
-	public Optional<Endereco> obterPorId(Long id){
+	public Optional<EnderecoResponseDTO> obterPorId(Long id){
 		Optional<Endereco> optEndereco = repositorio.findById(id);
 		if(optEndereco.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi possivel encontrar o endereço com id " + id);
 	}
-			return repositorio.findById(id);
+		EnderecoResponseDTO dto = mapper.map(optEndereco.get(), EnderecoResponseDTO.class);
+	return Optional.of(dto);
 	}
 	
-	public Endereco cadastrar(Endereco endereco) {
-		endereco.setId(null);
-		return repositorio.save(endereco);
+	public EnderecoResponseDTO cadastrar(EnderecoRequestDTO endereco) {
+		var enderecoModel = mapper.map(endereco, Endereco.class);
+		enderecoModel.setId(null);
+		enderecoModel = repositorio.save(enderecoModel);
+		var response = mapper.map(enderecoModel, EnderecoResponseDTO.class);
+		return response;
 	}
-	
-	public Endereco atualizar(Long id, Endereco endereco) {
+
+	public EnderecoResponseDTO atualizar(Long id, EnderecoRequestDTO endereco) {
 		obterPorId(id);
-		endereco.setId(id);
-		return repositorio.save(endereco);
+		var enderecoModel = mapper.map(endereco, Endereco.class);
+		enderecoModel.setId(id);
+		enderecoModel = repositorio.save(enderecoModel);
+		return mapper.map(enderecoModel, EnderecoResponseDTO.class);
 	}
 	
 	public void deletar (Long id) {

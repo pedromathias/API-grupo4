@@ -34,6 +34,9 @@ public class Endereco {
 	
 //	@Column (name = "complemento", nullable = false, length = 20)
 //	private String complemento;
+//	
+//	@Column (name = "numero", nullable = false)
+//	private int numero;
 	
 	@NotBlank(message = "Preencha o Bairro")
 	@Size(max=50, message = "Tamanho máximo 50 caracteres")
