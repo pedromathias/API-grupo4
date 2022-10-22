@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "produto")
@@ -22,12 +25,17 @@ public class Produto {
 	@Column(name = "id_produto")
 	private Long id;
 	
+	@NotBlank(message = "Preencha o nome")
+	@Size(max=30, message = "Tamanho máximo 30 caracteres")
 	@Column(name = "nome", nullable = false, length = 30)
 	private String nome;
 	
+	@NotBlank(message = "Preencha a descrição")
+	@Size(max=100, message = "Tamanho máximo 100 caracteres")
 	@Column(name = "descricao", length = 100)
 	private String descricao;
 	
+	@NotNull
 	@Column(name = "qtd_estoque", nullable = false)
 	private Integer quantidadeEstoque;
 	

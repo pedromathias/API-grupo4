@@ -38,9 +38,9 @@ public class ClienteService {
 	
 	public Optional<ClienteResponseDTO> obterPorId(Long id){
 		Optional<Cliente> optCliente = repositorio.findById(id);
-		if(optCliente.isEmpty()) {
-			throw new ResourceNotFoundException("Não foi possivel encontrar o cliente com id " + id);
-		}
+//		if(optCliente.isEmpty()) {
+//			throw new ResourceNotFoundException("Não foi possivel encontrar o cliente com id " + id);
+//		}
 		ClienteResponseDTO dto = mapper.map(optCliente.get(), ClienteResponseDTO.class);
 		return Optional.of(dto);
 	}

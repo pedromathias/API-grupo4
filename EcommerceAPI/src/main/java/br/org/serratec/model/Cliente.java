@@ -24,31 +24,21 @@ public class Cliente {
 	@Column(name="id_cliente")
 	private Long id;
 	
-	@NotBlank(message = "Preencha o nome")
-	@Size(max=30, message = "Tamanho máximo 30 caracteres")
 	@Column(unique = true)
 	private String email;
 	
-	@NotBlank(message = "Preencha o nome de usuário")
-	@Size(max=20, message = "Tamanho máximo 20 caracteres")
 	@Column(nullable = false, length = 20)
 	private String nomeUsuario;
 	
-	@NotBlank(message = "Preencha o nome do usuário completo")
-	@Size(max=60, message = "Tamanho máximo 60 caracteres")
 	@Column(nullable = false, length = 60)
 	private String nomeCompleto;
 	
-	@Size(max=255, message = "Tamanho máximo 255 caracteres")
 	@Column(nullable = true, length = 255)
 	private String senha;
 	
-	@NotBlank(message = "Preencha o cpf")
-	@Size(max=14, message = "Tamanho máximo 14 caracteres")
 	@Column(unique = true)
 	private String cpf;
 	
-	@Size(max=14, message = "Tamanho máximo 11 caracteres")
 	@Column(nullable = true, length = 11)
 	private String telefone;
 	

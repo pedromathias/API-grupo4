@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.OneToMany;
 
 import br.org.serratec.model.Endereco;
+import br.org.serratec.model.Pedido;
 
 public class ClienteResponseDTO {
 
@@ -21,6 +22,17 @@ public class ClienteResponseDTO {
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> endereco;
 	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedido;
+	
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
+
 	public List<Endereco> getEndereco() {
 		return endereco;
 	}
