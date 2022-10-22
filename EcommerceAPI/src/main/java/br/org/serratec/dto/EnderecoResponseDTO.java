@@ -13,7 +13,7 @@ public class EnderecoResponseDTO {
 	
 	private String localidade;
 	
-	private int numero;
+	private String numero;
 	
 	private String complemento;
 
@@ -59,11 +59,11 @@ public class EnderecoResponseDTO {
 		this.localidade = localidade;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

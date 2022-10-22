@@ -106,7 +106,7 @@ public class ClienteService {
 		if (cliente.getEmail() == null) {
 			throw new ResourceBadRequestException("O Email deve ser informado");
 		} else if (cliente.getEmail().length() > 30) {
-			throw new ResourceBadRequestException("Tamanho máxmimo do Email deve ser 40 caracteres.");
+			throw new ResourceBadRequestException("Tamanho máxmimo do Email deve ser 30 caracteres.");
 		}
 
 	}
@@ -133,7 +133,7 @@ public class ClienteService {
 	
 	private void validarSenha(ClienteRequestDTO cliente) {
 
-		 if (cliente.getNomeCompleto().length() > 255) {
+		 if (cliente.getSenha().length() > 255) {
 			throw new ResourceBadRequestException("Tamanho máxmimo da senha deve ser 255 caracteres.");
 		}
 

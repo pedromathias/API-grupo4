@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.org.serratec.dto.EnderecoRequestDTO;
 import br.org.serratec.dto.EnderecoResponseDTO;
+import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.repository.EnderecoRepository;
@@ -42,6 +43,9 @@ public class EnderecoService {
 	}
 	
 	public EnderecoResponseDTO cadastrar(EnderecoRequestDTO endereco) {
+		validarCep(endereco);
+		validarComplemento(endereco);
+		validarNumero(endereco);
 		var enderecoModel = mapper.map(endereco, Endereco.class);
 		enderecoModel.setId(null);
 		enderecoModel = repositorio.save(enderecoModel);
@@ -61,6 +65,32 @@ public class EnderecoService {
 		obterPorId(id);
 		repositorio.deleteById(id);
 		
+	}
+	
+	private void validarCep(EnderecoRequestDTO endereco) {
+
+		if (endereco.getCep() == null) {
+			throw new ResourceBadRequestException("O CEP deve ser informado");
+		} else if (endereco.getCep().length() > 9) {
+			throw new ResourceBadRequestException("Tamanho do CEP deve ser no formato ex:25665-500");
+		}
+
+	}
+	
+	private void validarComplemento(EnderecoRequestDTO endereco) {
+
+		if (endereco.getComplemento().length() > 20) {
+			throw new ResourceBadRequestException("Tamanho máxmimo do complemento deve ser 20 caracteres");
+		}
+
+	}
+	
+	private void validarNumero(EnderecoRequestDTO endereco) {
+
+		if (endereco.getNumero() == null){
+			throw new ResourceBadRequestException("O número deve ser informado");
+		}
+
 	}
 }
 

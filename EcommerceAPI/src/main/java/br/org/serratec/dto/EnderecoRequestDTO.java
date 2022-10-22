@@ -1,17 +1,11 @@
 package br.org.serratec.dto;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.org.serratec.model.Cliente;
-import br.org.serratec.model.Endereco;
 
 public class EnderecoRequestDTO {
 	
@@ -25,9 +19,9 @@ private Long id;
 	
 	private String localidade;
 	
-//	private int numero;
-//	
-//	private String complemento;
+	private String numero;
+	
+	private String complemento;
 	
 	private String uf;
 	
@@ -76,21 +70,21 @@ private Long id;
 		this.localidade = localidade;
 	}
 
-//	public int getNumero() {
-//		return numero;
-//	}
-//
-//	public void setNumero(int numero) {
-//		this.numero = numero;
-//	}
-//
-//	public String getComplemento() {
-//		return complemento;
-//	}
-//
-//	public void setComplemento(String complemento) {
-//		this.complemento = complemento;
-//	}
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 
 	public String getUf() {
 		return uf;
