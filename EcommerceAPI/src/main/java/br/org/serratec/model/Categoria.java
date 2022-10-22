@@ -34,7 +34,6 @@ public class Categoria {
 	
 	@ManyToOne
 	@JoinColumn(name="id_produto")
-	@JsonBackReference
 	private Produto produto;
 
 	public Produto getProduto() {
