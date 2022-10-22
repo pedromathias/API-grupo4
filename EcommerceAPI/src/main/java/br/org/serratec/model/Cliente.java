@@ -62,7 +62,6 @@ public class Cliente {
 	private List<Pedido> pedido;
 
 	
-	
 	public List<Pedido> getPedido() {
 		return pedido;
 	}

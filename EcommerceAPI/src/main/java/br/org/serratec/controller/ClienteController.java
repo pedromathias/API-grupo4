@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.dto.ClienteRequestDTO;
 import br.org.serratec.dto.ClienteResponseDTO;
-import br.org.serratec.model.Cliente;
 import br.org.serratec.service.ClienteService;
 
 
@@ -49,7 +48,11 @@ public class ClienteController {
 	}
 	@PutMapping("/{id}")
 
+<<<<<<< HEAD
 	//public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente cliente) {
+=======
+//	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente cliente) {
+>>>>>>> 02229a41d5c5533dfb8a2f18a8b2f4228004a445
 
 
 	public ResponseEntity<ClienteResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteRequestDTO cliente) {

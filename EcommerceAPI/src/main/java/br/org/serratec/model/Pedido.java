@@ -44,8 +44,19 @@ public class Pedido {
 	@JoinColumn(name = "id_cliente")
 	@JsonBackReference
 	private Cliente cliente;
-		
 	
+	@ManyToOne
+    @JoinColumn(name = "id_item_pedido")
+    private ItemPedido itemPedido;
+		
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+
 	public Long getId() {
 		return id;
 	}
