@@ -47,7 +47,6 @@ public class ClienteService {
 	
 
 //	public Cliente cadastrar(Cliente cliente) {
-<<<<<<< HEAD
 ////		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
 ////		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
 ////		if(clientes.size()>0) {
@@ -56,16 +55,9 @@ public class ClienteService {
 ////		if(client.size()>0) {
 ////			throw new RuntimeException("Email já cadastrado");
 ////		}
-=======
-//		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
-//		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
-//		if(clientes.size()>0) {
-//			throw new RuntimeException("Cpf já cadastrado!");
-//		}
-//		if(client.size()>0) {
-//			throw new RuntimeException("Email já cadastrado");
-//		}
->>>>>>> 02229a41d5c5533dfb8a2f18a8b2f4228004a445
+
+
+
 //		return repositorio.save(cliente);
 //	}
 		

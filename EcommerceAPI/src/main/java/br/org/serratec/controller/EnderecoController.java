@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.service.EnderecoService;
 
@@ -33,8 +34,8 @@ public class EnderecoController {
 	private EnderecoService servico;
 	
 	@GetMapping
-	public ResponseEntity<List<Endereco>> obterTodos(){
-		List<Endereco> lista = servico.obterTodos();
+	public ResponseEntity<List<EnderecoResponseDTO>> obterTodos(){
+		List<EnderecoResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 	

@@ -13,6 +13,9 @@ import br.org.serratec.repository.ItemPedidoRepository;
 @Service
 public class ItemPedidoService {
 	
+    ItemPedido valorBruto = new ItemPedido();
+    ItemPedido valorLiquido = new ItemPedido();
+    
 	@Autowired
 	private ItemPedidoRepository repositorio;
 	
@@ -34,6 +37,9 @@ public class ItemPedidoService {
 	public ItemPedido cadastrar(ItemPedido itemPedido) {
 		
 		itemPedido.setId(null);
+		calcularValorBruto(itemPedido);
+		calcularValorLiquido(itemPedido);
+		
 		return repositorio.save(itemPedido);
 	}
 	
@@ -49,5 +55,17 @@ public class ItemPedidoService {
 		obterPorId(id);
 		repositorio.deleteById(id);
 	}
-
+	
+	public ItemPedido calcularValorBruto(ItemPedido itemPedido) {
+	   
+	    valorBruto.setValorBruto(valorBruto.getQuantidade()*valorBruto.getPrecoVenda());
+        return this.valorBruto;
+	}
+		
+	public ItemPedido calcularValorLiquido(ItemPedido itemPedido) {
+	    valorLiquido.setValorLiquido(valorLiquido.getValorBruto()-valorLiquido.getValorBruto()*valorLiquido.getPercentDesconto());
+        return this.valorLiquido;
+	}
+	
+	
 }

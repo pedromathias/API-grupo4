@@ -19,20 +19,30 @@ public class ItemPedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_pedido")
 	private Long id;
-	
-	@NotNull(message="Preencha a quantidade")
-	@Column(name="quantidade")
+
+	@NotNull(message = "Preencha a quantidade")
+	@Column(name = "quantidade")
 	private int quantidade;
-	
-	@NotNull(message="Preencha o preço da venda")
-	@Column(name="preco_venda")
+
+	@NotNull(message = "Preencha o preço da venda")
+	@Column(name = "preco_venda")
 	private int precoVenda;
 	
-	@OneToMany(mappedBy="itemPedido")
+	@Column(name = "valor_bruto")
+	private double valorBruto;
+	
+	@NotNull(message = "Preencha o preço da venda")
+	@Column(name = "percentual_desconto")
+	private double percentDesconto;
+
+	@Column(name = "valor_líquido")
+	private double valorLiquido;
+
+	@OneToMany(mappedBy = "itemPedido")
 	@JsonBackReference
 	private List<Pedido> pedido;
-	
-	@OneToMany(mappedBy="itemPedido")
+
+	@OneToMany(mappedBy = "itemPedido")
 	private List<Produto> produto;
 
 	public Long getId() {
@@ -75,4 +85,32 @@ public class ItemPedido {
 		this.produto = produto;
 	}
 	
+	public double getValorBruto() {
+	    return valorBruto;
+	}
+	
+	public void setValorBruto(double valorBruto) {
+	    this.valorBruto = valorBruto;
+	    
+	}
+	
+	public double getPercentDesconto() {
+        return percentDesconto;
+    }
+    
+    public void setPercentDesconto(double percentDesconto) {
+        this.percentDesconto = percentDesconto;
+        
+    }
+	
+    public double getValorLiquido() {
+        return valorLiquido;
+    }
+    
+    public void setValorLiquido(double valorLiquido) {
+        this.valorLiquido = valorLiquido;
+        
+    }
+	
+
 }
