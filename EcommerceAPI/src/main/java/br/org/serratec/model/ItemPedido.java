@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class ItemPedido {
@@ -19,21 +19,21 @@ public class ItemPedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_pedido")
 	private Long id;
-	
-	@NotNull(message="Preencha a quantidade")
-	@Column(name="quantidade")
+
+	@NotNull(message = "Preencha a quantidade")
+	@Column(name = "quantidade")
 	private int quantidade;
-	
-	@NotNull(message="Preencha o preço da venda")
-	@Column(name="preco_venda")
+
+	@NotNull(message = "Preencha o preço da venda")
+	@Column(name = "preco_venda")
 	private int precoVenda;
 	
-	@OneToMany(mappedBy="itemPedido")
-	@JsonBackReference
-	private List<Pedido> pedido;
+	@ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedido pedido;
 	
-	@OneToMany(mappedBy="itemPedido")
-	private List<Produto> produto;
+	@OneToOne(mappedBy = "itemPedido")
+	private Produto produto;
 
 	public Long getId() {
 		return id;
@@ -59,20 +59,23 @@ public class ItemPedido {
 		this.precoVenda = precoVenda;
 	}
 
-	public List<Pedido> getPedido() {
+	
+	public Pedido getPedido() {
 		return pedido;
 	}
 
-	public void setPedido(List<Pedido> pedido) {
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
-	public List<Produto> getProduto() {
+	public Produto getProduto() {
 		return produto;
 	}
 
-	public void setProduto(List<Produto> produto) {
+	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
 	
+
 }

@@ -1,6 +1,7 @@
 package br.org.serratec.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,15 +47,15 @@ public class Pedido {
 	@JsonBackReference
 	private Cliente cliente;
 	
-	@ManyToOne
-    @JoinColumn(name = "id_item_pedido")
-    private ItemPedido itemPedido;
-		
-	public ItemPedido getItemPedido() {
+	@OneToMany(mappedBy = "pedido")
+	@JsonBackReference
+	private List<ItemPedido> itemPedido;
+
+	public List<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}
 
-	public void setItemPedido(ItemPedido itemPedido) {
+	public void setItemPedido(List<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;
 	}
 
