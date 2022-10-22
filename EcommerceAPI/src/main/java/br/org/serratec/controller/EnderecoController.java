@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import br.org.serratec.dto.EnderecoRequestDTO;
+import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.service.EnderecoService;
 
@@ -33,32 +35,28 @@ public class EnderecoController {
 	private EnderecoService servico;
 	
 	@GetMapping
-	public ResponseEntity<List<Endereco>> obterTodos(){
-		List<Endereco> lista = servico.obterTodos();
+	public ResponseEntity<List<EnderecoResponseDTO>> obterTodos(){
+		List<EnderecoResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Endereco> obterPorId(@PathVariable Long id){
-		Optional<Endereco> optEndereco = servico.obterPorId(id);
+	public ResponseEntity<EnderecoResponseDTO> obterPorId(@PathVariable Long id){
+		Optional<EnderecoResponseDTO> optEndereco = servico.obterPorId(id);
 		return ResponseEntity.ok(optEndereco.get());
 	}
 	
 	@PostMapping 
-	public ResponseEntity<Endereco> cadastrar(@RequestBody Endereco endereco) throws Exception {
-		//endereco = servico.cadastrar(endereco);
-		
+	public ResponseEntity<EnderecoResponseDTO> cadastrar(@RequestBody EnderecoRequestDTO endereco) throws Exception {
 		URL url=new URL ("https://viacep.com.br/ws/"+endereco.getCep()+"/json/");
 		URLConnection connection = url.openConnection();
 		InputStream is = connection.getInputStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-		
 		String cep = "";
 		StringBuilder jsonCep=new StringBuilder();
 		while((cep=br.readLine())!=null) {
 			jsonCep.append(cep);	
 		}
-		
 		Endereco userAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
 		endereco.setCep(userAux.getCep());
 		endereco.setLogradouro(userAux.getLogradouro());
@@ -67,13 +65,12 @@ public class EnderecoController {
 		endereco.setLocalidade(userAux.getLocalidade());
 		endereco.setUf(userAux.getUf());
 		
-		
-		endereco = servico.cadastrar(endereco);
-		return new ResponseEntity<>(endereco, HttpStatus.CREATED);
+		EnderecoResponseDTO enderecoDTO = servico.cadastrar(endereco);
+		return new ResponseEntity<>(enderecoDTO, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco endereco) {
+	public ResponseEntity<EnderecoResponseDTO> atualizar(@PathVariable Long id, @RequestBody EnderecoRequestDTO endereco) {
 		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
 	

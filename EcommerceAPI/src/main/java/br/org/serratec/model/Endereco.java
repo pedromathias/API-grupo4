@@ -34,6 +34,9 @@ public class Endereco {
 	
 //	@Column (name = "complemento", nullable = true, length = 20)
 //	private String complemento;
+//	
+//	@Column (name = "numero", nullable = false)
+//	private int numero;
 	
 	@Column(name="numero",nullable=false)
 	private int numero;
