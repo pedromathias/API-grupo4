@@ -16,6 +16,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -52,6 +54,7 @@ public class Produto {
 	private List<Categoria> categoria;
 	
 	@ManyToOne
+	@JsonBackReference
     @JoinColumn(name = "id_item_pedido")
     private ItemPedido itemPedido;
 	

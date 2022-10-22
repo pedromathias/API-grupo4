@@ -1,20 +1,21 @@
 package br.org.serratec.model.error;
 
-import java.time.LocalDateTime;
-
-import java.util.List;
 
 public class MensagemError {
-	private Integer status;
-	private String titulo;
-	private LocalDateTime dataHora;
-	private List<String> erros;
 
-	public MensagemError(Integer status, String titulo, LocalDateTime dataHora, List<String> erros) {
+	private String dataHora;
+	
+	private Integer status;
+	
+	private String titulo;
+	
+	private String mensagem;
+	
+	public MensagemError(String dataHora, Integer status, String titulo, String mensagem) {
+		this.dataHora = dataHora;
 		this.status = status;
 		this.titulo = titulo;
-		this.dataHora = dataHora;
-		this.erros = erros;
+		this.mensagem = mensagem;
 	}
 
 	public Integer getStatus() {
@@ -33,19 +34,21 @@ public class MensagemError {
 		this.titulo = titulo;
 	}
 
-	public LocalDateTime getDataHora() {
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
+	public String getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(LocalDateTime dataHora) {
+	public void setDataHora(String dataHora) {
 		this.dataHora = dataHora;
-	}
-
-	public List<String> getErros() {
-		return erros;
-	}
-
-	public void setErros(List<String> erros) {
-		this.erros = erros;
-	}
+	}	
+	
+	
 }
