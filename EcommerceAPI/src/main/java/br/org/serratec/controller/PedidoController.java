@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.org.serratec.dto.PedidoRequestDTO;
+import br.org.serratec.dto.PedidoResponseDTO;
 import br.org.serratec.model.Pedido;
 import br.org.serratec.service.PedidoService;
 
@@ -28,27 +30,27 @@ public class PedidoController {
 	private PedidoService servico;
 
 	@GetMapping
-	public ResponseEntity<List<Pedido>> obterTodos() {
+	public ResponseEntity<List<PedidoResponseDTO>> obterTodos() {
 
-		List<Pedido> lista = servico.obterTodos();
+		List<PedidoResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Pedido> obterPorId(@Valid @PathVariable Long id) {
+	public ResponseEntity<PedidoResponseDTO> obterPorId(@Valid @PathVariable Long id) {
 
-		Optional<Pedido> optPedido = servico.obterPorId(id);
+		Optional<PedidoResponseDTO> optPedido = servico.obterPorId(id);
 		return ResponseEntity.ok(optPedido.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<Pedido> cadastrar(@Valid @RequestBody Pedido pedido) {
-		pedido = servico.cadastrar(pedido);
-		return new ResponseEntity<>(pedido, HttpStatus.CREATED);
+	public ResponseEntity<PedidoResponseDTO> cadastrar(@Valid @RequestBody PedidoRequestDTO pedido) {
+		PedidoResponseDTO pedidoDTO = servico.cadastrar(pedido);
+		return new ResponseEntity<>(pedidoDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedido> atualizar(@Valid @PathVariable Long id, @RequestBody Pedido pedido) {
+	public ResponseEntity<PedidoResponseDTO> atualizar(@Valid @PathVariable Long id, @RequestBody PedidoRequestDTO pedido) {
 		return ResponseEntity.ok(servico.atualizar(id, pedido));
 	}
 

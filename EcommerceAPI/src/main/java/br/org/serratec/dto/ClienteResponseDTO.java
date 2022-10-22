@@ -19,10 +19,8 @@ public class ClienteResponseDTO {
 	
 	private String telefone;
 	
-	@OneToMany(mappedBy="cliente")
 	private List<Endereco> endereco;
 	
-	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedido;
 	
 	public List<Pedido> getPedido() {

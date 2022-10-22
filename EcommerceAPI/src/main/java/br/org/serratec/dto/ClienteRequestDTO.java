@@ -12,26 +12,16 @@ import br.org.serratec.model.Pedido;
 
 public class ClienteRequestDTO {
 
-	@NotBlank(message = "Preencha o nome")
-	@Size(max=30, message = "Tamanho máximo 30 caracteres")
 	private String email;
 	
-	@NotBlank(message = "Preencha o nome de usuário")
-	@Size(max=20, message = "Tamanho máximo 20 caracteres")
 	private String nomeUsuario;
 	
-	@NotBlank(message = "Preencha o nome do usuário completo")
-	@Size(max=60, message = "Tamanho máximo 60 caracteres")
 	private String nomeCompleto;
 	
-	@Size(max=255, message = "Tamanho máximo 255 caracteres")
 	private String senha;
 	
-	@NotBlank(message = "Preencha o cpf")
-	@Size(max=14, message = "Tamanho máximo 14 caracteres")
 	private String cpf;
 	
-	@Size(max=14, message = "Tamanho máximo 11 caracteres")
 	private String telefone;
 
 	private Date dataNasc;
