@@ -1,7 +1,5 @@
 package br.org.serratec.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +32,15 @@ public class ItemPedido {
 	
 	@OneToOne(mappedBy = "itemPedido")
 	private Produto produto;
+	
+	@Column(name="valor_bruto")
+	private double valorBruto;
+	
+	@Column(name= "percentual_desconto")
+	private double percentDesconto;
+	
+	@Column(name="valor_liquido")
+	private double valorLiquido;
 
 	public Long getId() {
 		return id;
@@ -74,6 +81,30 @@ public class ItemPedido {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public double getValorBruto() {
+		return valorBruto;
+	}
+
+	public void setValorBruto(double valorBruto) {
+		this.valorBruto = valorBruto;
+	}
+
+	public double getPercentDesconto() {
+		return percentDesconto;
+	}
+
+	public void setPercentDesconto(double percentDesconto) {
+		this.percentDesconto = percentDesconto;
+	}
+
+	public double getValorLiquido() {
+		return valorLiquido;
+	}
+
+	public void setValorLiquido(double valorLiquido) {
+		this.valorLiquido = valorLiquido;
 	}
 
 	

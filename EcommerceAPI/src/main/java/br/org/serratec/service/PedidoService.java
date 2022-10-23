@@ -9,36 +9,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.org.serratec.model.Cliente;
-import br.org.serratec.model.Endereco;
-import br.org.serratec.model.MensagemEmail;
-import br.org.serratec.model.Pedido;
-import br.org.serratec.repository.PedidoRepository;
-import br.org.serratec.dto.ClienteResponseDTO;
-import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.dto.PedidoRequestDTO;
 import br.org.serratec.dto.PedidoResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
+import br.org.serratec.model.Pedido;
+import br.org.serratec.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
 
 	@Autowired
 	private PedidoRepository repositorio;
-
-	Cliente cliente = new Cliente();
-
-	Endereco endereco = new Endereco();
-	
-	@Autowired
-	private ClienteService clienteService;
-
-	@Autowired
-	private EnderecoService enderecoService;
-	
-	@Autowired
-	private EmailService emailService;
 
 	private ModelMapper mapper = new ModelMapper();
 
@@ -66,24 +48,7 @@ public class PedidoService {
 		pedidoModel.setId(null);
 		pedidoModel = repositorio.save(pedidoModel);
 		var response = mapper.map(pedidoModel, PedidoResponseDTO.class);
-		Long clienteId = pedido.getCliente().getId();
-		var destinatarios = new ArrayList<String>();
-		Optional<ClienteResponseDTO> cliente = clienteService.obterPorId(clienteId);
-		var clienteModel = mapper.map(clienteId, EnderecoResponseDTO.class);
-//		Endereco enderecoCliente = endereco.getCliente().getId(clienteId);
-		destinatarios.add(cliente.get().getEmail());
-		String mensagem = "<h1 style=\"color:blue\">Olá Sr(a)" + cliente.get().getNomeUsuario()
-				+ "!</h1> <p> Seu pedido foi cadastrado com sucesso!</p>" + "<ul>Dados do Pedido:"
-					+ "<li>Data Pedido:"+pedidoModel.getDataPedido()+"</li>"
-					+ "<li>Status Pedido:"+pedidoModel.getStatus()+"</li>"
-				+ "</ul>"
-				+"<ul>Dados do Cliente: "
-					+"<li>Cpf do Cliente:"+cliente.get().getCpf()+"</li>"
-					+"<li>Nome do Cliente:"+cliente.get().getNomeCompleto()+"</li>"
-					+ "</ul>"
-				;
-		MensagemEmail email = new MensagemEmail("Nova conta criada.", mensagem, "g4serratec@gmail.com", destinatarios);
-		emailService.enviar(email);
+		// colocar email
 		return response;
 	}
 
@@ -102,12 +67,12 @@ public class PedidoService {
 	}
 
 	private void validarDataPedido(PedidoRequestDTO pedido) {
-		Date data = new Date();
+
 		if (pedido.getDataPedido() == null) {
 			throw new ResourceBadRequestException("A data deve ser informada");
-		} else if (pedido.getDataPedido().before(data)) {
-			throw new ResourceBadRequestException("A data não pode ser retroativa");
 		}
 	}
 
 }
+
+
