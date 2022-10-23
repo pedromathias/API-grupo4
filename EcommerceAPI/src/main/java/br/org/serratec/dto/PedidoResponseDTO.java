@@ -2,6 +2,8 @@ package br.org.serratec.dto;
 
 import java.util.Date;
 
+import br.org.serratec.model.Cliente;
+
 public class PedidoResponseDTO {
 	
 	private Date dataPedido;
@@ -11,6 +13,16 @@ public class PedidoResponseDTO {
 	private Date dataEnvio;
 	
 	private String status;
+
+	private Cliente cliente;
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public Date getDataPedido() {
 		return dataPedido;

@@ -19,10 +19,20 @@ public class ClienteResponseDTO {
 	
 	private String telefone;
 	
+	private String cpf;
+	
 	private List<Endereco> endereco;
 	
 	private List<Pedido> pedido;
 	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public List<Pedido> getPedido() {
 		return pedido;
 	}
