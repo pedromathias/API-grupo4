@@ -1,10 +1,5 @@
 package br.org.serratec.dto;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import br.org.serratec.model.Cliente;
 
 public class EnderecoRequestDTO {

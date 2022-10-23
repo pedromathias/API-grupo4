@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class ItemPedido {
@@ -18,11 +17,9 @@ public class ItemPedido {
 	@Column(name = "id_item_pedido")
 	private Long id;
 
-	@NotNull(message = "Preencha a quantidade")
 	@Column(name = "quantidade")
 	private int quantidade;
 
-	@NotNull(message = "Preencha o preço da venda")
 	@Column(name = "preco_venda")
 	private int precoVenda;
 	

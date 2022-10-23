@@ -21,7 +21,7 @@ import br.org.serratec.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
-
+	
 	@Autowired
 	private PedidoRepository repositorio;
 	
@@ -53,6 +53,7 @@ public class PedidoService {
 
 	public PedidoResponseDTO cadastrar(PedidoRequestDTO pedido) {
 		validarDataPedido(pedido);
+		validarStatus(pedido);
 		var pedidoModel = mapper.map(pedido, Pedido.class);
 		pedidoModel.setId(null);
 		pedidoModel = repositorio.save(pedidoModel);
@@ -92,12 +93,19 @@ public class PedidoService {
 	}
 
 	private void validarDataPedido(PedidoRequestDTO pedido) {
-
+		Date data =  new Date();
 		if (pedido.getDataPedido() == null) {
 			throw new ResourceBadRequestException("A data deve ser informada");
+		} else if (pedido.getDataPedido().before(data)) {
+			throw new ResourceBadRequestException("A data não pode ser retroativa");
+		}
+
+	}
+	
+	private void validarStatus(PedidoRequestDTO pedido) {
+		if(pedido.getStatus().length() < 20) {
+			throw new ResourceBadRequestException("Tamanho máximo de 20 caracteres no status");
 		}
 	}
 
 }
-
-
