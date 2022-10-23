@@ -107,6 +107,8 @@ public class ClienteService {
 			throw new ResourceBadRequestException("O Email deve ser informado");
 		} else if (cliente.getEmail().length() > 30) {
 			throw new ResourceBadRequestException("Tamanho máxmimo do Email deve ser 30 caracteres.");
+		} else if(!cliente.getEmail().contains("@")) {
+			throw new ResourceBadRequestException("Formato de email inválido");
 		}
 
 	}
@@ -143,7 +145,7 @@ public class ClienteService {
 
 		if (cliente.getCpf() == null) {
 			throw new ResourceBadRequestException("O Nome completo deve ser informado");
-		} else if (cliente.getNomeCompleto().length() < 14 && cliente.getNomeCompleto().length() > 14) {
+		} else if (cliente.getCpf().length() > 14 || cliente.getCpf().length() < 14) {
 			throw new ResourceBadRequestException("O Formato do cpf deve ser ex:123.456.789-10");
 		}
 
@@ -151,7 +153,7 @@ public class ClienteService {
 
 	private void validarTelefone(ClienteRequestDTO cliente) {
 
-		if (cliente.getTelefone().length() < 11 && cliente.getTelefone().length() > 11) {
+		if (cliente.getTelefone().length() < 10 || cliente.getTelefone().length() > 11) {
 			throw new ResourceBadRequestException("O Formato do telefone deve ser ex:1140028922");
 		}
 

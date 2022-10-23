@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.dto.ProdutoRequestDTO;
 import br.org.serratec.dto.ProdutoResponseDTO;
-import br.org.serratec.model.Produto;
 import br.org.serratec.service.ProdutoService;
 
 @RestController

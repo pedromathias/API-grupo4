@@ -2,8 +2,6 @@ package br.org.serratec.dto;
 
 import java.util.List;
 
-import javax.persistence.OneToMany;
-
 import br.org.serratec.model.Endereco;
 import br.org.serratec.model.Pedido;
 
@@ -20,6 +18,8 @@ public class ClienteResponseDTO {
 	private String nomeCompleto;
 	
 	private String telefone;
+	
+	private String cpf;
 	
 	private List<Endereco> endereco;
 	

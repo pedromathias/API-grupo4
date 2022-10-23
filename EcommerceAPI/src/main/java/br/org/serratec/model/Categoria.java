@@ -5,14 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.Table;
 
 @Entity	
 @Table(name = "categoria")
@@ -23,12 +18,9 @@ public class Categoria {
 	@Column(name="id_categoria")
 	private Long id;
 	
-	@NotBlank(message = "Preencha o nome")
-	@Size(max = 40, message = "Tamanho máximo 40 caracteres")
 	@Column(name="nome", nullable=false, length=40)
 	private String nome;
 	
-	@Size(max = 150, message = "Tamanho máximo 150 caracteres")
 	@Column(name = "descricao", nullable = true, length = 150)
 	private String descricao;
 	

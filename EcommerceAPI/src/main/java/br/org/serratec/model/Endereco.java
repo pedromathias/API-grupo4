@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -22,13 +20,9 @@ public class Endereco {
 	@Column(name="id_endereco")
 	private Long id;
 	
-	@NotBlank(message = "Preencha o CEP")
-	@Size(max=9, message = "Tamanho máximo 9 caracteres")
 	@Column (name = "cep", nullable = false, length = 9)
 	private String cep;
 	
-	@NotBlank(message = "Preencha a Rua")
-	@Size(max=100, message = "Tamanho máximo 100 caracteres")
 	@Column (name = "rua", nullable = false, length = 100)
 	private String logradouro;
 	
@@ -38,20 +32,14 @@ public class Endereco {
 	@Column (name = "numero", nullable = false)
 	private String numero;
 	
-	@NotBlank(message = "Preencha o Bairro")
-	@Size(max=50, message = "Tamanho máximo 50 caracteres")
 	@Column (name = "bairro", nullable = false, length = 50)
 	private String bairro;
 	
-	@Size(max=30, message = "Tamanho máximo 30 caracteres")
 	@Column (name = "cidade", nullable = true, length = 30)
 	private String localidade;
 	
-	@NotBlank(message = "Preencha o Estado")
-	@Size(max=2, message = "Tamanho máximo 2 caracteres")
 	@Column (name = "estado", nullable = false, length = 2)
 	private String uf;
-	
 	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")

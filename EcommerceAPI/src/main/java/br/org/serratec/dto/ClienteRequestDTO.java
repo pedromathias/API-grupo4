@@ -3,10 +3,6 @@ package br.org.serratec.dto;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import br.org.serratec.model.Endereco;
 import br.org.serratec.model.Pedido;
 

@@ -3,8 +3,6 @@ package br.org.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,25 +33,25 @@ public class ItemPedidoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ItemPedido> obterPorId(@Valid @PathVariable Long id) {
+	public ResponseEntity<ItemPedido> obterPorId(@PathVariable Long id) {
 
 		Optional<ItemPedido> optItemPedido = servico.obterPorId(id);
 		return ResponseEntity.ok(optItemPedido.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<ItemPedido> cadastrar(@Valid @RequestBody ItemPedido itemPedido) {
+	public ResponseEntity<ItemPedido> cadastrar(@RequestBody ItemPedido itemPedido) {
 		itemPedido = servico.cadastrar(itemPedido);
 		return new ResponseEntity<>(itemPedido, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ItemPedido> atualizar(@Valid @PathVariable Long id, @RequestBody ItemPedido itemPedido) {
+	public ResponseEntity<ItemPedido> atualizar(@PathVariable Long id, @RequestBody ItemPedido itemPedido) {
 		return ResponseEntity.ok(servico.atualizar(id, itemPedido));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@Valid @PathVariable Long id) {
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

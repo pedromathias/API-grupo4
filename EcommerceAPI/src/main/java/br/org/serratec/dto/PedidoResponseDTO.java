@@ -5,6 +5,8 @@ import java.util.List;
 
 import br.org.serratec.model.Cliente;
 
+import br.org.serratec.model.Cliente;
+
 public class PedidoResponseDTO {
 	
 	private Long id;
@@ -33,6 +35,16 @@ public class PedidoResponseDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	private Cliente cliente;
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Date getDataPedido() {

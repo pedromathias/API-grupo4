@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.dto.PedidoRequestDTO;
 import br.org.serratec.dto.PedidoResponseDTO;
-import br.org.serratec.model.Pedido;
 import br.org.serratec.service.PedidoService;
 
 @RestController
@@ -37,14 +36,13 @@ public class PedidoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<PedidoResponseDTO> obterPorId(@Valid @PathVariable Long id) {
-
+	public ResponseEntity<PedidoResponseDTO> obterPorId(@PathVariable Long id) {
 		Optional<PedidoResponseDTO> optPedido = servico.obterPorId(id);
 		return ResponseEntity.ok(optPedido.get());
 	}
 
 	@PostMapping
-	public ResponseEntity<PedidoResponseDTO> cadastrar(@Valid @RequestBody PedidoRequestDTO pedido) {
+	public ResponseEntity<PedidoResponseDTO> cadastrar(@RequestBody @Valid PedidoRequestDTO pedido) {
 		PedidoResponseDTO pedidoDTO = servico.cadastrar(pedido);
 		return new ResponseEntity<>(pedidoDTO, HttpStatus.CREATED);
 	}
@@ -55,7 +53,7 @@ public class PedidoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@Valid @PathVariable Long id) {
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

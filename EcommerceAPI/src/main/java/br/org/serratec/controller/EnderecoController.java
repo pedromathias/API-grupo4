@@ -43,8 +43,12 @@ public class EnderecoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<EnderecoResponseDTO> obterPorId(@PathVariable Long id){
 		Optional<EnderecoResponseDTO> optEndereco = servico.obterPorId(id);
-		return ResponseEntity.ok(optEndereco.get());
-	}
+		if (optEndereco.isPresent()) {
+			return ResponseEntity.ok(optEndereco.get());
+			}
+			return ResponseEntity.notFound().build();
+			}
+		
 	
 	@PostMapping 
 	public ResponseEntity<EnderecoResponseDTO> cadastrar(@RequestBody EnderecoRequestDTO endereco) throws Exception {
