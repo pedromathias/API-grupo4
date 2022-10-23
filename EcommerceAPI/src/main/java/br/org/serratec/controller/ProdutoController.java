@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.org.serratec.dto.ProdutoRequestDTO;
+import br.org.serratec.dto.ProdutoResponseDTO;
 import br.org.serratec.model.Produto;
 import br.org.serratec.service.ProdutoService;
 
@@ -25,28 +27,36 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService servico;
 
+//	@GetMapping
+//	public ResponseEntity<List<Produto>> obterTodos() {
+//
+//		List<Produto> lista = servico.obterTodos();
+//		return ResponseEntity.ok(lista);
+//	}
+	
 	@GetMapping
-	public ResponseEntity<List<Produto>> obterTodos() {
-
-		List<Produto> lista = servico.obterTodos();
+	public ResponseEntity<List<ProdutoResponseDTO>> obterTodos() {
+		List<ProdutoResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> obterPorId(@PathVariable Long id) {
-
-		Optional<Produto> optProduto = servico.obterPorId(id);
-		return ResponseEntity.ok(optProduto.get());
+	public ResponseEntity<ProdutoResponseDTO> obterPorId(@PathVariable Long id) {
+		Optional<ProdutoResponseDTO> optProduto = servico.obterPorId(id);
+		if(optProduto.isPresent()){
+			return ResponseEntity.ok(optProduto.get());
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	public ResponseEntity<Produto> cadastrar(@RequestBody Produto produto) {
-		produto = servico.cadastrar(produto);
-		return new ResponseEntity<>(produto, HttpStatus.CREATED);
+	public ResponseEntity<ProdutoResponseDTO> cadastrar(@RequestBody ProdutoRequestDTO produto) {
+		ProdutoResponseDTO produtoDTO = servico.cadastrar(produto);
+		return new ResponseEntity<>(produtoDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
 		return ResponseEntity.ok(servico.atualizar(id, produto));
 	}
 
