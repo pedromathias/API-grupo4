@@ -1,10 +1,8 @@
 package br.org.serratec.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import br.org.serratec.model.Cliente;
-import br.org.serratec.model.Pedido;
 
 public class PedidoRequestDTO {
 
