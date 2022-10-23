@@ -1,11 +1,15 @@
 package br.org.serratec.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.dto.ProdutoRequestDTO;
+import br.org.serratec.dto.ProdutoResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Produto;
@@ -17,36 +21,48 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository repositorio;
 	
-	public List<Produto> obterTodos() {
-		return repositorio.findAll();
+	private ModelMapper mapper = new ModelMapper();
+	
+//	public List<Produto> obterTodos() {
+//		return repositorio.findAll();
+//	}
+	
+	public List<ProdutoResponseDTO> obterTodos(){
+		List<Produto> lista = repositorio.findAll();
+		var novaLista = new ArrayList<ProdutoResponseDTO>();
+		for(Produto produto : lista) {
+			novaLista.add(mapper.map(produto, ProdutoResponseDTO.class));
+		}
+		return novaLista;	
 	}
 	
-	public Optional<Produto> obterPorId(Long id){
-		
+	public Optional<ProdutoResponseDTO> obterPorId(Long id){
 		Optional<Produto> optProduto = repositorio.findById(id);
-		
 		if(optProduto.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi possivel encontrar o produto com id " + id);
 		}
-		
-		return optProduto;
+		ProdutoResponseDTO dto = mapper.map(optProduto.get(), ProdutoResponseDTO.class);
+		return Optional.of(dto);
 	}
 	
-	public Produto cadastrar(Produto produto) {
+	public ProdutoResponseDTO cadastrar(ProdutoRequestDTO produto) {
 		List<Produto> produtoDescricao = repositorio.findByDescricao(produto.getDescricao());
 		if(produtoDescricao.size() > 0) {
 			throw new ResourceBadRequestException("Descrição já cadastrada!");
 		}
-		produto.setIdProduto(null);
-		return repositorio.save(produto);
+		var produtoModel = mapper.map(produto, Produto.class);
+		produtoModel.setId(null);
+		produtoModel = repositorio.save(produtoModel);
+		var response = mapper.map(produtoModel, ProdutoResponseDTO.class);
+		return response;
 	}
 	
-	public Produto atualizar(Long id, Produto produto) {
-		
+	public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produto) {
 		obterPorId(id);
-	
-		produto.setIdProduto(id);
-		return repositorio.save(produto);
+		var produtoModel = mapper.map(produto, Produto.class);
+		produtoModel.setId(id);
+		produtoModel = repositorio.save(produtoModel);
+		return mapper.map(produtoModel, ProdutoResponseDTO.class);
 	}
 	
 	public void deletar(Long id) {
