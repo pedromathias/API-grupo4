@@ -13,6 +13,8 @@ public class ClienteResponseDTO {
 	
 	private String email;
 	
+	private String cpf;
+	
 	private String nomeUsuario;
 	
 	private String nomeCompleto;
@@ -23,6 +25,14 @@ public class ClienteResponseDTO {
 	
 	private List<Pedido> pedido;
 	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public List<Pedido> getPedido() {
 		return pedido;
 	}
@@ -79,6 +89,6 @@ public class ClienteResponseDTO {
 		this.id = id;
 	}
 	
-
+	
 	
 }

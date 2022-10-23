@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -24,6 +25,7 @@ public class Cliente {
 	@Column(name="id_cliente")
 	private Long id;
 	
+	@Email(message= "O email precisa estar no formato certo")
 	@Column(unique = true)
 	private String email;
 	
@@ -50,7 +52,6 @@ public class Cliente {
 	
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedido;
-
 	
 	public List<Pedido> getPedido() {
 		return pedido;
@@ -131,9 +132,13 @@ public class Cliente {
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
-	
-	
-	
+
+	public Endereco getId(Endereco clienteId) {
+		return clienteId;
+		// TODO Auto-generated method stub
+		
+		
+	}
 	
 	
 	

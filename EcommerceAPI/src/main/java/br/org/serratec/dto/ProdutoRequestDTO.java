@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.org.serratec.model.Categoria;
+import br.org.serratec.model.Cliente;
 
 public class ProdutoRequestDTO {
 
@@ -18,6 +19,16 @@ public class ProdutoRequestDTO {
 	private Double valorUnitario;
 	
 	private List<Categoria> categoria;
+	
+	private Cliente cliente;
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public String getNome() {
 		return nome;
