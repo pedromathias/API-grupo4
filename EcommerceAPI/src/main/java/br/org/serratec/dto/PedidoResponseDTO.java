@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.org.serratec.model.Cliente;
-
-import br.org.serratec.model.Cliente;
+import br.org.serratec.model.ItemPedido;
 
 public class PedidoResponseDTO {
 	
@@ -20,6 +19,16 @@ public class PedidoResponseDTO {
 	private String status;
 	
 	private List<Cliente> cliente;
+	
+	private List<ItemPedido> itemPedido;
+
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
+	}
 
 	public List<Cliente> getCliente() {
 		return cliente;

@@ -1,7 +1,6 @@
 package br.org.serratec.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -40,8 +39,9 @@ public class Produto {
 	@Column(name = "imagem_produto", nullable = true, columnDefinition = "TEXT")
 	private String imagemProduto;
 	
-	@OneToMany(mappedBy="produto")
-	private List<Categoria> categoria;
+	@ManyToOne
+	@JoinColumn(name="id_categoria")
+	private Categoria categoria;
 	
 	@OneToOne
     @JoinColumn(name = "id_item_pedido")
@@ -54,10 +54,10 @@ public class Produto {
 	public void setItemPedido(ItemPedido itemPedido) {
 		this.itemPedido = itemPedido;
 	}
-	public List<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(List<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	public void setId(Long id) {

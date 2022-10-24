@@ -81,6 +81,8 @@ public class PedidoService {
 	public PedidoResponseDTO atualizar(Long id, PedidoRequestDTO pedido) {
 
 		obterPorId(id);
+		validarDataPedido(pedido);
+		validarStatus(pedido);
 		var pedidoModel = mapper.map(pedido, Pedido.class);
 		pedidoModel.setId(id);
 		pedidoModel = repositorio.save(pedidoModel);
@@ -103,7 +105,7 @@ public class PedidoService {
 	}
 	
 	private void validarStatus(PedidoRequestDTO pedido) {
-		if(pedido.getStatus().length() < 20) {
+		if(pedido.getStatus().length() > 20) {
 			throw new ResourceBadRequestException("Tamanho máximo de 20 caracteres no status");
 		}
 	}

@@ -1,7 +1,5 @@
 package br.org.serratec.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -37,12 +35,12 @@ public class ItemPedido {
 	private double valorLiquido;
 
 	@ManyToOne
-	@JoinColumn(name = "pedido")
+	@JoinColumn(name = "id_pedido")
 	@JsonBackReference
 	private Pedido pedido;
 
-	@OneToMany(mappedBy = "itemPedido")
-	private List<Produto> produto;
+	@OneToOne(mappedBy = "itemPedido")
+	private Produto produto;
 
 
 	public Long getId() {
@@ -77,11 +75,11 @@ public class ItemPedido {
 		this.pedido = pedido;
 	}
 
-	public List<Produto> getProduto() {
+	public Produto getProduto() {
 		return produto;
 	}
 
-	public void setProduto(List<Produto> produto) {
+	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
 

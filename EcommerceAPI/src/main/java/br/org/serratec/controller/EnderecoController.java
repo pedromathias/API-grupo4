@@ -1,8 +1,10 @@
 package br.org.serratec.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -66,7 +68,6 @@ public class EnderecoController {
 		Endereco userAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
 		endereco.setCep(userAux.getCep());
 		endereco.setLogradouro(userAux.getLogradouro());
-	//	endereco.setComplemento(userAux.getComplemento());
 		endereco.setBairro(userAux.getBairro());
 		endereco.setLocalidade(userAux.getLocalidade());
 		endereco.setUf(userAux.getUf());
@@ -76,7 +77,22 @@ public class EnderecoController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<EnderecoResponseDTO> atualizar(@PathVariable Long id, @RequestBody EnderecoRequestDTO endereco) {
+	public ResponseEntity<EnderecoResponseDTO> atualizar(@PathVariable Long id, @RequestBody EnderecoRequestDTO endereco) throws Exception {
+		URL url=new URL ("https://viacep.com.br/ws/"+endereco.getCep()+"/json/");
+		URLConnection connection = url.openConnection();
+		InputStream is = connection.getInputStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		String cep = "";
+		StringBuilder jsonCep=new StringBuilder();
+		while((cep=br.readLine())!=null) {
+			jsonCep.append(cep);	
+		}
+		Endereco userAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
+		endereco.setCep(userAux.getCep());
+		endereco.setLogradouro(userAux.getLogradouro());
+		endereco.setBairro(userAux.getBairro());
+		endereco.setLocalidade(userAux.getLocalidade());
+		endereco.setUf(userAux.getUf());
 		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
 	

@@ -52,8 +52,11 @@ public class ItemPedidoService {
 	public ItemPedido atualizar(Long id, ItemPedido itemPedido) {
 
 		obterPorId(id);
-
 		itemPedido.setId(id);
+		calcularValorBruto(itemPedido);
+		calcularValorLiquido(itemPedido);
+		validarQuantidade(itemPedido);
+		validarPrecoVenda(itemPedido);
 		return repositorio.save(itemPedido);
 	}
 

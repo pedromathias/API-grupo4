@@ -1,12 +1,11 @@
 package br.org.serratec.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import br.org.serratec.model.Categoria;
-import br.org.serratec.model.Cliente;
+import br.org.serratec.model.ItemPedido;
 
 public class ProdutoRequestDTO {
 
@@ -22,16 +21,16 @@ public class ProdutoRequestDTO {
 	
 	private MultipartFile imagemProduto;
 	
-	private List<Categoria> categoria;
+	private Categoria categoria;
 	
-	private Cliente cliente;
+	private ItemPedido itemPedido;
 
-	public Cliente getCliente() {
-		return cliente;
+	public ItemPedido getItemPedido() {
+		return itemPedido;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	public String getNome() {
@@ -74,11 +73,11 @@ public class ProdutoRequestDTO {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public List<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(List<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 

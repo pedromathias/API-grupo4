@@ -1,9 +1,7 @@
 package br.org.serratec.dto;
 
-import java.util.List;
-
 import br.org.serratec.model.Categoria;
-import br.org.serratec.model.Cliente;
+import br.org.serratec.model.ItemPedido;
 
 public class ProdutoResponseDTO {
 	
@@ -17,16 +15,16 @@ public class ProdutoResponseDTO {
 	
 	private String imagemProduto;
 	
-	private List<Categoria> categoria;
+	private Categoria categoria;
 	
-	private List<Cliente> cliente;
+	private ItemPedido itemPedido;
 
-	public List<Cliente> getCliente() {
-		return cliente;
+	public ItemPedido getItemPedido() {
+		return itemPedido;
 	}
 
-	public void setCliente(List<Cliente> cliente) {
-		this.cliente = cliente;
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	public Long getId() {
@@ -61,11 +59,11 @@ public class ProdutoResponseDTO {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public List<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(List<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
