@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.org.serratec.model.Categoria;
+import br.org.serratec.model.Cliente;
 
 public class ProdutoRequestDTO {
 
@@ -22,6 +23,16 @@ public class ProdutoRequestDTO {
 	private MultipartFile imagemProduto;
 	
 	private List<Categoria> categoria;
+	
+	private Cliente cliente;
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public String getNome() {
 		return nome;

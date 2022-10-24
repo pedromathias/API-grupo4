@@ -11,13 +11,13 @@ public class ClienteResponseDTO {
 	
 	private String email;
 	
+	private String cpf;
+	
 	private String nomeUsuario;
 	
 	private String nomeCompleto;
 	
 	private String telefone;
-	
-	private String cpf;
 	
 	private List<Endereco> endereco;
 	
@@ -87,6 +87,6 @@ public class ClienteResponseDTO {
 		this.id = id;
 	}
 	
-
+	
 	
 }

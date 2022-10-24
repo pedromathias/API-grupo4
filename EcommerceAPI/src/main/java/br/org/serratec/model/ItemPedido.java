@@ -1,5 +1,7 @@
 package br.org.serratec.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 
 @Entity
@@ -21,6 +27,7 @@ public class ItemPedido {
 	@Column(name = "id_item_pedido")
 	@ApiModelProperty(value="Identificador unico do item de Pedido")
 	private Long id;
+
 	
 	@Column(name = "quantidade")
 	@ApiModelProperty(value="Quantidade")
@@ -53,6 +60,30 @@ public class ItemPedido {
 	
 
 
+	@Column(name = "quantidade")
+	private Integer quantidade;
+
+	@Column(name = "preco_venda")
+	private Integer precoVenda;
+	
+	@Column(name = "valor_bruto")
+	private double valorBruto;
+	
+	@Column(name = "percentual_desconto")
+	private double percentDesconto;
+
+	@Column(name = "valor_líquido")
+	private double valorLiquido;
+
+	@ManyToOne
+	@JoinColumn(name = "pedido")
+	@JsonBackReference
+	private Pedido pedido;
+
+	@OneToMany(mappedBy = "itemPedido")
+	private List<Produto> produto;
+
+
 	public Long getId() {
 		return id;
 	}
@@ -61,11 +92,11 @@ public class ItemPedido {
 		this.id = id;
 	}
 
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -74,10 +105,15 @@ public class ItemPedido {
 	}
 
 	public void setPrecoVenda(int precoVenda) {
+
+	public Integer getPrecoVenda() {
+		return precoVenda;
+	}
+
+	public void setPrecoVenda(Integer precoVenda) {
 		this.precoVenda = precoVenda;
 	}
 
-	
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -86,11 +122,11 @@ public class ItemPedido {
 		this.pedido = pedido;
 	}
 
-	public Produto getProduto() {
+	public List<Produto> getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Produto produto) {
+	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
 
@@ -117,6 +153,9 @@ public class ItemPedido {
 	public void setValorLiquido(double valorLiquido) {
 		this.valorLiquido = valorLiquido;
 	}
+
+
+
 
 
 }

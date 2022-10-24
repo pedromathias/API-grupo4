@@ -109,7 +109,6 @@ public class ProdutoService {
 	}
 
 	private String converterImagemBase64(MultipartFile imagem) {
-		String image = new String();
 		try {
 			byte[] imageByteArray = Base64.encodeBase64(imagem.getBytes());
 			String result = new String(imageByteArray);

@@ -3,6 +3,7 @@ package br.org.serratec.dto;
 import java.util.List;
 
 import br.org.serratec.model.Categoria;
+import br.org.serratec.model.Cliente;
 
 public class ProdutoResponseDTO {
 	
@@ -18,6 +19,15 @@ public class ProdutoResponseDTO {
 	
 	private List<Categoria> categoria;
 	
+	private List<Cliente> cliente;
+
+	public List<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(List<Cliente> cliente) {
+		this.cliente = cliente;
+	}
 
 	public Long getId() {
 		return id;
