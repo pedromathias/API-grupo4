@@ -37,8 +37,8 @@ public class Produto {
 	@Column(name = "valor_unitario", nullable = false)
 	private Double valorUnitario;
 	
-//	@Column
-//	private Image imagemProduto;
+	@Column(name = "imagem_produto", nullable = true, columnDefinition = "TEXT")
+	private String imagemProduto;
 	
 	@OneToMany(mappedBy="produto")
 	private List<Categoria> categoria;
@@ -99,12 +99,11 @@ public class Produto {
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-//	public Image getImagemProduto() {
-//		return imagemProduto;
-//	}
-//	public void setImagemProduto(Image imagemProduto) {
-//		this.imagemProduto = imagemProduto;
-//	}
-
+	public String getImagemProduto() {
+		return imagemProduto;
+	}
+	public void setImagemProduto(String imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
 	
 }
