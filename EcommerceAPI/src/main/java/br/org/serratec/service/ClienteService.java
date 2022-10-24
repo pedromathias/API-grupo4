@@ -46,14 +46,17 @@ public class ClienteService {
 	}
 
 //	public Cliente cadastrar(Cliente cliente) {
-//		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
-//		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
-//		if(clientes.size()>0) {
-//			throw new RuntimeException("Cpf já cadastrado!");
-//		}
-//		if(client.size()>0) {
-//			throw new RuntimeException("Email já cadastrado");
-//		}
+////		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
+////		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
+////		if(clientes.size()>0) {
+////			throw new RuntimeException("Cpf já cadastrado!");
+////		}
+////		if(client.size()>0) {
+////			throw new RuntimeException("Email já cadastrado");
+////		}
+
+
+
 //		return repositorio.save(cliente);
 //	}
 
@@ -158,5 +161,6 @@ public class ClienteService {
 		}
 
 	}
+
 
 }
