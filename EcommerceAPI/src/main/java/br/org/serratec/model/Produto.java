@@ -9,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,13 +37,13 @@ public class Produto {
 	@Column(name = "valor_unitario", nullable = false)
 	private Double valorUnitario;
 	
-//	@Column
-//	private Image imagemProduto;
+	@Column(name = "imagem_produto", nullable = true, columnDefinition = "TEXT")
+	private String imagemProduto;
 	
 	@OneToMany(mappedBy="produto")
 	private List<Categoria> categoria;
 	
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name = "id_item_pedido")
     private ItemPedido itemPedido;
 	
@@ -99,12 +99,11 @@ public class Produto {
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-//	public Image getImagemProduto() {
-//		return imagemProduto;
-//	}
-//	public void setImagemProduto(Image imagemProduto) {
-//		this.imagemProduto = imagemProduto;
-//	}
-
+	public String getImagemProduto() {
+		return imagemProduto;
+	}
+	public void setImagemProduto(String imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
 	
 }

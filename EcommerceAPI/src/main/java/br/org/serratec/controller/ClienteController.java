@@ -3,8 +3,6 @@ package br.org.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,11 +36,14 @@ public class ClienteController {
 	@GetMapping("/{id}")
 	public ResponseEntity<ClienteResponseDTO> obterPorId(@PathVariable Long id){
 		Optional<ClienteResponseDTO> optCliente = servico.obterPorId(id);
-		return ResponseEntity.ok(optCliente.get());
-	}
+		if (optCliente.isPresent()) {
+			return ResponseEntity.ok(optCliente.get());
+			}
+			return ResponseEntity.notFound().build();
+			}
 	
 	@PostMapping 
-	public ResponseEntity<ClienteResponseDTO> cadastrar(@RequestBody @Valid ClienteRequestDTO cliente) {
+	public ResponseEntity<ClienteResponseDTO> cadastrar(@RequestBody ClienteRequestDTO cliente) {
 		ClienteResponseDTO clienteDTO = servico.cadastrar(cliente);
 		return new ResponseEntity<>(clienteDTO, HttpStatus.CREATED);
 	}
@@ -54,7 +55,7 @@ public class ClienteController {
 //	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente cliente) {
 
 
-	public ResponseEntity<ClienteResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteRequestDTO cliente) {
+	public ResponseEntity<ClienteResponseDTO> atualizar(@PathVariable Long id, @RequestBody ClienteRequestDTO cliente) {
 
 		return ResponseEntity.ok(servico.atualizar(id, cliente));
 	}

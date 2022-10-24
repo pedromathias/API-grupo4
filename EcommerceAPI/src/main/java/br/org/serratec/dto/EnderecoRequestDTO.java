@@ -1,15 +1,6 @@
 package br.org.serratec.dto;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import br.org.serratec.model.Cliente;
-import br.org.serratec.model.Endereco;
 
 public class EnderecoRequestDTO {
 	
@@ -17,21 +8,21 @@ private Long id;
 	
 	private String cep;
 	
-	private String rua;
+	private String logradouro;
 	
 	private String bairro;
 	
-	private String cidade;
+	private String localidade;
 	
-	private int numero;
+	private String numero;
 	
 	private String complemento;
 	
-	private String estado;
+	private String uf;
 	
-	@ManyToOne
-	@JoinColumn(name="id_cliente")
-	@JsonBackReference
+//	@ManyToOne
+//	@JoinColumn(name="id_cliente")
+//	@JsonBackReference
 	private Cliente cliente;
 
 	public Long getId() {
@@ -50,12 +41,12 @@ private Long id;
 		this.cep = cep;
 	}
 
-	public String getRua() {
-		return rua;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public String getBairro() {
@@ -66,19 +57,19 @@ private Long id;
 		this.bairro = bairro;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getLocalidade() {
+		return localidade;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -90,12 +81,12 @@ private Long id;
 		this.complemento = complemento;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getUf() {
+		return uf;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public Cliente getCliente() {
@@ -105,6 +96,5 @@ private Long id;
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
 	
 }
