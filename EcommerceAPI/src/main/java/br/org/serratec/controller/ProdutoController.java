@@ -23,6 +23,10 @@ import br.org.serratec.dto.ProdutoRequestDTO;
 import br.org.serratec.dto.ProdutoResponseDTO;
 import br.org.serratec.service.ProdutoService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/produtos")
 
@@ -39,12 +43,28 @@ public class ProdutoController {
 //	}
 	
 	@GetMapping
+	@ApiOperation(value = "Lista todos os produtos", notes = "Listagem dos produtos")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna todos os produtos"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<List<ProdutoResponseDTO>> obterTodos() {
 		List<ProdutoResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Retorna produto por Id", notes = "Retorna produto por Id")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna produto por Id"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<ProdutoResponseDTO> obterPorId(@PathVariable Long id) {
 		Optional<ProdutoResponseDTO> optProduto = servico.obterPorId(id);
 		if(optProduto.isPresent()){
@@ -54,17 +74,41 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	@ApiOperation(value = "Insere produto", notes = "Insere produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Insere produto"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<ProdutoResponseDTO> cadastrar(@ModelAttribute ProdutoRequestDTO produto) {
 		ProdutoResponseDTO produtoDTO = servico.cadastrar(produto);
 		return new ResponseEntity<>(produtoDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Atualiza produto", notes = "Atualiza produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Atualiza produto"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
 		return ResponseEntity.ok(servico.atualizar(id, produto));
 	}
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Deleta produto", notes = "Deleta produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Deleta produto"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);

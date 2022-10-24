@@ -29,6 +29,10 @@ import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.service.EnderecoService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/enderecos")
 public class EnderecoController {
@@ -37,12 +41,28 @@ public class EnderecoController {
 	private EnderecoService servico;
 	
 	@GetMapping
+	@ApiOperation(value = "Lista todos os endereços dos clientes", notes = "Listagem de endereços dos clientes")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna todos os endereços dos clientes"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<List<EnderecoResponseDTO>> obterTodos(){
 		List<EnderecoResponseDTO> lista = servico.obterTodos();
 		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Retorna o endereço de cliente por Id", notes = "Retorna endereço de cliente")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna endereço de cliente"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<EnderecoResponseDTO> obterPorId(@PathVariable Long id){
 		Optional<EnderecoResponseDTO> optEndereco = servico.obterPorId(id);
 		if (optEndereco.isPresent()) {
@@ -53,6 +73,14 @@ public class EnderecoController {
 		
 	
 	@PostMapping 
+	@ApiOperation(value = "Insere o endereço", notes = "Insere endereço")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Insere endereço"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<EnderecoResponseDTO> cadastrar(@RequestBody EnderecoRequestDTO endereco) throws Exception {
 		URL url=new URL ("https://viacep.com.br/ws/"+endereco.getCep()+"/json/");
 		URLConnection connection = url.openConnection();
@@ -76,11 +104,27 @@ public class EnderecoController {
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Atualiza o endereço por Id", notes = "Atualiza o endereço")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Atualiza o endereço"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<EnderecoResponseDTO> atualizar(@PathVariable Long id, @RequestBody EnderecoRequestDTO endereco) {
 		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Deleta o endereço por Id", notes = "Deleta endereço")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Deleta endereço"),
+			@ApiResponse(code = 401, message = "Erro de autenticação"),
+			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	})
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		servico.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);

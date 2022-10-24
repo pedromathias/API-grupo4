@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity	
 @Table(name = "categoria")
 public class Categoria {
@@ -16,16 +18,20 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_categoria")
+	@ApiModelProperty(value="Identificador unico da categoria")
 	private Long id;
 	
 	@Column(name="nome", nullable=false, length=40)
+	@ApiModelProperty(value="Nome da categoria", required = true)
 	private String nome;
 	
 	@Column(name = "descricao", nullable = true, length = 150)
+	@ApiModelProperty(value="Descrição da categoria", required = true)
 	private String descricao;
 	
 	@ManyToOne
 	@JoinColumn(name="id_produto")
+	@ApiModelProperty(value="Id do produto")
 	private Produto produto;
 
 	public Produto getProduto() {

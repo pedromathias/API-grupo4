@@ -5,17 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-<<<<<<< HEAD
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-=======
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
->>>>>>> 542297bc4eeb748347fd31572da18411098e27d0
+
 
 @Entity
 public class ItemPedido {
@@ -23,55 +19,38 @@ public class ItemPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_pedido")
+	@ApiModelProperty(value="Identificador unico do item de Pedido")
 	private Long id;
-
-
-	@NotNull(message = "Preencha a quantidade")
-	@Column(name = "quantidade")
-	private int quantidade;
-
-	@NotNull(message = "Preencha o preço da venda")
-	@Column(name = "preco_venda")
-	private double precoVenda;
 	
-	@Column(name = "valor_bruto")
-	private double valorBruto;
-	
-	@NotNull(message = "Preencha o preço da venda")
-	@Column(name = "percentual_desconto")
-	private double percentDesconto;
-
-	@Column(name = "valor_líquido")
-	private double valorLiquido;
-
-	@ManyToOne(mappedBy = "itemPedido")
-	@JsonBackReference
-	private List<Pedido> pedido;
-
-	@OneToMany(mappedBy = "itemPedido")
-	private List<Produto> produto;
-
 	@Column(name = "quantidade")
+	@ApiModelProperty(value="Quantidade")
 	private int quantidade;
 
 	@Column(name = "preco_venda")
+	@ApiModelProperty(value="Preço de Venda")
 	private int precoVenda;
-	
-	@ManyToOne
-    @JoinColumn(name = "id_pedido")
-    private Pedido pedido;
-	
-	@OneToOne(mappedBy = "itemPedido")
-	private Produto produto;
-	
+		
 	@Column(name="valor_bruto")
+	@ApiModelProperty(value="Valor Bruto")
 	private double valorBruto;
 	
 	@Column(name= "percentual_desconto")
+	@ApiModelProperty(value="Percentual de Desconto")
 	private double percentDesconto;
 	
 	@Column(name="valor_liquido")
+	@ApiModelProperty(value="Valor Líquido")
 	private double valorLiquido;
+
+	@ManyToOne
+    @JoinColumn(name = "id_pedido")
+	@ApiModelProperty(value="Id_Pedido")
+    private Pedido pedido;
+
+	@OneToOne(mappedBy = "itemPedido")
+	@ApiModelProperty(value="Id_Produto")
+	private Produto produto;
+	
 
 
 	public Long getId() {
@@ -94,7 +73,7 @@ public class ItemPedido {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(double precoVenda) {
+	public void setPrecoVenda(int precoVenda) {
 		this.precoVenda = precoVenda;
 	}
 
@@ -139,34 +118,5 @@ public class ItemPedido {
 		this.valorLiquido = valorLiquido;
 	}
 
-	
-
-	public Double getValorBruto() {
-	    return valorBruto;
-	}
-	
-	public void setValorBruto(Double valorBruto) {
-	    this.valorBruto = valorBruto;
-	    
-	}
-	
-	public Double getPercentDesconto() {
-        return percentDesconto;
-    }
-    
-    public void setPercentDesconto(double percentDesconto) {
-        this.percentDesconto = percentDesconto;
-        
-    }
-	
-    public Double getValorLiquido() {
-        return valorLiquido;
-    }
-    
-    public void setValorLiquido(Double valorLiquido) {
-        this.valorLiquido = valorLiquido;
-        
-    }
-	
 
 }
