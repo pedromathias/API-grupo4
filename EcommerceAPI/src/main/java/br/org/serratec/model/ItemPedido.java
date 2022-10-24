@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -24,20 +26,21 @@ public class ItemPedido {
 	private int quantidade;
 
 	@Column(name = "preco_venda")
-	private Double precoVenda;
+	private double precoVenda;
 	
 	@Column(name = "valor_bruto")
-	private Double valorBruto;
+	private double valorBruto;
 	
 	@Column(name = "percentual_desconto")
-	private Double percentDesconto;
+	private double percentDesconto;
 
 	@Column(name = "valor_líquido")
-	private Double valorLiquido;
+	private double valorLiquido;
 
-	@OneToMany(mappedBy = "itemPedido")
+	@ManyToOne
+	@JoinColumn(name = "pedido")
 	@JsonBackReference
-	private List<Pedido> pedido;
+	private Pedido pedido;
 
 	@OneToMany(mappedBy = "itemPedido")
 	private List<Produto> produto;
@@ -59,19 +62,19 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public Double getPrecoVenda() {
+	public double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(Double precoVenda) {
+	public void setPrecoVenda(double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
-	
-	public List<Pedido> getPedido() {
+
+	public Pedido getPedido() {
 		return pedido;
 	}
 
-	public void setPedido(List<Pedido> pedido) {
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
