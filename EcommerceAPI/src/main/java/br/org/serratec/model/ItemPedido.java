@@ -11,37 +11,49 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import io.swagger.annotations.ApiModelProperty;
+
+
+
 @Entity
 public class ItemPedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_pedido")
+	@ApiModelProperty(value="Identificador unico do item de Pedido")
 	private Long id;
 
+	
 	@Column(name = "quantidade")
-	private Integer quantidade;
+	@ApiModelProperty(value="Quantidade")
+	private int quantidade;
 
 	@Column(name = "preco_venda")
-	private Integer precoVenda;
-	
-	@Column(name = "valor_bruto")
+	@ApiModelProperty(value="Preço de Venda")
+	private int precoVenda;
+		
+	@Column(name="valor_bruto")
+	@ApiModelProperty(value="Valor Bruto")
 	private double valorBruto;
 	
-	@Column(name = "percentual_desconto")
+	@Column(name= "percentual_desconto")
+	@ApiModelProperty(value="Percentual de Desconto")
 	private double percentDesconto;
-
-	@Column(name = "valor_líquido")
+	
+	@Column(name="valor_liquido")
+	@ApiModelProperty(value="Valor Líquido")
 	private double valorLiquido;
 
 	@ManyToOne
-	@JoinColumn(name = "id_pedido")
+    @JoinColumn(name = "id_pedido")
 	@JsonBackReference
-	private Pedido pedido;
+	@ApiModelProperty(value="Id_Pedido")
+    private Pedido pedido;
 
 	@OneToOne(mappedBy = "itemPedido")
+	@ApiModelProperty(value="Id_Produto")
 	private Produto produto;
-
 
 	public Long getId() {
 		return id;
@@ -106,6 +118,9 @@ public class ItemPedido {
 	public void setValorLiquido(double valorLiquido) {
 		this.valorLiquido = valorLiquido;
 	}
-	
+
+
+
+
 
 }

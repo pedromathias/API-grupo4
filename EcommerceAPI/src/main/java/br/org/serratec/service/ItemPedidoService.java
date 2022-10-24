@@ -23,7 +23,7 @@ public class ItemPedidoService {
 	ItemPedido valorBruto = new ItemPedido();
 	ItemPedido valorLiquido = new ItemPedido();
 
-	public List<ItemPedido> obterTodos() {
+  public List<ItemPedido> obterTodos() {
 		return repositorio.findAll();
 	}
 
@@ -91,3 +91,4 @@ public class ItemPedidoService {
 	}
 
 }
+
