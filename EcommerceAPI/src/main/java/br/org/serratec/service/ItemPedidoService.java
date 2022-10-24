@@ -24,9 +24,6 @@ public class ItemPedidoService {
 	ItemPedido valorBruto = new ItemPedido();
 	ItemPedido valorLiquido = new ItemPedido();
 
-	@Autowired
-	private ItemPedidoRepository repositorio;
-
 
 	public List<ItemPedido> obterTodos() {
 		return repositorio.findAll();
@@ -79,23 +76,6 @@ public class ItemPedidoService {
 	}
 	
 	
-}
-
-
-	public ItemPedido calcularValorBruto(ItemPedido itemPedido) {
-
-		valorBruto.setValorBruto(valorBruto.getQuantidade() * valorBruto.getPrecoVenda());
-
-		return valorBruto;
-	}
-
-	public ItemPedido calcularValorLiquido(ItemPedido itemPedido) {
-
-		valorLiquido.setValorLiquido(valorLiquido.getValorBruto() - valorLiquido.getValorBruto() * valorLiquido.getPercentDesconto());
-		
-		return valorLiquido;
-
-	}
 
 }
 

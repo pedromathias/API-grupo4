@@ -19,8 +19,6 @@ public class ClienteResponseDTO {
 	
 	private String telefone;
 	
-	private String cpf;
-	
 	private List<Endereco> endereco;
 	
 	private List<Pedido> pedido;

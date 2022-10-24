@@ -37,15 +37,14 @@ public class PedidoResponseDTO {
 		this.id = id;
 	}
 
-	private Cliente cliente;
 	
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+//	public Cliente getCliente() {
+//		return cliente;
+//	}
+//
+//	public void setCliente(Cliente cliente) {
+//		this.cliente = cliente;
+//	}
 
 	public Date getDataPedido() {
 		return dataPedido;
