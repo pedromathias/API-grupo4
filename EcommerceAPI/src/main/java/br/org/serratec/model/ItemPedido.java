@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -23,10 +22,10 @@ public class ItemPedido {
 	private Long id;
 
 	@Column(name = "quantidade")
-	private int quantidade;
+	private Integer quantidade;
 
 	@Column(name = "preco_venda")
-	private double precoVenda;
+	private Integer precoVenda;
 	
 	@Column(name = "valor_bruto")
 	private double valorBruto;
@@ -54,19 +53,19 @@ public class ItemPedido {
 		this.id = id;
 	}
 
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 
-	public double getPrecoVenda() {
+	public Integer getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(double precoVenda) {
+	public void setPrecoVenda(Integer precoVenda) {
 		this.precoVenda = precoVenda;
 	}
 
