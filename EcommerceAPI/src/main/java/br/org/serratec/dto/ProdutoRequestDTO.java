@@ -3,6 +3,8 @@ package br.org.serratec.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import br.org.serratec.model.Categoria;
 
 public class ProdutoRequestDTO {
@@ -16,6 +18,8 @@ public class ProdutoRequestDTO {
 	private Date dataCadastro;
 	
 	private Double valorUnitario;
+	
+	private MultipartFile imagemProduto;
 	
 	private List<Categoria> categoria;
 
@@ -65,6 +69,14 @@ public class ProdutoRequestDTO {
 
 	public void setCategoria(List<Categoria> categoria) {
 		this.categoria = categoria;
+	}
+
+	public MultipartFile getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(MultipartFile imagemProduto) {
+		this.imagemProduto = imagemProduto;
 	}
 	
 	
