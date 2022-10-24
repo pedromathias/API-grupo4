@@ -17,6 +17,32 @@ public class ItemPedido {
 	@Column(name = "id_item_pedido")
 	private Long id;
 
+
+	@NotNull(message = "Preencha a quantidade")
+	@Column(name = "quantidade")
+	private int quantidade;
+
+	@NotNull(message = "Preencha o preço da venda")
+	@Column(name = "preco_venda")
+	private Double precoVenda;
+	
+	@Column(name = "valor_bruto")
+	private Double valorBruto;
+	
+	@NotNull(message = "Preencha o preço da venda")
+	@Column(name = "percentual_desconto")
+	private Double percentDesconto;
+
+	@Column(name = "valor_líquido")
+	private Double valorLiquido;
+
+	@OneToMany(mappedBy = "itemPedido")
+	@JsonBackReference
+	private List<Pedido> pedido;
+
+	@OneToMany(mappedBy = "itemPedido")
+	private List<Produto> produto;
+
 	@Column(name = "quantidade")
 	private int quantidade;
 
@@ -39,6 +65,7 @@ public class ItemPedido {
 	@Column(name="valor_liquido")
 	private double valorLiquido;
 
+
 	public Long getId() {
 		return id;
 	}
@@ -55,11 +82,11 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public int getPrecoVenda() {
+	public Double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(int precoVenda) {
+	public void setPrecoVenda(Double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
 
@@ -104,6 +131,34 @@ public class ItemPedido {
 		this.valorLiquido = valorLiquido;
 	}
 
+	
+
+	public Double getValorBruto() {
+	    return valorBruto;
+	}
+	
+	public void setValorBruto(Double valorBruto) {
+	    this.valorBruto = valorBruto;
+	    
+	}
+	
+	public Double getPercentDesconto() {
+        return percentDesconto;
+    }
+    
+    public void setPercentDesconto(double percentDesconto) {
+        this.percentDesconto = percentDesconto;
+        
+    }
+	
+    public Double getValorLiquido() {
+        return valorLiquido;
+    }
+    
+    public void setValorLiquido(Double valorLiquido) {
+        this.valorLiquido = valorLiquido;
+        
+    }
 	
 
 }

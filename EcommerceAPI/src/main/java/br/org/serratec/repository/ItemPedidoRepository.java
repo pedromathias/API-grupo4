@@ -7,4 +7,5 @@ import br.org.serratec.model.ItemPedido;
 
 @Repository
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long>{
+    
 }

@@ -10,4 +10,5 @@ import br.org.serratec.model.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	List<Produto> findByDescricao(String descricao);
+
 }

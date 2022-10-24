@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+
 import br.org.serratec.dto.EnderecoRequestDTO;
+
 import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.service.EnderecoService;

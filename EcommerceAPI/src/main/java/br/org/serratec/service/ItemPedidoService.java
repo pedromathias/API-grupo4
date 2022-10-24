@@ -8,16 +8,25 @@ import org.springframework.stereotype.Service;
 
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.ItemPedido;
+import br.org.serratec.model.Produto;
 import br.org.serratec.repository.ItemPedidoRepository;
+import br.org.serratec.repository.ProdutoRepository;
 
 @Service
 public class ItemPedidoService {
+
+      
+	@Autowired
+	private ItemPedidoRepository repositorio;
+		
+	Produto produtos;
 
 	ItemPedido valorBruto = new ItemPedido();
 	ItemPedido valorLiquido = new ItemPedido();
 
 	@Autowired
 	private ItemPedidoRepository repositorio;
+
 
 	public List<ItemPedido> obterTodos() {
 		return repositorio.findAll();
@@ -35,9 +44,13 @@ public class ItemPedidoService {
 	}
 
 	public ItemPedido cadastrar(ItemPedido itemPedido) {
+		
+    
+		itemPedido.setId(null);
+	
 		calcularValorBruto(itemPedido);
 		calcularValorLiquido(itemPedido);
-		itemPedido.setId(null);
+		
 		return repositorio.save(itemPedido);
 	}
 
@@ -53,6 +66,21 @@ public class ItemPedidoService {
 		obterPorId(id);
 		repositorio.deleteById(id);
 	}
+
+	
+	public ItemPedido calcularValorBruto(ItemPedido itemPedido) {
+	    itemPedido.setValorBruto(itemPedido.getQuantidade()*itemPedido.getPrecoVenda());
+		return repositorio.save(itemPedido);
+	}
+	
+	public ItemPedido calcularValorLiquido(ItemPedido itemPedido) {
+	   itemPedido.setValorLiquido(itemPedido.getValorBruto()-itemPedido.getValorBruto()*itemPedido.getPercentDesconto());
+	   return repositorio.save(itemPedido);
+	}
+	
+	
+}
+
 
 	public ItemPedido calcularValorBruto(ItemPedido itemPedido) {
 
@@ -70,3 +98,4 @@ public class ItemPedidoService {
 	}
 
 }
+
