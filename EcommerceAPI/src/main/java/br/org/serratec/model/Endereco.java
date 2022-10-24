@@ -26,8 +26,11 @@ public class Endereco {
 	@Column (name = "rua", nullable = false, length = 100)
 	private String logradouro;
 	
-//	@Column (name = "complemento", nullable = false, length = 20)
-//	private String complemento;
+	@Column (name = "complemento", nullable = true, length = 20)
+	private String complemento;
+	
+	@Column (name = "numero", nullable = false)
+	private String numero;
 	
 	@Column (name = "bairro", nullable = false, length = 50)
 	private String bairro;
@@ -37,7 +40,6 @@ public class Endereco {
 	
 	@Column (name = "estado", nullable = false, length = 2)
 	private String uf;
-	
 	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
@@ -80,13 +82,13 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-//	public String getComplemento() {
-//		return complemento;
-//	}
-//
-//	public void setComplemento(String complemento) {
-//		this.complemento = complemento;
-//	}
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 
 	public String getBairro() {
 		return bairro;
@@ -110,6 +112,14 @@ public class Endereco {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 	
 	

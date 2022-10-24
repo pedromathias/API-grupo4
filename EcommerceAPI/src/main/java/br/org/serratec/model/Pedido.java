@@ -1,18 +1,17 @@
 package br.org.serratec.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -25,8 +24,6 @@ public class Pedido {
 	@Column(name="id_pedido")
 	private Long id;
 	
-	@FutureOrPresent
-	@NotNull(message="Preencha a data do pedido")
 	@Column(name = "data_pedido",nullable=false)
 	private Date dataPedido;
 	
@@ -36,7 +33,6 @@ public class Pedido {
 	@Column(name="data_envio",nullable=true)
 	private Date dataEnvio;
 	
-	@Size(max=20,message="Tamanho máximo de 20 caracteres")
 	@Column(name="status",length=20)
 	private String status;
 	
@@ -45,15 +41,15 @@ public class Pedido {
 	@JsonBackReference
 	private Cliente cliente;
 	
-	@ManyToOne
-    @JoinColumn(name = "id_item_pedido")
-    private ItemPedido itemPedido;
-		
-	public ItemPedido getItemPedido() {
+	@OneToMany(mappedBy = "pedido")
+//	@JsonBackReference
+	private List<ItemPedido> itemPedido;
+
+	public List<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}
 
-	public void setItemPedido(ItemPedido itemPedido) {
+	public void setItemPedido(List<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;
 	}
 

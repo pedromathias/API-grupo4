@@ -8,7 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.dto.EnderecoRequestDTO;
 import br.org.serratec.dto.EnderecoResponseDTO;
+import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.repository.EnderecoRepository;
@@ -31,29 +33,64 @@ public class EnderecoService {
 		return novaLista;
 	}
 	
-	public Optional<Endereco> obterPorId(Long id){
+	public Optional<EnderecoResponseDTO> obterPorId(Long id){
 		Optional<Endereco> optEndereco = repositorio.findById(id);
 		if(optEndereco.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi possivel encontrar o endereço com id " + id);
 	}
-			return repositorio.findById(id);
+		EnderecoResponseDTO dto = mapper.map(optEndereco.get(), EnderecoResponseDTO.class);
+	return Optional.of(dto);
 	}
 	
-	public Endereco cadastrar(Endereco endereco) {
-		endereco.setId(null);
-		return repositorio.save(endereco);
+	public EnderecoResponseDTO cadastrar(EnderecoRequestDTO endereco) {
+		validarCep(endereco);
+		validarComplemento(endereco);
+		validarNumero(endereco);
+		var enderecoModel = mapper.map(endereco, Endereco.class);
+		enderecoModel.setId(null);
+		enderecoModel = repositorio.save(enderecoModel);
+		var response = mapper.map(enderecoModel, EnderecoResponseDTO.class);
+		return response;
 	}
-	
-	public Endereco atualizar(Long id, Endereco endereco) {
+
+	public EnderecoResponseDTO atualizar(Long id, EnderecoRequestDTO endereco) {
 		obterPorId(id);
-		endereco.setId(id);
-		return repositorio.save(endereco);
+		var enderecoModel = mapper.map(endereco, Endereco.class);
+		enderecoModel.setId(id);
+		enderecoModel = repositorio.save(enderecoModel);
+		return mapper.map(enderecoModel, EnderecoResponseDTO.class);
 	}
 	
 	public void deletar (Long id) {
 		obterPorId(id);
 		repositorio.deleteById(id);
 		
+	}
+	
+	private void validarCep(EnderecoRequestDTO endereco) {
+
+		if (endereco.getCep() == null) {
+			throw new ResourceBadRequestException("O CEP deve ser informado");
+		} else if (endereco.getCep().length() > 9) {
+			throw new ResourceBadRequestException("Tamanho do CEP deve ser no formato ex:25665-500");
+		}
+
+	}
+	
+	private void validarComplemento(EnderecoRequestDTO endereco) {
+
+		if (endereco.getComplemento().length() > 20) {
+			throw new ResourceBadRequestException("Tamanho máxmimo do complemento deve ser 20 caracteres");
+		}
+
+	}
+	
+	private void validarNumero(EnderecoRequestDTO endereco) {
+
+		if (endereco.getNumero() == null){
+			throw new ResourceBadRequestException("O número deve ser informado");
+		}
+
 	}
 }
 

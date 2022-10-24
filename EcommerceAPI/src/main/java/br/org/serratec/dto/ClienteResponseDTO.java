@@ -2,9 +2,8 @@ package br.org.serratec.dto;
 
 import java.util.List;
 
-import javax.persistence.OneToMany;
-
 import br.org.serratec.model.Endereco;
+import br.org.serratec.model.Pedido;
 
 public class ClienteResponseDTO {
 
@@ -18,9 +17,28 @@ public class ClienteResponseDTO {
 	
 	private String telefone;
 	
-	@OneToMany(mappedBy="cliente")
+	private String cpf;
+	
 	private List<Endereco> endereco;
 	
+	private List<Pedido> pedido;
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
+
 	public List<Endereco> getEndereco() {
 		return endereco;
 	}
