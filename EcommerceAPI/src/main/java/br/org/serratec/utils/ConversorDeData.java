@@ -5,21 +5,6 @@ import java.util.Date;
 
 public class ConversorDeData {
 
-	//"18/10/2022 as 19:54hs"
-	
-	/*
-	 * dd => Dia do mes
-	 * DD => Dia do ano
-	 * MM =>> Mês
-	 * mm =>> Minuto
-	 * YYYY => Ano formato 2022
-	 * YY => Ano formato 22
-	 * HH => Hora formato 24hs (0 a 23) pm
-	 * hh => formato 12hs (0 a 12:00) am
-	 * ss => segundos
-	 *  
-	 * */
-	
 	public static String converterDateParaDataEHoraISO(Date data) {
 		SimpleDateFormat formatador = new SimpleDateFormat("YYYY-MM-dd");
 		return formatador.format(data) + "T" + converterDateParaHora(data);

@@ -3,13 +3,11 @@ package br.org.serratec.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.dto.PedidoRequestDTO;
 import br.org.serratec.dto.PedidoResponseDTO;
@@ -42,10 +40,6 @@ public class ProdutoService {
 
 	private ModelMapper mapper = new ModelMapper();
 
-//	public List<Produto> obterTodos() {
-//		return repositorio.findAll();
-//	}
-
 	public List<ProdutoResponseDTO> obterTodos() {
 		List<Produto> lista = repositorio.findAll();
 		var novaLista = new ArrayList<ProdutoResponseDTO>();
@@ -75,7 +69,6 @@ public class ProdutoService {
 		if (produtoDescricao.size() > 0) {
 			throw new ResourceBadRequestException("Descrição já cadastrada!");
 		}
-//		var produtoModel = mapper.map(produto, Produto.class);
 		var produtoModel = new Produto();
 		produtoModel.setNome(produto.getNome());
 		produtoModel.setDescricao(produto.getDescricao());
@@ -121,8 +114,7 @@ public class ProdutoService {
 		validarDescricao(produto);
 		validarQuantidadeEstoque(produto);
 		validarValorUnitario(produto);
-    validarCategoria(produto);
-		//var produtoModel = mapper.map(produto, Produto.class);
+		validarCategoria(produto);
 		var produtoModel = new Produto();
 		produtoModel.setId(id);
 		produtoModel.setNome(produto.getNome());

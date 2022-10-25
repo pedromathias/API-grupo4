@@ -17,15 +17,15 @@ public class ProdutoResponseDTO {
 	
 	private Categoria categoria;
 	
-//	private ItemPedido itemPedido;
+	private ItemPedido itemPedido;
 
-//	public ItemPedido getItemPedido() {
-//		return itemPedido;
-//	}
-//
-//	public void setItemPedido(ItemPedido itemPedido) {
-//		this.itemPedido = itemPedido;
-//	}
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
+	}
 
 	public Long getId() {
 		return id;
