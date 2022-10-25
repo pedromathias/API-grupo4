@@ -22,13 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-
 import br.org.serratec.dto.EnderecoRequestDTO;
-
 import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.service.EnderecoService;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -94,7 +91,6 @@ public class EnderecoController {
 		Endereco userAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
 		endereco.setCep(userAux.getCep());
 		endereco.setLogradouro(userAux.getLogradouro());
-	//	endereco.setComplemento(userAux.getComplemento());
 		endereco.setBairro(userAux.getBairro());
 		endereco.setLocalidade(userAux.getLocalidade());
 		endereco.setUf(userAux.getUf());
@@ -111,8 +107,25 @@ public class EnderecoController {
 			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
+	
 	})
-	public ResponseEntity<EnderecoResponseDTO> atualizar(@PathVariable Long id, @RequestBody EnderecoRequestDTO endereco) {
+	public ResponseEntity<EnderecoResponseDTO> atualizar(@PathVariable Long id, @RequestBody EnderecoRequestDTO endereco) throws Exception {
+			URL url=new URL ("https://viacep.com.br/ws/"+endereco.getCep()+"/json/");
+			URLConnection connection = url.openConnection();
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			String cep = "";
+			StringBuilder jsonCep=new StringBuilder();
+			while((cep=br.readLine())!=null) {
+				jsonCep.append(cep);	
+			}
+			Endereco userAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
+			endereco.setCep(userAux.getCep());
+			endereco.setLogradouro(userAux.getLogradouro());
+			endereco.setBairro(userAux.getBairro());
+			endereco.setLocalidade(userAux.getLocalidade());
+			endereco.setUf(userAux.getUf());
+
 		return ResponseEntity.ok(servico.atualizar(id, endereco));
 	}
 	

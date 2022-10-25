@@ -1,21 +1,17 @@
 package br.org.serratec.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import io.swagger.annotations.ApiModelProperty;
 
 
 
@@ -51,6 +47,7 @@ public class ItemPedido {
 
 	@ManyToOne
     @JoinColumn(name = "id_pedido")
+	@JsonBackReference
 	@ApiModelProperty(value="Id_Pedido")
     private Pedido pedido;
 
@@ -96,6 +93,14 @@ public class ItemPedido {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public double getValorBruto() {

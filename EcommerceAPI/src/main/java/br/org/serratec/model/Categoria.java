@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,12 +35,15 @@ public class Categoria {
 	@Column(name = "descricao", nullable = true, length = 150)
 	@ApiModelProperty(value="Descrição da categoria", required = true)
 	private String descricao;
-	
+
 	@OneToMany(mappedBy="categoria")
 	@JsonBackReference
 	@ApiModelProperty(value="Id do produto")
 	private List<Produto> produto;
 
+	@OneToMany(mappedBy="categoria")
+	@ApiModelProperty(value="Id do produto")
+	private List<Produto> produto;
 
 	public List<Produto> getProduto() {
 		return produto;

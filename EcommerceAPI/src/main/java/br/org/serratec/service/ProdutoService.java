@@ -67,6 +67,7 @@ public class ProdutoService {
 		produtoModel.setValorUnitario(produto.getValorUnitario());
 		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
 		produtoModel.setCategoria(produto.getCategoria());
+		produtoModel.setItemPedido(produto.getItemPedido());
 		produtoModel = repositorio.save(produtoModel);
 		var response = mapper.map(produtoModel, ProdutoResponseDTO.class);
 		return response;
@@ -74,8 +75,21 @@ public class ProdutoService {
 	
 	public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produto) {
 		obterPorId(id);
-		var produtoModel = mapper.map(produto, Produto.class);
+		validarNomeProduto(produto);
+		validarDescricao(produto);
+		validarQuantidadeEstoque(produto);
+		validarValorUnitario(produto);
+    validarCategoria(produto);
+		//var produtoModel = mapper.map(produto, Produto.class);
+		var produtoModel = new Produto();
 		produtoModel.setId(id);
+		produtoModel.setNome(produto.getNome());
+		produtoModel.setDescricao(produto.getDescricao());
+		produtoModel.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+		produtoModel.setDataCadastro(produto.getDataCadastro());
+		produtoModel.setValorUnitario(produto.getValorUnitario());
+		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
+    produtoModel.setCategoria(produto.getCategoria());
 		produtoModel = repositorio.save(produtoModel);
 		return mapper.map(produtoModel, ProdutoResponseDTO.class);
 	}

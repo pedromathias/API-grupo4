@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -30,6 +29,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/produtos")
+
 public class ProdutoController {
 
 	@Autowired
@@ -88,7 +88,8 @@ public class ProdutoController {
 		return new ResponseEntity<>(produtoDTO, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{id}")
+	@RequestMapping("/{id}")
+	@PutMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	@ApiOperation(value = "Atualiza produto", notes = "Atualiza produto")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Atualiza produto"),
@@ -100,6 +101,10 @@ public class ProdutoController {
 	
 	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO pokemon) {
 		return ResponseEntity.ok(servico.atualizar(id, pokemon));
+
+	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @ModelAttribute ProdutoRequestDTO produto) {
+		return ResponseEntity.ok(servico.atualizar(id, produto));
+
 	}
 
 	@DeleteMapping("/{id}")
