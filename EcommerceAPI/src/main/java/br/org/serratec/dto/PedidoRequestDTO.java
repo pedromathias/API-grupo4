@@ -3,6 +3,7 @@ package br.org.serratec.dto;
 import java.util.Date;
 
 import br.org.serratec.model.Cliente;
+import br.org.serratec.model.ItemPedido;
 
 public class PedidoRequestDTO {
 
@@ -15,6 +16,8 @@ public class PedidoRequestDTO {
 	private String status;
 	
 	private Cliente cliente;
+	
+	private ItemPedido itemPedido;
  
 	public Cliente getCliente() {
 		return cliente;
@@ -55,6 +58,15 @@ public class PedidoRequestDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+	
 	
 	
 }

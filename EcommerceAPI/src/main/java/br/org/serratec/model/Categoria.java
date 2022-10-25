@@ -41,10 +41,6 @@ public class Categoria {
 	@ApiModelProperty(value="Id do produto")
 	private List<Produto> produto;
 
-	@OneToMany(mappedBy="categoria")
-	@ApiModelProperty(value="Id do produto")
-	private List<Produto> produto;
-
 	public List<Produto> getProduto() {
 		return produto;
 	}

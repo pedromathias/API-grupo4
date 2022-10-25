@@ -50,7 +50,6 @@ public class Pedido {
 	private Cliente cliente;
 
 	@OneToMany(mappedBy = "pedido")
-//	@JsonBackReference
 	@ApiModelProperty(value = "Id_ItemPedido")
 	private List<ItemPedido> itemPedido;
 

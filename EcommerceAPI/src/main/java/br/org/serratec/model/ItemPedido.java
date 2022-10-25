@@ -47,21 +47,13 @@ public class ItemPedido {
 
 	@ManyToOne
     @JoinColumn(name = "id_pedido")
-	@JsonBackReference
 	@ApiModelProperty(value="Id_Pedido")
+	@JsonBackReference
     private Pedido pedido;
 
 	@OneToOne(mappedBy = "itemPedido")
 	@ApiModelProperty(value="Id_Produto")
 	private Produto produto;
-	
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
 
 	public Long getId() {
 		return id;
