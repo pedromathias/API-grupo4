@@ -31,7 +31,7 @@ public class ItemPedido {
 
 	@Column(name = "preco_venda")
 	@ApiModelProperty(value="Preço de Venda")
-	private int precoVenda;
+	private Integer precoVenda;
 		
 	@Column(name="valor_bruto")
 	@ApiModelProperty(value="Valor Bruto")

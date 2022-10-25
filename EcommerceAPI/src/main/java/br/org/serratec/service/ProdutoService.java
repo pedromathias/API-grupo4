@@ -65,8 +65,7 @@ public class ProdutoService {
 		produtoModel.setDataCadastro(produto.getDataCadastro());
 		produtoModel.setValorUnitario(produto.getValorUnitario());
 		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
-		Long idItemPedido = produto.getItemPedido().getId();
-		produtoModel.getItemPedido().setId(idItemPedido);
+		produtoModel.setItemPedido(produto.getItemPedido());
 		produtoModel = repositorio.save(produtoModel);
 		var response = mapper.map(produtoModel, ProdutoResponseDTO.class);
 		return response;
