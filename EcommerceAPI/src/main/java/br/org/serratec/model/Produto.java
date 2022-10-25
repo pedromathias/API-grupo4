@@ -52,11 +52,7 @@ public class Produto {
 	@Column(name = "imagem_produto", nullable = true, columnDefinition = "TEXT")
 	@ApiModelProperty(value = "Imagem do Produto", required = true)
 	private String imagemProduto;
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> tabela-pedidos
 	@ManyToOne
 	@ApiModelProperty(value = "Categoria do Produto")
 	@JoinColumn(name = "id_categoria")
@@ -76,10 +72,6 @@ public class Produto {
 		this.itemPedido = itemPedido;
 	}
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> tabela-pedidos
 	public Categoria getCategoria() {
 		return categoria;
 	}
