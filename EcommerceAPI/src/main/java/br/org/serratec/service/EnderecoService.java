@@ -3,18 +3,15 @@ package br.org.serratec.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.org.serratec.dto.EnderecoRequestDTO;
 import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.repository.EnderecoRepository;
-
 
 @Service
 public class EnderecoService {

@@ -20,9 +20,6 @@ private Long id;
 	
 	private String uf;
 	
-//	@ManyToOne
-//	@JoinColumn(name="id_cliente")
-//	@JsonBackReference
 	private Cliente cliente;
 
 	public Long getId() {
