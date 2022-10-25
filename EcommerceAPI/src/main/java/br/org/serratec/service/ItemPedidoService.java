@@ -77,6 +77,8 @@ public class ItemPedidoService {
 	private void validarQuantidade(ItemPedido itemPedido) {
 		if (itemPedido.getQuantidade() == null) {
 			throw new ResourceBadRequestException("A quantidade deve ser informado");
+		} else if (itemPedido.getQuantidade() < 1) {
+			throw new ResourceBadRequestException("O valor da quantidade deve ser maior que 1");
 		}
 
 	}
@@ -84,6 +86,8 @@ public class ItemPedidoService {
 	private void validarPrecoVenda(ItemPedido itemPedido) {
 		if (itemPedido.getPrecoVenda() == null) {
 			throw new ResourceBadRequestException("A quantidade deve ser informado");
+		} else if (itemPedido.getQuantidade() <= 0) {
+			throw new ResourceBadRequestException("O valor do Preco de venda deve ser maior que 0.00");
 		}
 
 	}

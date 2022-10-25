@@ -94,11 +94,7 @@ public class ProdutoController {
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
 	})
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> tabela-pedidos
 	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @ModelAttribute ProdutoRequestDTO produto) {
 		return ResponseEntity.ok(servico.atualizar(id, produto));
 

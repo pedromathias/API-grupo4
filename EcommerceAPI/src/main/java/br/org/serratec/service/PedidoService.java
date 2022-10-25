@@ -62,6 +62,7 @@ public class PedidoService {
 		pedidoModel.setId(null);
 		pedidoModel = repositorio.save(pedidoModel);
 		var response = mapper.map(pedidoModel, PedidoResponseDTO.class);
+		
 //		Long clienteId = pedido.getCliente().getId();
 //		var destinatarios = new ArrayList<String>();
 //		Optional<ClienteResponseDTO> cliente = clienteService.obterPorId(clienteId);

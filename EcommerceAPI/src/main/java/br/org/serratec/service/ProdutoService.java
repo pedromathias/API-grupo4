@@ -90,9 +90,9 @@ public class ProdutoService {
 		destinatarios.add(cliente.get().getEmail());
 		String mensagem = "<h1 style=\"color:blue\">Olá Sr(a)" + cliente.get().getNomeUsuario()
 				+ "!</h1> <p> Seu pedido foi cadastrado com sucesso!</p>" + "<ul>Dados do Pedido:"
-					+ "<li>Data Pedido:"+pedido.get().getDataPedido()+"</li>"
-					+ "<li>Status Pedido:"+pedido.get().getStatus()+"</li>"
-					+ "<li>Valor do Pedido"+itemPedido.get().getValorLiquido()+"</li>"
+					+ "<li>Data Pedido: "+pedido.get().getDataPedido()+"</li>"
+					+ "<li>Status Pedido: "+pedido.get().getStatus()+"</li>"
+					+ "<li>Valor do Pedido: R$"+itemPedido.get().getValorLiquido()+"</li>"
 				+ "</ul>"
 				+"<ul>Dados do Cliente: "
 					+"<li>Cpf do Cliente:"+cliente.get().getCpf()+"</li>"

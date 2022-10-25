@@ -67,7 +67,7 @@ public class EnderecoService {
 	private void validarCep(EnderecoRequestDTO endereco) {
 
 		if (endereco.getCep() == null) {
-			throw new ResourceBadRequestException("O CEP deve ser informado");
+			throw new ResourceBadRequestException("O CEP deve ser informado corretamente");
 		} else if (endereco.getCep().length() > 9) {
 			throw new ResourceBadRequestException("Tamanho do CEP deve ser no formato ex:25665-500");
 		}
@@ -75,7 +75,9 @@ public class EnderecoService {
 	}
 	
 	private void validarComplemento(EnderecoRequestDTO endereco) {
-
+		if(endereco.getComplemento() == null) {
+			throw new ResourceBadRequestException("O complemento deve ser informado, se não houver escreva 'Sem complemento'");
+		}
 		if (endereco.getComplemento().length() > 20) {
 			throw new ResourceBadRequestException("Tamanho máxmimo do complemento deve ser 20 caracteres");
 		}

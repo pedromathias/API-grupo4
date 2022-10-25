@@ -34,10 +34,6 @@ public class Categoria {
 	@ApiModelProperty(value="Id do produto")
 	private List<Produto> produto;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> tabela-pedidos
 	public List<Produto> getProduto() {
 		return produto;
 	}
