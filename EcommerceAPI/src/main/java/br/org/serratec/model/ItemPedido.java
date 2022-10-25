@@ -54,6 +54,14 @@ public class ItemPedido {
 	@OneToOne(mappedBy = "itemPedido")
 	@ApiModelProperty(value="Id_Produto")
 	private Produto produto;
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
 
 	public Long getId() {
 		return id;

@@ -98,8 +98,13 @@ public class ProdutoController {
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
 	})
+	
+	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO pokemon) {
+		return ResponseEntity.ok(servico.atualizar(id, pokemon));
+
 	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @ModelAttribute ProdutoRequestDTO produto) {
 		return ResponseEntity.ok(servico.atualizar(id, produto));
+
 	}
 
 	@DeleteMapping("/{id}")

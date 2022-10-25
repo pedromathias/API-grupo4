@@ -52,6 +52,7 @@ public class ProdutoService {
 		validarDescricao(produto);
 		validarQuantidadeEstoque(produto);
 		validarValorUnitario(produto);
+		validarCategoria(produto);
 		
 		List<Produto> produtoDescricao = repositorio.findByDescricao(produto.getDescricao());
 		if (produtoDescricao.size() > 0) {
@@ -65,18 +66,20 @@ public class ProdutoService {
 		produtoModel.setDataCadastro(produto.getDataCadastro());
 		produtoModel.setValorUnitario(produto.getValorUnitario());
 		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
+		produtoModel.setCategoria(produto.getCategoria());
 		produtoModel.setItemPedido(produto.getItemPedido());
 		produtoModel = repositorio.save(produtoModel);
 		var response = mapper.map(produtoModel, ProdutoResponseDTO.class);
 		return response;
 	}
-
+	
 	public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produto) {
 		obterPorId(id);
 		validarNomeProduto(produto);
 		validarDescricao(produto);
 		validarQuantidadeEstoque(produto);
 		validarValorUnitario(produto);
+    validarCategoria(produto);
 		//var produtoModel = mapper.map(produto, Produto.class);
 		var produtoModel = new Produto();
 		produtoModel.setId(id);
@@ -86,6 +89,7 @@ public class ProdutoService {
 		produtoModel.setDataCadastro(produto.getDataCadastro());
 		produtoModel.setValorUnitario(produto.getValorUnitario());
 		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
+    produtoModel.setCategoria(produto.getCategoria());
 		produtoModel = repositorio.save(produtoModel);
 		return mapper.map(produtoModel, ProdutoResponseDTO.class);
 	}
@@ -136,6 +140,12 @@ public class ProdutoService {
 			throw new ResourceBadRequestException("O valor unitário deve ser informado");
 		}
 
+	}
+
+	private void validarCategoria(ProdutoRequestDTO produto) {
+		if(produto.getCategoria() == null){
+			throw new ResourceBadRequestException("A categoria deve ser informado");
+		}
 	}
 
 }
