@@ -22,6 +22,16 @@ public class PedidoResponseDTO {
 	
 	private List<ItemPedido> itemPedido;
 
+	private Cliente clienteTeste;
+	
+	public Cliente getClienteTeste() {
+		return clienteTeste;
+	}
+
+	public void setClienteTeste(Cliente clienteTeste) {
+		this.clienteTeste = clienteTeste;
+	}
+
 	public List<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}

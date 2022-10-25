@@ -13,19 +13,19 @@ public class ProdutoResponseDTO {
 	
 	private Double valorUnitario;
 	
-//	private String imagemProduto;
+	private String imagemProduto;
 	
 	private Categoria categoria;
 	
-	private ItemPedido itemPedido;
+//	private ItemPedido itemPedido;
 
-	public ItemPedido getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(ItemPedido itemPedido) {
-		this.itemPedido = itemPedido;
-	}
+//	public ItemPedido getItemPedido() {
+//		return itemPedido;
+//	}
+//
+//	public void setItemPedido(ItemPedido itemPedido) {
+//		this.itemPedido = itemPedido;
+//	}
 
 	public Long getId() {
 		return id;
@@ -67,13 +67,13 @@ public class ProdutoResponseDTO {
 		this.categoria = categoria;
 	}
 
-//	public String getImagemProduto() {
-//		return imagemProduto;
-//	}
-//
-//	public void setImagemProduto(String imagemProduto) {
-//		this.imagemProduto = imagemProduto;
-//	}
+	public String getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(String imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
 	
 	
 }

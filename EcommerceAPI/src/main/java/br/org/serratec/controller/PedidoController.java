@@ -60,6 +60,11 @@ public class PedidoController {
 		Optional<PedidoResponseDTO> optPedido = servico.obterPorId(id);
 		return ResponseEntity.ok(optPedido.get());
 	}
+	
+	public ResponseEntity<PedidoRequestDTO> obterPorId2(@PathVariable Long id) {
+		Optional<PedidoRequestDTO> optPedido = servico.obterPorId2(id);
+		return ResponseEntity.ok(optPedido.get());
+	}
 
 	@PostMapping
 	@ApiOperation(value = "Insere pedido", notes = "Insere pedido")

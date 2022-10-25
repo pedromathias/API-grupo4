@@ -50,6 +50,15 @@ public class PedidoService {
 		PedidoResponseDTO pedidoDTO = mapper.map(optPedido.get(), PedidoResponseDTO.class);
 		return Optional.of(pedidoDTO);
 	}
+	
+	public Optional<PedidoRequestDTO> obterPorId2(Long id) {
+		Optional<Pedido> optPedido = repositorio.findById(id);
+		if (optPedido.isEmpty()) {
+			throw new ResourceNotFoundException("Não foi possivel encontrar o pedido com id " + id);
+		}
+		PedidoRequestDTO pedidoDTO = mapper.map(optPedido.get(), PedidoRequestDTO.class);
+		return Optional.of(pedidoDTO);
+	}
 
 	public PedidoResponseDTO cadastrar(PedidoRequestDTO pedido) {
 		validarDataPedido(pedido);
