@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.org.serratec.dto.ProdutoRequestDTO;
 import br.org.serratec.dto.ProdutoResponseDTO;
@@ -26,8 +29,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/pokemons")
-
+@RequestMapping("/produtos")
 public class ProdutoController {
 
 	@Autowired
@@ -80,7 +82,8 @@ public class ProdutoController {
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
 	})
-	public ResponseEntity<ProdutoResponseDTO> cadastrar(@ModelAttribute ProdutoRequestDTO produto) {
+	public ResponseEntity<ProdutoResponseDTO> cadastrar(@RequestPart ProdutoRequestDTO produto, @RequestParam MultipartFile imagemProduto) {
+		produto.setImagemProduto(imagemProduto);
 		ProdutoResponseDTO produtoDTO = servico.cadastrar(produto);
 		return new ResponseEntity<>(produtoDTO, HttpStatus.CREATED);
 	}
@@ -94,14 +97,7 @@ public class ProdutoController {
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Exceção interna da aplicação"),
 	})
-	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
-		return ResponseEntity.ok(servico.atualizar(id, produto));
-	public ResponseEntity<ProdutoResponseDTO> cadastrar(@ModelAttribute ProdutoRequestDTO pokemon) {
-		ProdutoResponseDTO pokemonDTO = servico.cadastrar(pokemon);
-		return new ResponseEntity<>(pokemonDTO, HttpStatus.CREATED);
-	}
-
-	@PutMapping("/{id}")
+	
 	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO pokemon) {
 		return ResponseEntity.ok(servico.atualizar(id, pokemon));
 	}

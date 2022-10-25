@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -49,9 +52,11 @@ public class Produto {
 	@ApiModelProperty(value="Imagem do Produto", required=true)
 	private String imagemProduto;
 	
-	@OneToMany(mappedBy="produto")
-	@ApiModelProperty(value="Categoria do Produto")
-	private List<Categoria> categoria;
+	@ManyToOne
+	@JoinColumn(name = "categoria", nullable = true)
+	
+	@ApiModelProperty(value="Categoria do Produto", required=true)
+	private Categoria categoria;
 	
 	@OneToOne
     @JoinColumn(name = "id_item_pedido")
@@ -65,10 +70,10 @@ public class Produto {
 	public void setItemPedido(ItemPedido itemPedido) {
 		this.itemPedido = itemPedido;
 	}
-	public List<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(List<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	public void setId(Long id) {
@@ -77,9 +82,7 @@ public class Produto {
 	public Long getId() {
 		return id;
 	}
-	public void setIdProduto(Long id) {
-		this.id = id;
-	}
+	
 	public String getNome() {
 		return nome;
 	}

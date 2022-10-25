@@ -1,5 +1,7 @@
 package br.org.serratec.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -29,19 +34,19 @@ public class Categoria {
 	@ApiModelProperty(value="Descrição da categoria", required = true)
 	private String descricao;
 	
-	@ManyToOne
-	@JoinColumn(name="id_produto")
+	@OneToMany(mappedBy="categoria")
+	@JsonBackReference
 	@ApiModelProperty(value="Id do produto")
-	private Produto produto;
+	private List<Produto> produto;
 
-	public Produto getProduto() {
+
+	public List<Produto> getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Produto produto) {
+	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
-
 
 	public Long getId() {
 		return id;

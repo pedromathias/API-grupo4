@@ -17,7 +17,7 @@ public class ProdutoResponseDTO {
 	
 	private String imagemProduto;
 	
-	private List<Categoria> categoria;
+	private Categoria categoria;
 	
 	private List<Cliente> cliente;
 
@@ -61,11 +61,11 @@ public class ProdutoResponseDTO {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public List<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(List<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 

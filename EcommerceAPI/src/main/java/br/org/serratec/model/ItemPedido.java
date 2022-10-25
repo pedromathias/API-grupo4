@@ -35,7 +35,7 @@ public class ItemPedido {
 
 	@Column(name = "preco_venda")
 	@ApiModelProperty(value="Preço de Venda")
-	private int precoVenda;
+	private Integer precoVenda;
 		
 	@Column(name="valor_bruto")
 	@ApiModelProperty(value="Valor Bruto")
@@ -58,31 +58,13 @@ public class ItemPedido {
 	@ApiModelProperty(value="Id_Produto")
 	private Produto produto;
 	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
-
-	@Column(name = "quantidade")
-	private Integer quantidade;
-
-	@Column(name = "preco_venda")
-	private Integer precoVenda;
-	
-	@Column(name = "valor_bruto")
-	private double valorBruto;
-	
-	@Column(name = "percentual_desconto")
-	private double percentDesconto;
-
-	@Column(name = "valor_líquido")
-	private double valorLiquido;
-
-	@ManyToOne
-	@JoinColumn(name = "pedido")
-	@JsonBackReference
-	private Pedido pedido;
-
-	@OneToMany(mappedBy = "itemPedido")
-	private List<Produto> produto;
-
+	public Produto getProduto() {
+		return produto;
+	}
 
 	public Long getId() {
 		return id;
@@ -100,12 +82,6 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public double getPrecoVenda() {
-		return precoVenda;
-	}
-
-	public void setPrecoVenda(int precoVenda) {
-
 	public Integer getPrecoVenda() {
 		return precoVenda;
 	}
@@ -120,14 +96,6 @@ public class ItemPedido {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
-	}
-
-	public List<Produto> getProduto() {
-		return produto;
-	}
-
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
 	}
 
 	public double getValorBruto() {
