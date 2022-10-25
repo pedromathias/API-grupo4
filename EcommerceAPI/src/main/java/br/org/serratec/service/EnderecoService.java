@@ -3,18 +3,15 @@ package br.org.serratec.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.org.serratec.dto.EnderecoRequestDTO;
 import br.org.serratec.dto.EnderecoResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.Endereco;
 import br.org.serratec.repository.EnderecoRepository;
-
 
 @Service
 public class EnderecoService {
@@ -70,7 +67,7 @@ public class EnderecoService {
 	private void validarCep(EnderecoRequestDTO endereco) {
 
 		if (endereco.getCep() == null) {
-			throw new ResourceBadRequestException("O CEP deve ser informado");
+			throw new ResourceBadRequestException("O CEP deve ser informado corretamente");
 		} else if (endereco.getCep().length() > 9) {
 			throw new ResourceBadRequestException("Tamanho do CEP deve ser no formato ex:25665-500");
 		}
@@ -78,7 +75,9 @@ public class EnderecoService {
 	}
 	
 	private void validarComplemento(EnderecoRequestDTO endereco) {
-
+		if(endereco.getComplemento() == null) {
+			throw new ResourceBadRequestException("O complemento deve ser informado, se não houver escreva 'Sem complemento'");
+		}
 		if (endereco.getComplemento().length() > 20) {
 			throw new ResourceBadRequestException("Tamanho máxmimo do complemento deve ser 20 caracteres");
 		}

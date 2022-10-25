@@ -18,26 +18,6 @@ public class ClienteRequestDTO {
 
 	private Date dataNasc;
 	
-	//private List<Endereco> endereço;
-	
-//	private List<Pedido> pedido;
-//	
-//	public List<Pedido> getPedido() {
-//		return pedido;
-//	}
-//
-//	public void setPedido(List<Pedido> pedido) {
-//		this.pedido = pedido;
-//	}
-
-//	public List<Endereco> getEndereço() {
-//		return endereço;
-//	}
-//
-//	public void setEndereço(List<Endereco> endereço) {
-//		this.endereço = endereço;
-//	}
-
 	public String getEmail() {
 		return email;
 	}

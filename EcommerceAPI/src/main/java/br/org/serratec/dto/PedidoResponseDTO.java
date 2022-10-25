@@ -22,6 +22,16 @@ public class PedidoResponseDTO {
 	
 	private List<ItemPedido> itemPedido;
 
+	private Cliente clienteTeste;
+	
+	public Cliente getClienteTeste() {
+		return clienteTeste;
+	}
+
+	public void setClienteTeste(Cliente clienteTeste) {
+		this.clienteTeste = clienteTeste;
+	}
+
 	public List<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}
@@ -45,15 +55,6 @@ public class PedidoResponseDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
-//	public Cliente getCliente() {
-//		return cliente;
-//	}
-//
-//	public void setCliente(Cliente cliente) {
-//		this.cliente = cliente;
-//	}
 
 	public Date getDataPedido() {
 		return dataPedido;

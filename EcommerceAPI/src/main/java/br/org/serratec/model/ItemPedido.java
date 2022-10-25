@@ -8,12 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import io.swagger.annotations.ApiModelProperty;
-
-
 
 @Entity
 public class ItemPedido {
@@ -111,8 +107,17 @@ public class ItemPedido {
 		this.valorLiquido = valorLiquido;
 	}
 
+	public Produto getProduto() {
+		return produto;
+	}
 
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
 
-
+	
 }

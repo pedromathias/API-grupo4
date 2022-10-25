@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.org.serratec.model.Categoria;
 import br.org.serratec.service.CategoriaService;
 import io.swagger.annotations.ApiOperation;

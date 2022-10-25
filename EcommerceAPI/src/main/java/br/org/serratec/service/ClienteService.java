@@ -3,11 +3,9 @@ package br.org.serratec.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.org.serratec.dto.ClienteRequestDTO;
 import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
@@ -44,21 +42,6 @@ public class ClienteService {
 		ClienteResponseDTO dto = mapper.map(optCliente.get(), ClienteResponseDTO.class);
 		return Optional.of(dto);
 	}
-
-//	public Cliente cadastrar(Cliente cliente) {
-////		List<Cliente> clientes = repositorio.findByCpf(cliente.getCpf());
-////		List<Cliente> client = repositorio.findByEmail(cliente.getEmail());
-////		if(clientes.size()>0) {
-////			throw new RuntimeException("Cpf já cadastrado!");
-////		}
-////		if(client.size()>0) {
-////			throw new RuntimeException("Email já cadastrado");
-////		}
-
-
-
-//		return repositorio.save(cliente);
-//	}
 
 	public ClienteResponseDTO cadastrar(ClienteRequestDTO cliente) {
 		validarEmail(cliente);
@@ -161,6 +144,5 @@ public class ClienteService {
 		}
 
 	}
-
 
 }
