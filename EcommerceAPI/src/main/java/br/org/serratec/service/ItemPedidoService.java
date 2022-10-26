@@ -2,12 +2,13 @@ package br.org.serratec.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.ItemPedido;
-import br.org.serratec.model.Produto;
 import br.org.serratec.repository.ItemPedidoRepository;
 
 @Service
@@ -15,8 +16,6 @@ public class ItemPedidoService {
 
 	@Autowired
 	private ItemPedidoRepository repositorio;
-
-	Produto produtos;
 
 	ItemPedido valorBruto = new ItemPedido();
 	ItemPedido valorLiquido = new ItemPedido();
@@ -84,9 +83,10 @@ public class ItemPedidoService {
 	}
 	
 	private void validarPrecoVenda(ItemPedido itemPedido) {
-		if (itemPedido.getPrecoVenda() == null) {
-			throw new ResourceBadRequestException("A quantidade deve ser informado");
-		} else if (itemPedido.getQuantidade() <= 0) {
+		if(itemPedido.getPrecoVenda() == null) {
+			throw new ResourceBadRequestException("O preço da venda não pode ser nulo");
+		}
+		else if (itemPedido.getPrecoVenda() <= 0) {
 			throw new ResourceBadRequestException("O valor do Preco de venda deve ser maior que 0.00");
 		}
 

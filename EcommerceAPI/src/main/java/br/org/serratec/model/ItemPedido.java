@@ -23,11 +23,11 @@ public class ItemPedido {
 	
 	@Column(name = "quantidade")
 	@ApiModelProperty(value="Quantidade")
-	private int quantidade;
+	private Integer quantidade;
 
 	@Column(name = "preco_venda")
 	@ApiModelProperty(value="Preço de Venda")
-	private Integer precoVenda;
+	private Double precoVenda;
 		
 	@Column(name="valor_bruto")
 	@ApiModelProperty(value="Valor Bruto")
@@ -47,7 +47,7 @@ public class ItemPedido {
 	@JsonBackReference
     private Pedido pedido;
 
-	@OneToOne(mappedBy = "itemPedido")
+	@OneToOne
 	@ApiModelProperty(value="Id_Produto")
 	private Produto produto;
 
@@ -67,11 +67,11 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public Integer getPrecoVenda() {
+	public Double getPrecoVenda() {
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(Integer precoVenda) {
+	public void setPrecoVenda(Double precoVenda) {
 		this.precoVenda = precoVenda;
 	}
 
@@ -114,10 +114,5 @@ public class ItemPedido {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
 	
 }
