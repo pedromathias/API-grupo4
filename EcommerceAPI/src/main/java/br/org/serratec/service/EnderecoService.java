@@ -52,6 +52,9 @@ public class EnderecoService {
 
 	public EnderecoResponseDTO atualizar(Long id, EnderecoRequestDTO endereco) {
 		obterPorId(id);
+		validarCep(endereco);
+		validarComplemento(endereco);
+		validarNumero(endereco);
 		var enderecoModel = mapper.map(endereco, Endereco.class);
 		enderecoModel.setId(id);
 		enderecoModel = repositorio.save(enderecoModel);

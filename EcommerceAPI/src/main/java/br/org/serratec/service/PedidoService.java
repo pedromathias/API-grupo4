@@ -81,8 +81,6 @@ public class PedidoService {
 		for (ItemPedido itemPedido : pedido.getItemPedido()) {
 			var itemPedidoModel = mapper.map(itemPedido, ItemPedido.class);
 			itemPedidoModel.setPedido(pedidoModel);
-//			servicoItemPedido.calcularValorBruto(itemPedidoModel);
-//			servicoItemPedido.calcularValorLiquido(itemPedidoModel);
 			itemPedidoRepositorio.save(itemPedidoModel);
 			itensResponse.add(mapper.map(itemPedidoModel, ItemPedido.class));
 			Long clienteId = pedido.getCliente().getId();

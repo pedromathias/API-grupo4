@@ -82,7 +82,6 @@ public class ProdutoService {
 		produtoModel.setQuantidadeEstoque(produto.getQuantidadeEstoque());
 		produtoModel.setDataCadastro(produto.getDataCadastro());
 		produtoModel.setValorUnitario(produto.getValorUnitario());
-		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
 		produtoModel.setCategoria(produto.getCategoria());
 		produtoModel = repositorio.save(produtoModel);
 		return mapper.map(produtoModel, ProdutoResponseDTO.class);
@@ -94,7 +93,7 @@ public class ProdutoService {
 	}
 
 	private void validarNomeProduto(ProdutoRequestDTO produto) {
-		if (produto.getNome() == null) {
+		if (produto.getNome() == null || produto.getNome().isBlank()) {
 			throw new ResourceBadRequestException("O nome deve ser informado");
 		} else if (produto.getNome().length() > 30) {
 			throw new ResourceBadRequestException("Tamanho máximo de 30 caracteres no nome");
@@ -122,7 +121,7 @@ public class ProdutoService {
 			String result = new String(imageByteArray);
 			return result;
 		} catch (Exception e) {
-			throw new ResourceBadRequestException("O valor unitário deve ser informado");
+			throw new ResourceBadRequestException("Erro no envio da imagem");
 		}
 
 	}

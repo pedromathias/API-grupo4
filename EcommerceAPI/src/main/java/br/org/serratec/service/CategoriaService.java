@@ -38,7 +38,7 @@ public class CategoriaService {
 
 	public Categoria atualizar(Long id, Categoria categoria) {
 		validarNome(categoria);
-		validarNome(categoria);
+		validarDescricao(categoria);
 		obterPorId(id);
 		categoria.setId(id);
 		return categoriaRepositorio.save(categoria);
@@ -50,7 +50,7 @@ public class CategoriaService {
 	}
 
 	private void validarNome(Categoria categoria) {
-		if (categoria.getNome() == null) {
+		if (categoria.getNome().isBlank() || categoria.getNome() == null) {
 			throw new ResourceBadRequestException("O nome deve ser informado");
 		} else if (categoria.getNome().length() > 30) {
 			throw new ResourceBadRequestException("Tamanho máximo de 30 caracteres no nome");

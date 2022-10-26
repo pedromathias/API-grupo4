@@ -77,6 +77,12 @@ public class ClienteService {
 
 	public ClienteResponseDTO atualizar(Long id, ClienteRequestDTO cliente) {
 		obterPorId(id);
+		validarEmail(cliente);
+		validarNomeUsuario(cliente);
+		validarNomeCompleto(cliente);
+		validarCPF(cliente);
+		validarTelefone(cliente);
+		validarSenha(cliente);
 		var clienteModel = mapper.map(cliente, Cliente.class);
 		clienteModel.setId(id);
 		clienteModel = repositorio.save(clienteModel);

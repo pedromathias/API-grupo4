@@ -84,7 +84,7 @@ public class ProdutoController {
 			@ApiResponse(code = 505, message = "Exceção interna da aplicação"), })
 
 	public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id,
-			@ModelAttribute ProdutoRequestDTO produto) {
+			@RequestPart ProdutoRequestDTO produto) {
 		return ResponseEntity.ok(servico.atualizar(id, produto));
 
 	}
