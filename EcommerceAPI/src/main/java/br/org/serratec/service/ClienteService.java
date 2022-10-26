@@ -3,9 +3,11 @@ package br.org.serratec.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.org.serratec.dto.ClienteRequestDTO;
 import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
@@ -93,7 +95,7 @@ public class ClienteService {
 			throw new ResourceBadRequestException("O Email deve ser informado");
 		} else if (cliente.getEmail().length() > 30) {
 			throw new ResourceBadRequestException("Tamanho máxmimo do Email deve ser 30 caracteres.");
-		} else if(!cliente.getEmail().contains("@")) {
+		} else if (!cliente.getEmail().contains("@")) {
 			throw new ResourceBadRequestException("Formato de email inválido");
 		}
 
@@ -118,10 +120,10 @@ public class ClienteService {
 		}
 
 	}
-	
+
 	private void validarSenha(ClienteRequestDTO cliente) {
 
-		 if (cliente.getSenha().length() > 255) {
+		if (cliente.getSenha().length() > 255) {
 			throw new ResourceBadRequestException("Tamanho máxmimo da senha deve ser 255 caracteres.");
 		}
 

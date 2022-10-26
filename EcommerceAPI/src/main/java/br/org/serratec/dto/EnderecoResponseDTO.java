@@ -1,20 +1,19 @@
 package br.org.serratec.dto;
 
-
 public class EnderecoResponseDTO {
 
 	private Long id;
-	
+
 	private String cep;
-	
+
 	private String logradouro;
-	
+
 	private String bairro;
-	
+
 	private String localidade;
-	
+
 	private String numero;
-	
+
 	private String complemento;
 
 	private String uf;
@@ -82,6 +81,5 @@ public class EnderecoResponseDTO {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	
-	
+
 }

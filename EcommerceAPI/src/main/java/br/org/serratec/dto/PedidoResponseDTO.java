@@ -7,30 +7,20 @@ import br.org.serratec.model.Cliente;
 import br.org.serratec.model.ItemPedido;
 
 public class PedidoResponseDTO {
-	
+
 	private Long id;
-	
+
 	private Date dataPedido;
-	
+
 	private Date dataEntrega;
-	
+
 	private Date dataEnvio;
-	
+
 	private String status;
-	
+
 	private List<Cliente> cliente;
-	
+
 	private List<ItemPedido> itemPedido;
-
-	private Cliente clienteTeste;
-	
-	public Cliente getClienteTeste() {
-		return clienteTeste;
-	}
-
-	public void setClienteTeste(Cliente clienteTeste) {
-		this.clienteTeste = clienteTeste;
-	}
 
 	public List<ItemPedido> getItemPedido() {
 		return itemPedido;
@@ -88,5 +78,4 @@ public class PedidoResponseDTO {
 		this.status = status;
 	}
 
-	
 }

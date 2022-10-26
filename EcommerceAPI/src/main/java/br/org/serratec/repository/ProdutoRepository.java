@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.org.serratec.model.Produto;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long>{
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	List<Produto> findByDescricao(String descricao);
 
 }

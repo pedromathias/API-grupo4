@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -17,38 +19,37 @@ public class ItemPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_pedido")
-	@ApiModelProperty(value="Identificador unico do item de Pedido")
+	@ApiModelProperty(value = "Identificador unico do item de Pedido")
 	private Long id;
 
-	
 	@Column(name = "quantidade")
-	@ApiModelProperty(value="Quantidade")
+	@ApiModelProperty(value = "Quantidade")
 	private Integer quantidade;
 
 	@Column(name = "preco_venda")
-	@ApiModelProperty(value="Preço de Venda")
+	@ApiModelProperty(value = "Preço de Venda")
 	private Double precoVenda;
-		
-	@Column(name="valor_bruto")
-	@ApiModelProperty(value="Valor Bruto")
+
+	@Column(name = "valor_bruto")
+	@ApiModelProperty(value = "Valor Bruto")
 	private double valorBruto;
-	
-	@Column(name= "percentual_desconto")
-	@ApiModelProperty(value="Percentual de Desconto")
+
+	@Column(name = "percentual_desconto")
+	@ApiModelProperty(value = "Percentual de Desconto")
 	private double percentDesconto;
-	
-	@Column(name="valor_liquido")
-	@ApiModelProperty(value="Valor Líquido")
+
+	@Column(name = "valor_liquido")
+	@ApiModelProperty(value = "Valor Líquido")
 	private double valorLiquido;
 
 	@ManyToOne
-    @JoinColumn(name = "id_pedido")
-	@ApiModelProperty(value="Id_Pedido")
+	@JoinColumn(name = "id_pedido")
+	@ApiModelProperty(value = "Id_Pedido")
 	@JsonBackReference
-    private Pedido pedido;
+	private Pedido pedido;
 
 	@OneToOne
-	@ApiModelProperty(value="Id_Produto")
+	@ApiModelProperty(value = "Id_Produto")
 	private Produto produto;
 
 	public Long getId() {
@@ -82,7 +83,7 @@ public class ItemPedido {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	
+
 	public double getValorBruto() {
 		return valorBruto;
 	}
@@ -114,5 +115,5 @@ public class ItemPedido {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	
+
 }

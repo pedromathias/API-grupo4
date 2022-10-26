@@ -15,30 +15,30 @@ import br.org.serratec.repository.EnderecoRepository;
 
 @Service
 public class EnderecoService {
-	
+
 	@Autowired
 	private EnderecoRepository repositorio;
-	
+
 	private ModelMapper mapper = new ModelMapper();
-	
-	public List<EnderecoResponseDTO>obterTodos(){
+
+	public List<EnderecoResponseDTO> obterTodos() {
 		List<Endereco> lista = repositorio.findAll();
 		var novaLista = new ArrayList<EnderecoResponseDTO>();
-		for(Endereco endereco : lista) {
+		for (Endereco endereco : lista) {
 			novaLista.add(mapper.map(endereco, EnderecoResponseDTO.class));
 		}
 		return novaLista;
 	}
-	
-	public Optional<EnderecoResponseDTO> obterPorId(Long id){
+
+	public Optional<EnderecoResponseDTO> obterPorId(Long id) {
 		Optional<Endereco> optEndereco = repositorio.findById(id);
-		if(optEndereco.isEmpty()) {
+		if (optEndereco.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi possivel encontrar o endereço com id " + id);
-	}
+		}
 		EnderecoResponseDTO dto = mapper.map(optEndereco.get(), EnderecoResponseDTO.class);
-	return Optional.of(dto);
+		return Optional.of(dto);
 	}
-	
+
 	public EnderecoResponseDTO cadastrar(EnderecoRequestDTO endereco) {
 		validarCep(endereco);
 		validarComplemento(endereco);
@@ -57,13 +57,13 @@ public class EnderecoService {
 		enderecoModel = repositorio.save(enderecoModel);
 		return mapper.map(enderecoModel, EnderecoResponseDTO.class);
 	}
-	
-	public void deletar (Long id) {
+
+	public void deletar(Long id) {
 		obterPorId(id);
 		repositorio.deleteById(id);
-		
+
 	}
-	
+
 	private void validarCep(EnderecoRequestDTO endereco) {
 
 		if (endereco.getCep() == null) {
@@ -73,24 +73,23 @@ public class EnderecoService {
 		}
 
 	}
-	
+
 	private void validarComplemento(EnderecoRequestDTO endereco) {
-		if(endereco.getComplemento() == null) {
-			throw new ResourceBadRequestException("O complemento deve ser informado, se não houver escreva 'Sem complemento'");
+		if (endereco.getComplemento() == null) {
+			throw new ResourceBadRequestException(
+					"O complemento deve ser informado, se não houver escreva 'Sem complemento'");
 		}
 		if (endereco.getComplemento().length() > 20) {
 			throw new ResourceBadRequestException("Tamanho máxmimo do complemento deve ser 20 caracteres");
 		}
 
 	}
-	
+
 	private void validarNumero(EnderecoRequestDTO endereco) {
 
-		if (endereco.getNumero() == null){
+		if (endereco.getNumero() == null) {
 			throw new ResourceBadRequestException("O número deve ser informado");
 		}
 
 	}
 }
-
-

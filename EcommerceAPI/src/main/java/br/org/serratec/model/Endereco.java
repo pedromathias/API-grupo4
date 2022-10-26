@@ -8,51 +8,53 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Embeddable
 public class Endereco {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_endereco")
-	@ApiModelProperty(value="Identificador unico do endereço")
+	@Column(name = "id_endereco")
+	@ApiModelProperty(value = "Identificador unico do endereço")
 	private Long id;
-	
-	@Column (name = "cep", nullable = false, length = 9)
-	@ApiModelProperty(value="CEP", required=true)
+
+	@Column(name = "cep", nullable = false, length = 9)
+	@ApiModelProperty(value = "CEP", required = true)
 	private String cep;
-	
-	@Column (name = "rua", nullable = false, length = 100)
-	@ApiModelProperty(value="Logradouro", required=true)
+
+	@Column(name = "rua", nullable = false, length = 100)
+	@ApiModelProperty(value = "Logradouro", required = true)
 	private String logradouro;
-	
-	@Column (name = "complemento", nullable = true, length = 20)
-	@ApiModelProperty(value="Complemento", required=true)
+
+	@Column(name = "complemento", nullable = true, length = 20)
+	@ApiModelProperty(value = "Complemento", required = true)
 	private String complemento;
-	
-	@Column (name = "numero", nullable = false)
-	@ApiModelProperty(value="Numero", required=true)
+
+	@Column(name = "numero", nullable = false)
+	@ApiModelProperty(value = "Numero", required = true)
 	private String numero;
-	
-	@Column (name = "bairro", nullable = false, length = 50)
-	@ApiModelProperty(value="Bairro", required=true)
+
+	@Column(name = "bairro", nullable = false, length = 50)
+	@ApiModelProperty(value = "Bairro", required = true)
 	private String bairro;
-	
-	@Column (name = "cidade", nullable = true, length = 30)
-	@ApiModelProperty(value="Localidade", required=true)
+
+	@Column(name = "cidade", nullable = true, length = 30)
+	@ApiModelProperty(value = "Localidade", required = true)
 	private String localidade;
-	
-	@Column (name = "estado", nullable = false, length = 2)
-	@ApiModelProperty(value="UF", required=true)
+
+	@Column(name = "estado", nullable = false, length = 2)
+	@ApiModelProperty(value = "UF", required = true)
 	private String uf;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_cliente")
+	@JoinColumn(name = "id_cliente")
 	@JsonBackReference
-	@ApiModelProperty(value="Cliente")
+	@ApiModelProperty(value = "Cliente")
 	private Cliente cliente;
 
 	public Cliente getCliente() {
@@ -73,8 +75,9 @@ public class Endereco {
 
 	public void setId(Long id) {
 		this.id = id;
-		
+
 	}
+
 	public String getCep() {
 		return cep;
 	}
@@ -130,6 +133,5 @@ public class Endereco {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
-	
+
 }

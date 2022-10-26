@@ -1,16 +1,15 @@
 package br.org.serratec.model.error;
 
-
 public class MensagemError {
 
 	private String dataHora;
-	
+
 	private Integer status;
-	
+
 	private String titulo;
-	
+
 	private String mensagem;
-	
+
 	public MensagemError(String dataHora, Integer status, String titulo, String mensagem) {
 		this.dataHora = dataHora;
 		this.status = status;
@@ -48,7 +47,6 @@ public class MensagemError {
 
 	public void setDataHora(String dataHora) {
 		this.dataHora = dataHora;
-	}	
-	
-	
+	}
+
 }

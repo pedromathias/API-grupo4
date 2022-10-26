@@ -49,7 +49,7 @@ public class ProdutoService {
 		validarQuantidadeEstoque(produto);
 		validarValorUnitario(produto);
 		validarCategoria(produto);
-		
+
 		List<Produto> produtoDescricao = repositorio.findByDescricao(produto.getDescricao());
 		if (produtoDescricao.size() > 0) {
 			throw new ResourceBadRequestException("Descrição já cadastrada!");
@@ -67,7 +67,7 @@ public class ProdutoService {
 		var response = mapper.map(produtoModel, ProdutoResponseDTO.class);
 		return response;
 	}
-	
+
 	public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produto) {
 		obterPorId(id);
 		validarNomeProduto(produto);
@@ -83,7 +83,7 @@ public class ProdutoService {
 		produtoModel.setDataCadastro(produto.getDataCadastro());
 		produtoModel.setValorUnitario(produto.getValorUnitario());
 		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
-    produtoModel.setCategoria(produto.getCategoria());
+		produtoModel.setCategoria(produto.getCategoria());
 		produtoModel = repositorio.save(produtoModel);
 		return mapper.map(produtoModel, ProdutoResponseDTO.class);
 	}
@@ -96,16 +96,14 @@ public class ProdutoService {
 	private void validarNomeProduto(ProdutoRequestDTO produto) {
 		if (produto.getNome() == null) {
 			throw new ResourceBadRequestException("O nome deve ser informado");
-		} else if (produto.getNome().length() > 30)
-		{
+		} else if (produto.getNome().length() > 30) {
 			throw new ResourceBadRequestException("Tamanho máximo de 30 caracteres no nome");
 		}
 
 	}
 
 	private void validarDescricao(ProdutoRequestDTO produto) {
-		if (produto.getNome().length() > 100)
-		{
+		if (produto.getNome().length() > 100) {
 			throw new ResourceBadRequestException("Tamanho máximo de 100 caracteres na descrição");
 		}
 
@@ -128,7 +126,7 @@ public class ProdutoService {
 		}
 
 	}
-	
+
 	private void validarValorUnitario(ProdutoRequestDTO produto) {
 		if (produto.getValorUnitario() == null) {
 			throw new ResourceBadRequestException("O valor unitário deve ser informado");
@@ -137,7 +135,7 @@ public class ProdutoService {
 	}
 
 	private void validarCategoria(ProdutoRequestDTO produto) {
-		if(produto.getCategoria() == null){
+		if (produto.getCategoria() == null) {
 			throw new ResourceBadRequestException("A categoria deve ser informado");
 		}
 	}

@@ -8,12 +8,14 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import br.org.serratec.dto.ClienteResponseDTO;
 import br.org.serratec.dto.PedidoRequestDTO;
 import br.org.serratec.dto.PedidoResponseDTO;
+import br.org.serratec.dto.ProdutoResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
 import br.org.serratec.model.ItemPedido;
+import br.org.serratec.model.MensagemEmail;
 import br.org.serratec.model.Pedido;
 import br.org.serratec.repository.ItemPedidoRepository;
 import br.org.serratec.repository.PedidoRepository;
@@ -23,18 +25,21 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository repositorio;
-	
+
 	@Autowired
 	private ItemPedidoService servicoItemPedido;
 
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepositorio;
 
-//	@Autowired
-//	private EmailService emailService;
-//	
-//	@Autowired
-//	private ClienteService clienteService;
+	@Autowired
+	private ClienteService clienteService;
+
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private ProdutoService produtoService;
 
 	private ModelMapper mapper = new ModelMapper();
 
@@ -73,37 +78,37 @@ public class PedidoService {
 		pedidoModel = repositorio.save(pedidoModel);
 		var response = mapper.map(pedidoModel, PedidoResponseDTO.class);
 		List<ItemPedido> itensResponse = new ArrayList<ItemPedido>();
-
 		for (ItemPedido itemPedido : pedido.getItemPedido()) {
-
 			var itemPedidoModel = mapper.map(itemPedido, ItemPedido.class);
-			
 			itemPedidoModel.setPedido(pedidoModel);
 			servicoItemPedido.calcularValorBruto(itemPedidoModel);
 			servicoItemPedido.calcularValorLiquido(itemPedidoModel);
-			
 			itemPedidoRepositorio.save(itemPedidoModel);
-			
 			itensResponse.add(mapper.map(itemPedidoModel, ItemPedido.class));
-			
-		}
+			Long clienteId = pedido.getCliente().getId();
+			var destinatarios = new ArrayList<String>();
+			Optional<ClienteResponseDTO> cliente = clienteService.obterPorId(clienteId);
+			destinatarios.add(cliente.get().getEmail());
+			Long produtoID = itemPedido.getProduto().getId();
+			Optional<ProdutoResponseDTO> produto = produtoService.obterPorId(produtoID);
+			String mensagem = "<h1 style=\"color:blue\">Olá Sr(a)" + cliente.get().getNomeUsuario()
+					+ "!</h1> <p> Seu pedido foi cadastrado com sucesso!</p>" + "<ul><strong>Dados do Pedido: </strong>"
+					+ "<li>Data Pedido:" + pedidoModel.getDataPedido() + "</li>" + "<li>Status Pedido:"
+					+ pedidoModel.getStatus() + "</li>" + "<li>Valor bruto do Pedido: "
+					+ itemPedidoModel.getValorBruto() + "</li>" + "<li>Porcentagem de desconto do Pedido: "
+					+ itemPedidoModel.getPercentDesconto() + "</li>" + "<li>Valor final do Pedido: "
+					+ itemPedidoModel.getValorLiquido() + "</li>" + "</ul>" + "<ul><strong>Dados do Produto: </strong>"
+					+ "<li>Nome do Produto: " + produto.get().getNome() + "</li>" + "<li>Descrição do Produto: "
+					+ produto.get().getDescricao() + "</li>" + "<li>Código do Produto: " + produto.get().getId()
+					+ "<li>" + "</ul>" + "<ul><strong>Dados do Cliente: </strong>" + "<li>Cpf do Cliente:"
+					+ cliente.get().getCpf() + "</li>" + "<li>Nome do Cliente:" + cliente.get().getNomeCompleto()
+					+ "</li>" + "</ul>";
+			MensagemEmail email = new MensagemEmail("Pedido Cadastrado.", mensagem, "g4serratec@gmail.com",
+					destinatarios);
+			emailService.enviar(email);
+			return response;
 
-//		Long clienteId = pedido.getCliente().getId();
-//		var destinatarios = new ArrayList<String>();
-//		Optional<ClienteResponseDTO> cliente = clienteService.obterPorId(clienteId);
-//		destinatarios.add(cliente.get().getEmail());
-//		String mensagem = "<h1 style=\"color:blue\">Olá Sr(a)" + cliente.get().getNomeUsuario()
-//				+ "!</h1> <p> Seu pedido foi cadastrado com sucesso!</p>" + "<ul>Dados do Pedido:"
-//					+ "<li>Data Pedido:"+pedidoModel.getDataPedido()+"</li>"
-//					+ "<li>Status Pedido:"+pedidoModel.getStatus()+"</li>"
-//				+ "</ul>"
-//				+"<ul>Dados do Cliente: "
-//					+"<li>Cpf do Cliente:"+cliente.get().getCpf()+"</li>"
-//					+"<li>Nome do Cliente:"+cliente.get().getNomeCompleto()+"</li>"
-//					+ "</ul>"
-//				;
-//		MensagemEmail email = new MensagemEmail("Nova conta criada.", mensagem, "g4serratec@gmail.com", destinatarios);
-//		emailService.enviar(email);
+		}
 		return response;
 	}
 

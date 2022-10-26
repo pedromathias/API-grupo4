@@ -5,19 +5,19 @@ import java.util.Date;
 public class ClienteRequestDTO {
 
 	private String email;
-	
+
 	private String nomeUsuario;
-	
+
 	private String nomeCompleto;
-	
+
 	private String senha;
-	
+
 	private String cpf;
-	
+
 	private String telefone;
 
 	private Date dataNasc;
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -73,6 +73,5 @@ public class ClienteRequestDTO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
+
 }

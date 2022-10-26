@@ -8,21 +8,21 @@ import br.org.serratec.model.Pedido;
 public class ClienteResponseDTO {
 
 	private Long id;
-	
+
 	private String email;
-	
+
 	private String cpf;
-	
+
 	private String nomeUsuario;
-	
+
 	private String nomeCompleto;
-	
+
 	private String telefone;
-	
+
 	private List<Endereco> endereco;
-	
+
 	private List<Pedido> pedido;
-	
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -86,7 +86,5 @@ public class ClienteResponseDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
+
 }

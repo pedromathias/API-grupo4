@@ -3,21 +3,21 @@ package br.org.serratec.dto;
 import br.org.serratec.model.Cliente;
 
 public class EnderecoRequestDTO {
-	
+
 	private String cep;
-	
+
 	private String logradouro;
-	
+
 	private String bairro;
-	
+
 	private String localidade;
-	
+
 	private String numero;
-	
+
 	private String complemento;
-	
+
 	private String uf;
-	
+
 	private Cliente cliente;
 
 	public String getCep() {
@@ -83,5 +83,5 @@ public class EnderecoRequestDTO {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
+
 }

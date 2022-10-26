@@ -9,30 +9,18 @@ import br.org.serratec.model.Categoria;
 public class ProdutoRequestDTO {
 
 	private String nome;
-	
+
 	private String descricao;
-	
+
 	private Integer quantidadeEstoque;
-	
+
 	private Date dataCadastro;
-	
+
 	private Double valorUnitario;
-	
+
 	private MultipartFile imagemProduto;
-	
+
 	private Categoria categoria;
-	
-//	private ItemPedido itemPedido;
-//
-//	public ItemPedido getItemPedido() {
-//		return itemPedido;
-//	}
-//
-//	public void setItemPedido(ItemPedido itemPedido) {
-//		this.itemPedido = itemPedido;
-//	}
-	
-	
 
 	public String getNome() {
 		return nome;
@@ -89,6 +77,5 @@ public class ProdutoRequestDTO {
 	public void setImagemProduto(MultipartFile imagemProduto) {
 		this.imagemProduto = imagemProduto;
 	}
-	
-	
+
 }

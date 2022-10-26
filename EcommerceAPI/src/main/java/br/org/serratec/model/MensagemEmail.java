@@ -5,13 +5,13 @@ import java.util.List;
 public class MensagemEmail {
 
 	private String assunto;
-	
+
 	private String mensagem;
-	
+
 	private String remetente;
-	
+
 	private List<String> destinatarios;
-	
+
 	public MensagemEmail(String assunto, String mensagem, String remetente, List<String> destinatarios) {
 		this.assunto = assunto;
 		this.mensagem = mensagem;
@@ -50,6 +50,5 @@ public class MensagemEmail {
 	public void setDestinatarios(List<String> destinatarios) {
 		this.destinatarios = destinatarios;
 	}
-	
-	
+
 }

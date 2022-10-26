@@ -13,26 +13,25 @@ public class EmailService {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	public void enviar(MensagemEmail mensagemEmail) {
-		
+
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-		
+
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-		
+
 		try {
 			helper.setFrom(mensagemEmail.getRemetente());
 			helper.setSubject(mensagemEmail.getAssunto());
 			helper.setText(mensagemEmail.getMensagem(), true);
-			
-			helper.setTo(mensagemEmail.getDestinatarios()
-					.toArray(new String[mensagemEmail.getDestinatarios().size()]));
-			
+
+			helper.setTo(mensagemEmail.getDestinatarios().toArray(new String[mensagemEmail.getDestinatarios().size()]));
+
 			javaMailSender.send(mimeMessage);
-		}catch (MessagingException e) {
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

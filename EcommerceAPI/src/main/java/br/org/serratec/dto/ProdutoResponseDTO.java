@@ -3,28 +3,18 @@ package br.org.serratec.dto;
 import br.org.serratec.model.Categoria;
 
 public class ProdutoResponseDTO {
-	
+
 	private Long id;
 
 	private String nome;
-	
+
 	private String descricao;
-	
+
 	private Double valorUnitario;
-	
+
 	private String imagemProduto;
-	
+
 	private Categoria categoria;
-	
-//	private ItemPedido itemPedido;
-//
-//	public ItemPedido getItemPedido() {
-//		return itemPedido;
-//	}
-//
-//	public void setItemPedido(ItemPedido itemPedido) {
-//		this.itemPedido = itemPedido;
-//	}
 
 	public Long getId() {
 		return id;
@@ -73,6 +63,5 @@ public class ProdutoResponseDTO {
 	public void setImagemProduto(String imagemProduto) {
 		this.imagemProduto = imagemProduto;
 	}
-	
-	
+
 }

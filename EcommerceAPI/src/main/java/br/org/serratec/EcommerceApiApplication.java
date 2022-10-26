@@ -1,4 +1,4 @@
- package br.org.serratec;
+package br.org.serratec;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
