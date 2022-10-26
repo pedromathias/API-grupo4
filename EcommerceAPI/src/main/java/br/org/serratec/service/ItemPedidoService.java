@@ -34,11 +34,7 @@ public class ItemPedidoService {
 	}
 
 	public ItemPedido cadastrar(ItemPedido itemPedido) {
-
 		itemPedido.setId(null);
-
-		calcularValorBruto(itemPedido);
-		calcularValorLiquido(itemPedido);
 		validarQuantidade(itemPedido);
 		validarPrecoVenda(itemPedido);
 		return repositorio.save(itemPedido);
@@ -48,7 +44,7 @@ public class ItemPedidoService {
 
 		obterPorId(id);
 		itemPedido.setId(id);
-		calcularValorBruto(itemPedido);
+		calcularValorBruto2(itemPedido);
 		calcularValorLiquido(itemPedido);
 		validarQuantidade(itemPedido);
 		validarPrecoVenda(itemPedido);
@@ -59,9 +55,15 @@ public class ItemPedidoService {
 		obterPorId(id);
 		repositorio.deleteById(id);
 	}
-
-	public ItemPedido calcularValorBruto(ItemPedido itemPedido) {
+	
+	public ItemPedido calcularValorBruto2(ItemPedido itemPedido) {
 		itemPedido.setValorBruto(itemPedido.getQuantidade() * itemPedido.getPrecoVenda());
+		return repositorio.save(itemPedido);
+	}
+
+
+	public ItemPedido calcularValorBruto(ItemPedido itemPedido, double produto) {
+		itemPedido.setValorBruto(itemPedido.getQuantidade() * produto);
 		return repositorio.save(itemPedido);
 	}
 

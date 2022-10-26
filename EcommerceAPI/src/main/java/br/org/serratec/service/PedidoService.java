@@ -81,8 +81,8 @@ public class PedidoService {
 		for (ItemPedido itemPedido : pedido.getItemPedido()) {
 			var itemPedidoModel = mapper.map(itemPedido, ItemPedido.class);
 			itemPedidoModel.setPedido(pedidoModel);
-			servicoItemPedido.calcularValorBruto(itemPedidoModel);
-			servicoItemPedido.calcularValorLiquido(itemPedidoModel);
+//			servicoItemPedido.calcularValorBruto(itemPedidoModel);
+//			servicoItemPedido.calcularValorLiquido(itemPedidoModel);
 			itemPedidoRepositorio.save(itemPedidoModel);
 			itensResponse.add(mapper.map(itemPedidoModel, ItemPedido.class));
 			Long clienteId = pedido.getCliente().getId();
@@ -91,6 +91,8 @@ public class PedidoService {
 			destinatarios.add(cliente.get().getEmail());
 			Long produtoID = itemPedido.getProduto().getId();
 			Optional<ProdutoResponseDTO> produto = produtoService.obterPorId(produtoID);
+			servicoItemPedido.calcularValorBruto(itemPedidoModel, produto.get().getValorUnitario());
+			servicoItemPedido.calcularValorLiquido(itemPedidoModel);
 			String mensagem = "<h1 style=\"color:blue\">Olá Sr(a)" + cliente.get().getNomeUsuario()
 					+ "!</h1> <p> Seu pedido foi cadastrado com sucesso!</p>" + "<ul><strong>Dados do Pedido: </strong>"
 					+ "<li>Data Pedido:" + pedidoModel.getDataPedido() + "</li>" + "<li>Status Pedido:"

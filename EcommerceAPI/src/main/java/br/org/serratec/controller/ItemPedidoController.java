@@ -54,17 +54,18 @@ public class ItemPedidoController {
 		return ResponseEntity.ok(optItemPedido.get());
 	}
 
-	@PostMapping
-	@ApiOperation(value = "Insere item de pedido", notes = "Insere item de pedido")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Insere item de pedido"),
-			@ApiResponse(code = 401, message = "Erro de autenticação"),
-			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
-			@ApiResponse(code = 404, message = "Recurso não encontrado"),
-			@ApiResponse(code = 505, message = "Exceção interna da aplicação"), })
-	public ResponseEntity<ItemPedido> cadastrar(@RequestBody ItemPedido itemPedido) {
-		itemPedido = servico.cadastrar(itemPedido);
-		return new ResponseEntity<>(itemPedido, HttpStatus.CREATED);
-	}
+//	Não será usado, pois o cadastro está sendo feito pelo pedido.
+//	@PostMapping
+//	@ApiOperation(value = "Insere item de pedido", notes = "Insere item de pedido")
+//	@ApiResponses(value = { @ApiResponse(code = 200, message = "Insere item de pedido"),
+//			@ApiResponse(code = 401, message = "Erro de autenticação"),
+//			@ApiResponse(code = 403, message = "Não há permissão para acessar o recurso"),
+//			@ApiResponse(code = 404, message = "Recurso não encontrado"),
+//			@ApiResponse(code = 505, message = "Exceção interna da aplicação"), })
+//	public ResponseEntity<ItemPedido> cadastrar(@RequestBody ItemPedido itemPedido) {
+//		itemPedido = servico.cadastrar(itemPedido);
+//		return new ResponseEntity<>(itemPedido, HttpStatus.CREATED);
+//	}
 
 	@PutMapping("/{id}")
 	@ApiOperation(value = "Atualiza item de pedido", notes = "Atualiza item de pedido")
