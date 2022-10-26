@@ -1,7 +1,6 @@
 package br.org.serratec.dto;
 
 import br.org.serratec.model.Categoria;
-import br.org.serratec.model.ItemPedido;
 
 public class ProdutoResponseDTO {
 	
@@ -17,15 +16,15 @@ public class ProdutoResponseDTO {
 	
 	private Categoria categoria;
 	
-	private ItemPedido itemPedido;
-
-	public ItemPedido getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(ItemPedido itemPedido) {
-		this.itemPedido = itemPedido;
-	}
+//	private ItemPedido itemPedido;
+//
+//	public ItemPedido getItemPedido() {
+//		return itemPedido;
+//	}
+//
+//	public void setItemPedido(ItemPedido itemPedido) {
+//		this.itemPedido = itemPedido;
+//	}
 
 	public Long getId() {
 		return id;

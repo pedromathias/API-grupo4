@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.org.serratec.model.Categoria;
-import br.org.serratec.model.ItemPedido;
 
 public class ProdutoRequestDTO {
 
@@ -23,15 +22,17 @@ public class ProdutoRequestDTO {
 	
 	private Categoria categoria;
 	
-	private ItemPedido itemPedido;
-
-	public ItemPedido getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(ItemPedido itemPedido) {
-		this.itemPedido = itemPedido;
-	}
+//	private ItemPedido itemPedido;
+//
+//	public ItemPedido getItemPedido() {
+//		return itemPedido;
+//	}
+//
+//	public void setItemPedido(ItemPedido itemPedido) {
+//		this.itemPedido = itemPedido;
+//	}
+	
+	
 
 	public String getNome() {
 		return nome;

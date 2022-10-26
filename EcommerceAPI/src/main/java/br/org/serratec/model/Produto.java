@@ -1,6 +1,7 @@
 package br.org.serratec.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -41,7 +41,7 @@ public class Produto {
 
 	@Column(name = "valor_unitario", nullable = false)
 	@ApiModelProperty(value = "Valor Unitário", required = true)
-	private Double valorUnitario;
+	private double valorUnitario;
 
 	@Column(name = "imagem_produto", nullable = true, columnDefinition = "TEXT")
 	@ApiModelProperty(value = "Imagem do Produto", required = true)
@@ -52,19 +52,19 @@ public class Produto {
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 
-	@OneToOne
-	@JoinColumn(name = "id_item_pedido")
-	@ApiModelProperty(value = "Id Item Pedido")
-	@JsonBackReference
-	private ItemPedido itemPedido;
+//	@OneToOne
+//	@JoinColumn(name = "id_item_pedido")
+//	@ApiModelProperty(value = "Id Item Pedido")
+//	@JsonBackReference
+//	private ItemPedido itemPedido;
 
-	public ItemPedido getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(ItemPedido itemPedido) {
-		this.itemPedido = itemPedido;
-	}
+//	public ItemPedido getItemPedido() {
+//		return itemPedido;
+//	}
+//
+//	public void setItemPedido(ItemPedido itemPedido) {
+//		this.itemPedido = itemPedido;
+//	}
 	
 	public Categoria getCategoria() {
 		return categoria;
@@ -118,11 +118,11 @@ public class Produto {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Double getValorUnitario() {
+	public double getValorUnitario() {
 		return valorUnitario;
 	}
 
-	public void setValorUnitario(Double valorUnitario) {
+	public void setValorUnitario(double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
 

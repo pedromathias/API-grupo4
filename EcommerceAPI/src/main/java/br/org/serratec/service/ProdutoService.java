@@ -3,20 +3,17 @@ package br.org.serratec.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import br.org.serratec.dto.ClienteResponseDTO;
-import br.org.serratec.dto.PedidoRequestDTO;
-import br.org.serratec.dto.PedidoResponseDTO;
+
 import br.org.serratec.dto.ProdutoRequestDTO;
 import br.org.serratec.dto.ProdutoResponseDTO;
 import br.org.serratec.exception.ResourceBadRequestException;
 import br.org.serratec.exception.ResourceNotFoundException;
-import br.org.serratec.model.ItemPedido;
-import br.org.serratec.model.MensagemEmail;
 import br.org.serratec.model.Produto;
 import br.org.serratec.repository.ProdutoRepository;
 
@@ -25,18 +22,6 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository repositorio;
-	
-	@Autowired
-	private ItemPedidoService ipService;
-	
-	@Autowired
-	private PedidoService pedidoService;
-	
-	@Autowired
-	private ClienteService clienteService;
-	
-	@Autowired
-	private EmailService emailService;
 
 	private ModelMapper mapper = new ModelMapper();
 
@@ -77,33 +62,8 @@ public class ProdutoService {
 		produtoModel.setValorUnitario(produto.getValorUnitario());
 		produtoModel.setImagemProduto(converterImagemBase64(produto.getImagemProduto()));
 		produtoModel.setCategoria(produto.getCategoria());
-		produtoModel.setItemPedido(produto.getItemPedido());
 		produtoModel = repositorio.save(produtoModel);
-		Long itemPedidoId = produto.getItemPedido().getId();
-		Optional<ItemPedido> itemPedido = ipService.obterPorId(itemPedidoId);
-		Long pedidoID = itemPedido.get().getPedido().getId();
-		Optional<PedidoResponseDTO> pedido = pedidoService.obterPorId(pedidoID);
-		Optional<PedidoRequestDTO> pedido2 = pedidoService.obterPorId2(pedidoID);
-		Long clienteId = pedido2.get().getCliente().getId();
-		Optional<ClienteResponseDTO> cliente = clienteService.obterPorId(clienteId);
-		var destinatarios = new ArrayList<String>();
-		destinatarios.add(cliente.get().getEmail());
-		String mensagem = "<h1 style=\"color:blue\">Olá Sr(a)" + cliente.get().getNomeUsuario()
-				+ "!</h1> <p> Seu pedido foi cadastrado com sucesso!</p>" + "<ul>Dados do Pedido:"
-					+ "<li>Data Pedido: "+pedido.get().getDataPedido()+"</li>"
-					+ "<li>Status Pedido: "+pedido.get().getStatus()+"</li>"
-					+ "<li>Valor do Pedido: R$"+itemPedido.get().getValorLiquido()+"</li>"
-				+ "</ul>"
-				+"<ul>Dados do Cliente: "
-					+"<li>Cpf do Cliente:"+cliente.get().getCpf()+"</li>"
-					+"<li>Nome do Cliente:"+cliente.get().getNomeCompleto()+"</li>"
-				+ "</ul>"
-				+"<ul>Dados do Produto: "
-					+"<li>Nome do Produto "+produtoModel.getNome()+"</li>"
-					+"<li>Descrição do Produto"+produtoModel.getDescricao()+"</li>"
-				+"</ul>";
-		MensagemEmail email = new MensagemEmail("Nova conta criada.", mensagem, "g4serratec@gmail.com", destinatarios);
-		emailService.enviar(email);
+
 		var response = mapper.map(produtoModel, ProdutoResponseDTO.class);
 		return response;
 	}
